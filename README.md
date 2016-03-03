@@ -1,1 +1,1 @@
-# ProjetS2
+# ProjetS2 - Treasure Hunt
