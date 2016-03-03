@@ -1,7 +1,7 @@
 # ProjetS2 - Treasure Hunt
 
 
-## Première Jalon 14 Mars 18h
+## Premier Jalon 14 Mars 18h
 
 
 ###A faire:
