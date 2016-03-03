@@ -1,5 +1,6 @@
 # ProjetS2 - Treasure Hunt
 
+## Pour aller sur le GitLab de l'Univ' et donc avoir accès au projet (qui est en private, pas comme ici) : https://git-iut.univ-lille1.fr/
 
 ## Premier Jalon 14 Mars 18h
 
