@@ -19,7 +19,7 @@ public class Island {
 		for (int i = 0; i < xIle; i++) {
 			System.out.print("|");
 			for (int j = 0; j < yIle; j++) {
-				System.out.print(" " + ile[i][j] + " |");
+				System.out.print(" " + ile[i][j].affichage() + " |");
 			}
 			System.out.println("");
 		}
@@ -32,6 +32,16 @@ public class Island {
 	
 	public String affichage(int posX,int posY) {
 		return ile[posX][posY].toString(); 
+	}
+	
+	public static void main(String[] args){
+		
+		Island ile= new Island();
+		ile.changement("A", 1, 1);
+		System.out.println(ile);
+		
+		
+		
 	}
 
 }
