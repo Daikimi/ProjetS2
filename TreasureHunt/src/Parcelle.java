@@ -1,11 +1,10 @@
 public class Parcelle {
 
 	String emplacement = "";
-	String chose = "";
 	
-	public void changement() {
-
-		if (emplacement == "") {
+	Parcelle(String chose) {
+	
+		if (emplacement == null) {
 			emplacement = chose;
 		} 
 	}
