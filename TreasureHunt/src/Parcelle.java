@@ -1,16 +1,12 @@
 public class Parcelle {
 
-	String case = "";
+	String emplacement = "";
 	String chose = "";
 	
+	public void changement() {
 
-	public void changement {
-
-			if (case != "") {
-			case = case;
-		} else {
-		case = chose;
+		if (emplacement == "") {
+			emplacement = chose;
 		} 
 	}
-
 }
