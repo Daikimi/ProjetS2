@@ -21,10 +21,10 @@ public class Island {
 	}
 	
 	public void changement(String chose) {	
-		test.emplacement = chose; // Je n'arrive pas à modifier de manière à ce que les changements montent... :/
+		this.emplacement = chose; // Je n'arrive pas à modifier de manière à ce que les changements montent... :/
 }
 	
 	public String affichage() {
-		return test.emplacement; // Je n'arrive pas à modifier de manière à ce que les changements montent... :/
+		return this.emplacement; // Je n'arrive pas à modifier de manière à ce que les changements montent... :/
 	}
 }
