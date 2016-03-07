@@ -2,7 +2,11 @@
 public class TreasureHunt {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+			Island test = new Island();
+		
+			test[0][0].changement("A");
+			
+			test.toString();
 
 	}
 
