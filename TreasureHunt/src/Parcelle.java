@@ -10,7 +10,7 @@ public class Parcelle {
 			emplacement = chose;
 	}
 	
-	public String affichage() {
+	public String toString() {
 		return emplacement;
 	}
 }
