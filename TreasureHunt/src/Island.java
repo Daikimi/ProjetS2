@@ -19,7 +19,7 @@ public class Island {
 		for (int i = 0; i < xIle; i++) {
 			System.out.print("|");
 			for (int j = 0; j < yIle; j++) {
-				System.out.print(" " + ile[i][j].affichage() + " |");
+				System.out.print(" " + ile[i][j].toString() + " |");
 			}
 			System.out.println("");
 		}
