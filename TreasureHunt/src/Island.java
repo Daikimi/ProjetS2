@@ -9,7 +9,11 @@ public class Island {
 	public Island(){
 		for(int i=0;i<ile.length;i++){
 			for(int j=0;j<ile[0].length;j++){
-				ile[i][j]=new Parcelle();
+				if (i == 0 || i == xIle-1 || j == 0 || j == yIle-1) {
+					ile[i][j]=new Parcelle("X");
+				} else {
+					ile[i][j]=new Parcelle(" ");
+				}
 			}
 		}
 	}

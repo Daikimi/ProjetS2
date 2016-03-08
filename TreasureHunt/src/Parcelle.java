@@ -2,8 +2,8 @@ public class Parcelle {
 
 	String emplacement = null;
 	
-	Parcelle() {
-		emplacement = "";
+	Parcelle(String chose) {
+		emplacement = chose;
 	}
 
 	public void changement(String chose) {	
