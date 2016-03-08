@@ -13,16 +13,16 @@ méthode toString() pour affichage dans un main().
 
 Affichage en mode texte de l'île vierge.
 
-Placement des 2 navires (vides, à des emplacements fixés a priori).
+Placement des 2 navires (vides, à des emplacements fixés a priori). --> Nicolas
 
-Placement d'un rocher "recouvrant" le coffre à trésor (emplacement aléatoire ou fixé a priori).
+Placement d'un rocher "recouvrant" le coffre à trésor (emplacement aléatoire ou fixé a priori). |
+                                                                                                |
+Placement d'un rocher "recouvrant" la clef du coffre (idem,                                     |Florian
+emplacement distinct de celui du coffre).                                                       |
 
-Placement d'un rocher "recouvrant" la clef du coffre (idem,
-emplacement distinct de celui du coffre).
+Affichage en mode texte de l'île avec ces éléments. -->
 
-Affichage en mode texte de l'île avec ces éléments.
-
-Placement aléatoire de 10% (% du nombre de parcelles de l'île) de rochers ne recouvrant pas d' élément.
+Placement aléatoire de 10% (% du nombre de parcelles de l'île) de rochers ne recouvrant pas d' élément.--> Antoine
 
 Affichage en mode texte de l'île avec ces nouveaux éléments.
 Exemple de représentation de l'île 10 x10, et sa légende, intégrant tous les éléments du jeu version N°1 :
