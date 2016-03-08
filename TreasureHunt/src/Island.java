@@ -5,8 +5,9 @@ public class Island {
 	public int xIle = 10; // A modifier si l'on veut
 	public int yIle = 10; // A modifier si l'on veut
 	public int nbParcelles = (xIle*yIle) - ((xIle + yIle)*2) ; // Aire - Perimetre = Interieur du carre (l'exterieur sera de l'eau)
-	public int nbRochers = (xIle*yIle)/10; //A modifier, je pense que ce sera trop peu
+	public int nbRochers = (xIle*yIle)/10;
 	public Parcelle[][] ile = new Parcelle[xIle][yIle];
+	Random random = new Random();
 	
 	public Island(){
 		for(int i=0;i<ile.length;i++){
@@ -16,13 +17,25 @@ public class Island {
 				} else {
 					ile[i][j]=new Parcelle(" ");
 				}
-				int plc = 0;
-				do{
-					placementRocheux();
-				}while(plc != nbRochers-2);
 			}
 		}
-}
+		int b1 = 1+ random.nextInt(yIle-2);
+		int b2 = 1+ random.nextInt(yIle-2);
+		
+		ile[b1][1].emplacement = "n";
+		ile [b2][yIle-2].emplacement = "N";
+		
+		
+		int r = 0;
+		while (r < nbRochers) {			
+			int posX = random.nextInt(xIle);
+			int posY = random.nextInt(yIle);
+			if (ile[posX][posY].emplacement == " ") {
+				ile[posX][posY].emplacement = "R";
+				r = r + 1;
+			}
+		}
+	}
 
 	public String toString() {
 
@@ -37,35 +50,17 @@ public class Island {
 	}
 	
 	public void changement(String chose,int posX,int posY) {	
-		ile[posX][posY].changement(chose); // Je n'arrive pas a modifier de manière a ce que les changements montent... :/
+		ile[posX][posY].changement(chose);
 	}
 	
 	public String affichage(int posX,int posY) {
 		return ile[posX][posY].toString(); 
 	}
-	 
-	public void placementRocheux(){
-		Random rdm = new Random();
-
-			boolean positionne=false;
-			do{
-				int posX = rdm.nextInt(xIle);
-				int posY = rdm.nextInt(yIle);
-				if(ile[posX][posY].toString()==" "){ //Problème d'exécution
-					ile[posX][posY]=new Parcelle("R");
-					positionne= true;
-				}
-			}while(!positionne);
-		
-	}
 	
 	public static void main(String[] args){
 		
-		Island ile= new Island();
-		ile.changement("A", 1, 1);
-		System.out.println(ile);
-		
-		
+		Island test= new Island();
+		System.out.println(test);
 		
 		}
 
