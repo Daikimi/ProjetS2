@@ -2,8 +2,8 @@ public class Island {
 	
 	public int xIle = 10; // A modifier si l'on veut
 	public int yIle = 10; // A modifier si l'on veut
-	public int nbParcelles = (xIle*yIle) - ((xIle + yIle)*2) ; // Aire - Périmètre = Intérieur du carré (l'extérieur sera de l'eau)
-	public int nbRochers = 5; //A modifier, je pense que ce sera trop peu
+	public int nbParcelles = (xIle*yIle) - ((xIle + yIle)*2) ; // Aire - PÃ©rimÃ¨tre = IntÃ©rieur du carrÃ© (l'extÃ©rieur sera de l'eau)
+	public int nbRochers = (xIle*yIle)/10; //A modifier, je pense que ce sera trop peu
 	public Parcelle[][] ile = new Parcelle[xIle][yIle];
 	
 	public Island(){
@@ -27,7 +27,7 @@ public class Island {
 	}
 	
 	public void changement(String chose,int posX,int posY) {	
-		ile[posX][posY].changement(chose); // Je n'arrive pas à modifier de manière à ce que les changements montent... :/
+		ile[posX][posY].changement(chose); // Je n'arrive pas Ã  modifier de maniÃ¨re Ã  ce que les changements montent... :/
 	}
 	
 	public String affichage(int posX,int posY) {
