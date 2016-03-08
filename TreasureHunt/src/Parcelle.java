@@ -1,6 +1,12 @@
 public class Parcelle {
 
 	String emplacement = null;
+	boolean navire = false;
+	boolean eau = false;
+	boolean rocher = false;
+	boolean coffre = false;
+	boolean cle = false;
+	boolean personnage = false;
 	
 	Parcelle(String chose) {
 		emplacement = chose;

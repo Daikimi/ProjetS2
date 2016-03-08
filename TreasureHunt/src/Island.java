@@ -14,6 +14,7 @@ public class Island {
 			for(int j=0;j<ile[0].length;j++){
 				if (i == 0 || i == xIle-1 || j == 0 || j == yIle-1) {
 					ile[i][j]=new Parcelle("X");
+					ile[i][j].eau = true;
 				} else {
 					ile[i][j]=new Parcelle(" ");
 				}
@@ -23,15 +24,37 @@ public class Island {
 		int b2 = 1+ random.nextInt(yIle-2);
 		
 		ile[b1][1].emplacement = "n";
+		ile[b1][1].navire = true;
 		ile [b2][yIle-2].emplacement = "N";
-		
+		ile [b2][yIle-2].navire = true;
 		
 		int r = 0;
+		while (r < nbRochers-2) {			
+			int posX = random.nextInt(xIle);
+			int posY = random.nextInt(yIle);
+			if (ile[posX][posY].emplacement == " ")  {
+				ile[posX][posY].emplacement = "R";
+				ile[posX][posY].rocher = true;
+				r = r + 1;
+			}
+		}		
+		while (r < nbRochers-1) {			
+			int posX = random.nextInt(xIle);
+			int posY = random.nextInt(yIle);
+			if (ile[posX][posY].emplacement == " ") {
+				ile[posX][posY].emplacement = "R";
+				ile[posX][posY].rocher = true;
+				ile[posX][posY].coffre = true;
+				r = r + 1;
+			}
+		}
 		while (r < nbRochers) {			
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (ile[posX][posY].emplacement == " ") {
 				ile[posX][posY].emplacement = "R";
+				ile[posX][posY].rocher = true;
+				ile[posX][posY].cle = true;
 				r = r + 1;
 			}
 		}
