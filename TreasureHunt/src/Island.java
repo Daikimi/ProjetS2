@@ -1,33 +1,29 @@
+import java.util.Random;
+
 public class Island {
 	
 	public int xIle = 10; // A modifier si l'on veut
 	public int yIle = 10; // A modifier si l'on veut
 	public int nbParcelles = (xIle*yIle) - ((xIle + yIle)*2) ; // Aire - Perimetre = Interieur du carre (l'exterieur sera de l'eau)
-	public int nbRochers = (int)((xIle*yIle)*0.1); //A modifier, je pense que ce sera trop peu
+	public int nbRochers = (xIle*yIle)/10; //A modifier, je pense que ce sera trop peu
 	public Parcelle[][] ile = new Parcelle[xIle][yIle];
 	
 	public Island(){
 		for(int i=0;i<ile.length;i++){
 			for(int j=0;j<ile[0].length;j++){
-				ile[i][j]=new Parcelle();
+				if (i == 0 || i == xIle-1 || j == 0 || j == yIle-1) {
+					ile[i][j]=new Parcelle("X");
+				} else {
+					ile[i][j]=new Parcelle(" ");
+				}
+				int plc = 0;
+				do{
+					placementRocheux();
+				}while(plc != nbRochers-2);
 			}
 		}
-		Random rdm = new random();
-		for(int i =0;i<nbRochers;i++){
-			do{
-				boolean positionne=false;
-				int posX = rdm.nextInt(xIle);
-				int posY = rdm.nextInt(yIle);
-				if(ile[posX][posY]==" "){
-					ile[posX][posY]="R";
-					positionne= true;
-				}
-			}while(!positionne);
-			
-		}
-		
-	}
-		
+}
+
 	public String toString() {
 
 		for (int i = 0; i < xIle; i++) {
@@ -48,7 +44,20 @@ public class Island {
 		return ile[posX][posY].toString(); 
 	}
 	 
-	public void placementRocheux()
+	public void placementRocheux(){
+		Random rdm = new Random();
+
+			boolean positionne=false;
+			do{
+				int posX = rdm.nextInt(xIle);
+				int posY = rdm.nextInt(yIle);
+				if(ile[posX][posY].toString()==" "){ //Problème d'exécution
+					ile[posX][posY]=new Parcelle("R");
+					positionne= true;
+				}
+			}while(!positionne);
+		
+	}
 	
 	public static void main(String[] args){
 		
@@ -58,6 +67,8 @@ public class Island {
 		
 		
 		
-	}
+		}
 
 }
+
+
