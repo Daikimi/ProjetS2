@@ -1,7 +1,8 @@
 public class Parcelle {
 
 	String emplacement = null;
-	boolean navire = false;
+	boolean navire1 = false;
+	boolean navire2 = false;
 	boolean eau = false;
 	boolean rocher = false;
 	boolean coffre = false;

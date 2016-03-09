@@ -24,9 +24,9 @@ public class Island {
 		int b2 = 1+ random.nextInt(yIle-2);
 		
 		ile[b1][1].emplacement = "n";
-		ile[b1][1].navire = true;
+		ile[b1][1].navire1 = true;
 		ile [b2][yIle-2].emplacement = "N";
-		ile [b2][yIle-2].navire = true;
+		ile [b2][yIle-2].navire2 = true;
 		
 		int r = 0;
 		while (r < nbRochers-2) {			
