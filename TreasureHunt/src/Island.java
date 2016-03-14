@@ -1,5 +1,4 @@
 import java.util.Random;
-import javax.swing.JTextField;
 
 public class Island {
 	
@@ -101,8 +100,30 @@ public class Island {
 		ile[b1+1][2].emplacement = "e" + increment ;
 		increment++;
 	}
-
+	increment = 1;
+	if (ile[b2-1][yIle-2].emplacement == " 0") {
+		ile[b2-1][yIle-2].emplacement = "e" + increment ;
+		increment++;
 	}
+	if (ile[b2+1][yIle-2].emplacement == " 0") {
+		ile[b2+1][yIle-2].emplacement = "e" + increment ;
+		increment++;
+	}
+	if (ile[b2-1][yIle-3].emplacement == " 0") {
+		ile[b2-1][yIle-3].emplacement = "e" + increment ;
+		increment++;
+	}
+	if (ile[b2+1][yIle-3].emplacement == " 0") {
+		ile[b2+1][yIle-3].emplacement = "e" + increment ;
+		increment++;
+	}
+	if (ile[b2][yIle-3].emplacement == " 0") {
+		ile[b2][yIle-3].emplacement = "e" + increment ;
+		increment++;
+	}
+
+
+}
 
 	private void placementRochers() {
 	int r = 0;
