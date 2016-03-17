@@ -1,15 +1,18 @@
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 public class Island {
 	
 	public int xIle = 10; // A modifier si l'on veut
 	public int yIle = 10; // A modifier si l'on veut
-	public int nbParcelles = (xIle*yIle) - ((xIle + yIle)*2) ; // Aire - Perimetre = Interieur du carre (l'exterieur sera de l'eau)
-	public int nbRochers = (xIle*yIle)/10;
-	public Parcelle[][] ile = new Parcelle[xIle][yIle];
+	//public int nbParcelles = (xIle*yIle) - ((xIle + yIle)*2) ; // Aire - Perimetre = Interieur du carre (l'exterieur sera de l'eau)
+	public int nbRochers;
+	public Parcelle[][] ile;
 	Random random = new Random();
 
 	public Island(){
+		
+		creationIle();
 		
 		placementEau();
 
@@ -50,7 +53,57 @@ public class Island {
 	public String affichage(int posX,int posY) {
 		return ile[posX][posY].toString(); 
 	}
+	
+	public void affichageGraphique(){
+		
+		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png"};
+		int[][] carte = new int[xIle][yIle];
+		for(int i =xIle-1; i>=0; i--) {
+		    for(int j =yIle-1; j >=0 ; j--) {
+			if(ile[i][j].emplacement == "X0") {
+			    carte[i][j]=1;
+			}
+			else if(ile[i][j].emplacement == "R0") {
+			    carte[i][j]=2;
+			}
+			else if(ile[i][j].emplacement == "n0") {
+			    carte[i][j]=4;
+			}
+			else if (ile[i][j].emplacement.charAt(0) == 'e') {
+			    carte[i][j]=5;
+			} else if (ile[i][j].emplacement == "N0") { 
+				carte[i][j]=6;
+			} else if (ile[i][j].emplacement.charAt(0) == 'E') {
+			    carte[i][j]=7;
+		    } else {
+		    	carte[i][j]=8;
+		    }
+		}
+		
+		Plateau plateau = new Plateau(gifs, yIle);
+		plateau.setJeu(carte);
+		plateau.affichage();
+		}
+		
+	    }
+	
+	private void creationIle() {
+		String regex = "[0-9]+";
+		String rep1 = "";
+		String rep2 = "";
+		do {
+			rep1 = JOptionPane.showInputDialog(null, "Choississez la taille x de l'île");
+		 	rep2 = JOptionPane.showInputDialog(null, "Choississez la taille y de l'île");
+		} while (!rep1.matches(regex) && !rep2.matches(regex));
 
+		xIle = Integer.parseInt(rep1);
+		yIle = Integer.parseInt(rep2);
+		ile = new Parcelle[xIle][yIle];
+		nbRochers = (xIle*yIle)/10;
+	}
+
+
+	
 	private void placementEau() {
 		for(int i=0;i<ile.length;i++){
 			for(int j=0;j<ile[0].length;j++){
@@ -102,23 +155,23 @@ public class Island {
 	}
 	increment = 1;
 	if (ile[b2-1][yIle-2].emplacement == " 0") {
-		ile[b2-1][yIle-2].emplacement = "e" + increment ;
+		ile[b2-1][yIle-2].emplacement = "E" + increment ;
 		increment++;
 	}
 	if (ile[b2+1][yIle-2].emplacement == " 0") {
-		ile[b2+1][yIle-2].emplacement = "e" + increment ;
+		ile[b2+1][yIle-2].emplacement = "E" + increment ;
 		increment++;
 	}
 	if (ile[b2-1][yIle-3].emplacement == " 0") {
-		ile[b2-1][yIle-3].emplacement = "e" + increment ;
+		ile[b2-1][yIle-3].emplacement = "E" + increment ;
 		increment++;
 	}
 	if (ile[b2+1][yIle-3].emplacement == " 0") {
-		ile[b2+1][yIle-3].emplacement = "e" + increment ;
+		ile[b2+1][yIle-3].emplacement = "E" + increment ;
 		increment++;
 	}
 	if (ile[b2][yIle-3].emplacement == " 0") {
-		ile[b2][yIle-3].emplacement = "e" + increment ;
+		ile[b2][yIle-3].emplacement = "E" + increment ;
 		increment++;
 	}
 

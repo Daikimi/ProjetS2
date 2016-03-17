@@ -5,6 +5,7 @@ public class TreasureHunt {
 			Island test = new Island();
 			System.out.println(test.toString());
 			//System.out.println(test.toString());
+			test.affichageGraphique();
 
 	}
 
