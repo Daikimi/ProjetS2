@@ -1,4 +1,3 @@
-
 public class TreasureHunt {
 
 	public static void main(String[] args) {

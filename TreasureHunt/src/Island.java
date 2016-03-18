@@ -57,32 +57,33 @@ public class Island {
 	public void affichageGraphique(){
 		
 		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png"};
-		int[][] carte = new int[xIle][yIle];
-		for(int i =xIle-1; i>=0; i--) {
-		    for(int j =yIle-1; j >=0 ; j--) {
+		int[][] carte = new int[yIle][xIle];
+		for(int i =0; i<xIle; i++) {
+		    for(int j =0; j<yIle ; j++) {
 			if(ile[i][j].emplacement == "X0") {
-			    carte[i][j]=1;
+			    carte[j][i]=1;
 			}
 			else if(ile[i][j].emplacement == "R0") {
-			    carte[i][j]=2;
+			    carte[j][i]=2;
 			}
 			else if(ile[i][j].emplacement == "n0") {
-			    carte[i][j]=4;
+			    carte[j][i]=4;
 			}
 			else if (ile[i][j].emplacement.charAt(0) == 'e') {
-			    carte[i][j]=5;
+			    carte[j][i]=5;
 			} else if (ile[i][j].emplacement == "N0") { 
-				carte[i][j]=6;
+				carte[j][i]=6;
 			} else if (ile[i][j].emplacement.charAt(0) == 'E') {
-			    carte[i][j]=7;
+			    carte[j][i]=7;
 		    } else {
-		    	carte[i][j]=8;
+		    	carte[j][i]=8;
 		    }
 		}
 		
-		Plateau plateau = new Plateau(gifs, yIle);
+		Plateau plateau = new Plateau(gifs, 1);
 		plateau.setJeu(carte);
 		plateau.affichage();
+
 		}
 		
 	    }
@@ -118,8 +119,8 @@ public class Island {
 	}
 
 	private void placementNavires() {
-		int b1 = 1+ random.nextInt(yIle-2);
-		int b2 = 1+ random.nextInt(yIle-2);
+		int b1 = 1+ random.nextInt(xIle-2);
+		int b2 = 1+ random.nextInt(xIle-2);
 		
 		ile[b1][1].emplacement = "n0";
 		ile[b1][1].navire1 = true;
