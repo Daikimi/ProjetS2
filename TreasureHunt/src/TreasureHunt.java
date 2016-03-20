@@ -1,3 +1,11 @@
+/**
+ * Classe contenant le main qui sert à lancer la partie et appeler les diverses 
+ * méthodes d'autre classe 
+ * 
+ * @author Team-F5
+ *
+ */
+
 public class TreasureHunt {
 
 	public static void main(String[] args) {
