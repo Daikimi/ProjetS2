@@ -120,7 +120,7 @@ public class Island {
 	
 	/**
 	 * Affichage graphique de l'île grâce à la
-	 * classe Plateau mdifié afin de pouvoir faire des île personnalisable 
+	 * classe Plateau modifié afin de pouvoir faire des îles personnalisable 
 	 * 
 	 */
 	
@@ -167,15 +167,17 @@ public class Island {
 		String regex = "[0-9]+";
 		String rep1 = "";
 		String rep2 = "";
+		String nbroc="";
 		do {
 			rep1 = JOptionPane.showInputDialog(null, "Choississez la taille x de l'Ã®le");
 		 	rep2 = JOptionPane.showInputDialog(null, "Choississez la taille y de l'Ã®le");
-		} while (!rep1.matches(regex) && !rep2.matches(regex));
+		 	nbroc = JOptionPane.showInputDialog(null, "Choisissez le pourcentage de rocher de l'île :");
+		} while (!rep1.matches(regex) && !rep2.matches(regex)&& !nbroc.matches(regex));
 
 		xIle = Integer.parseInt(rep1);
 		yIle = Integer.parseInt(rep2);
 		ile = new Parcelle[xIle][yIle];
-		nbRochers = (xIle*yIle)/10;
+		nbRochers = Integer.parseInt(nbroc);
 	}
 	
 	/**
