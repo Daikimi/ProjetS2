@@ -1,51 +1,40 @@
 # ProjetS2 - Treasure Hunt
 
-## Premier Jalon 21 Mars 18h
+###Lug réparera le code auparavant, pour permettre un meilleur développement du projet.
+
+###Jalon 2 : éléments contrôlés par menu (xxxTableau + JOptionPane) => Nicolas (n'hésites pas à demander si tu as besoin d'aide)
+
+#### L'objectif est de pouvoir tester les différents éléments du jeu via un menu (sans être dans une partie)
+    - On doit pouvoir placer les personnages sur la grille à des places précises (spécifiées via un menu),
+    et leur faire réaliser les différentes actions possibles.
 
 
-###A faire:
-Création d'une île "vierge" (composée de parcelles vides, sans "élément").
-→ classe élémentaire représentant une "parcelle" d'une île. 
-Faire en sorte qu'une parcelle puisse afficher un unique "élément" (navire, rocher, ...). 
-→ classe Ile encapsulant un tableau ([][]) de parcelles.
-Tableau (carré de taille 10 par défaut) ou bien de taille fournie à la construction, 
-méthode toString() pour affichage dans un main(). --> Fait
+#### Première étape du Jalon2: => Toinou parce que de toute façon il va demander à Lug
+    - Ajouter l'explorateur
+    - Saisir  la cible /direction de l'action (explorateur => déplacement)
+    - Respect des règles du jeu, selon votre choix
+        soit ne proposer que les actions valides,
+        soit vérifier que l'action choisie est valide.
 
-Affichage en mode texte de l'île vierge. -->Fait
 
-Placement des 2 navires (vides, à des emplacements fixés a priori). --> Nicolas
+    - Contrôle du déplacement pour les explorateurs, selon la parcelle d'arrivée :
+        explorateur <=> 4 directions
+        parcelle
+            vide (terrain clair) : déplacement
+            mer : impossible
+            personnage : impossible
+            navire ami : remontée à bord
+                remarque pour la suite :
+                    uniquement s'il reste au moins un personnage de l'équipe sur l'île
+                    le repos (récupération d'énergie) sera traité plus tard
+            navire ennemi : impossible
+            rocher : soulever reposer
+                rien en dessous : continuer quête
+                clef : prendre clef
+                coffre :
+                    si clef transportée : prendre trésor
+                    sinon mémoriser emplacement coffre
 
-Placement d'un rocher "recouvrant" le coffre à trésor (emplacement aléatoire ou fixé a priori). |
-                                                                                                |
-Placement d'un rocher "recouvrant" la clef du coffre (idem,                                     |Florian
-emplacement distinct de celui du coffre).                                                       |
 
-Affichage en mode texte de l'île avec ces éléments. -->Fait
-
-Placement aléatoire de 10% (% du nombre de parcelles de l'île) de rochers ne recouvrant pas d' élément.--> Antoine
-
-Affichage en mode texte de l'île avec ces nouveaux éléments.-->Fait 
-Exemple de représentation de l'île 10 x10, et sa légende, intégrant tous les éléments du jeu version N°1 :
-Les personnages de l'équipe N°1 sont représentés par des minuscules suivies de numéro d'ordre du personnage 
-(dans l'équipe, sans tenir compte du type de personnage):
-
-e pour un explorateur
-
-v pour un voleur
-
-n pour le navire
-Les personnages de l'équipe N°2 sont représentés par des Majuscules suivies de numéro d'ordre du personnage 
-(dans l'équipe, sans tenir compte du type de personnage): 
-
-E pour un explorateur
-
-V pour un voleur 
-
-N pour le navire
-Les autres éléments sont en majuscules
-
-R pour un rocher
-
-C pour le coffre 
-(visible uniquement par la ou les équipes ayant découvert le coffre)
--->Flo
+#### Deuxième étape du Jalon2: (Ceci n'est pas impératif, selon un message sur le forum de JM Place, voilà pourquoi c'est Lug qui s'en occupera)
+  - Ajouter le voleur et ses actions (attention déplacement dans les huit directions)
