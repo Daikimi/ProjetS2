@@ -1,6 +1,6 @@
 /**
- * Classe contenant le main qui sert à lancer la partie et appeler les diverses 
- * méthodes d'autre classe 
+ * Classe contenant le main qui sert Ã  lancer la partie et appeler les diverses 
+ * mÃ©thodes d'autre classe 
  * 
  * @author Team-F5
  *

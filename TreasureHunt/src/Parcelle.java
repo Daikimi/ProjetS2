@@ -1,5 +1,5 @@
 	/**
-	 * La classe Parcelle g�re une case de l'�le
+	 * La classe Parcelle gère une case de l'île
 	 *  en prenant la valeur de la case voulue
 	 *  dans la classe ile
 	 *  
@@ -16,42 +16,42 @@ public class Parcelle {
 	private int emplacement ;
 	
 	/**
-	 * boolean v�rifiant si la case est un navire de l'equipe 1
+	 * boolean vérifiant si la case est un navire de l'equipe 1
 	 * 
 	 */
 	private boolean navire1 = false;
 	
 	/**
-	 * boolean v�rifiant si la case est un navire de l'equipe 2
+	 * boolean vérifiant si la case est un navire de l'equipe 2
 	 * 
 	 */
 	private boolean navire2 = false;
 	
 	/**
-	 * boolean v�rifiant si la case est de l'eau
+	 * boolean vérifiant si la case est de l'eau
 	 * 
 	 */
 	private boolean eau = false;
 	
 	/**
-	 * boolean v�rifiant si la case est un rocher
+	 * boolean vérifiant si la case est un rocher
 	 * 
 	 */
 	private boolean rocher = false;
 	
 	/**
-	 * boolean v�rifiant si la case est un coffre cach�
+	 * boolean vérifiant si la case est un coffre caché
 	 * 
 	 */
 	private boolean coffre = false;
 	
 	/**
-	 * boolean v�rifiant si la case est un rocher contenant la cl� du coffre
+	 * boolean vérifiant si la case est un rocher contenant la clé du coffre
 	 * 
 	 */
 	private boolean cle = false;
 	/**
-	 * boolean v�rifiant si la case est un personnage
+	 * boolean vérifiant si la case est un personnage
 	 * 
 	 */
 	private boolean personnage = false;
@@ -59,8 +59,8 @@ public class Parcelle {
 	
 	/**
 	 * Constructeur de Parcelle
-	 * assigne une valeur � la case
-	 * @param chose la valeur assign�e � la case
+	 * assigne une valeur à la case
+	 * @param chose la valeur assignée à la case
 	 *  
 	 */
 	public Parcelle(int chose) {
@@ -68,9 +68,9 @@ public class Parcelle {
 	}
 	
 	/**
-	 * M�thode de type setter
-	 * qui assigne une nouvelle valeur � la case
-	 * @param chose la nouvelle valeur qui va �tre assign�e � la case
+	 * Méthode de type setter
+	 * qui assigne une nouvelle valeur à la case
+	 * @param chose la nouvelle valeur qui va être assignée à la case
 	 */
 		
 	public int getEmplacement() {
@@ -138,7 +138,7 @@ public class Parcelle {
 	}
 
 	/**
-	 * M�thode toString qui 
+	 * Méthode toString qui 
 	 * retourne une String la valeur de la case
 	 * @return emplacement la valeur de la case
 	 */

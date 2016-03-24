@@ -2,24 +2,24 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
-	 * La classe Island g�nere et g�re la carte de l'�le
-	 * sur laquelle seront plac�es les diff�rents navires et personnages
-	 * elle permet auusi l'affichage et la modification d'une case
+	 * La classe Island génere et gère la carte de l'île
+	 * sur laquelle seront placées les diffèrents navires et personnages
+	 * elle permet aussi l'affichage et la modification d'une case
 	 * 
 	 * @author Team-F5
 	 */
 public class Island {
 	
 	/**
-	 * Attributs o� est enregistr�es la taille verticale de l�le
-	 * par d�faut l'�le 10
+	 * Attributs où est enregistrées la taille verticale de l'île
+	 * par défaut l'île 10
 	 * mais est modulable lors de la construction
 	 * 
 	 */
 	private int xIle = 10; // A modifier si l'on veut
 	/**
-	 * Attributs o� sont enregistr�es la taille horizontale de l�le
-	 * par d�faut l'�le est de taille 10
+	 * Attributs où sont enregistrées la taille horizontale de l'île
+	 * par défaut l'île est de taille 10
 	 * mais est modulable lors de la construction
 	 */
 	
@@ -27,30 +27,30 @@ public class Island {
 	
 	//public int nbParcelles = (xIle*yIle) - ((xIle + yIle)*2) ; // Aire - Perimetre = Interieur du carre (l'exterieur sera de l'eau)
 	/**
-	 * nombre de rocher sur l'�le
-	 * est pour l'instant mis � 10 % de la taille de l'�le
+	 * nombre de rocher sur l'île
+	 * est pour l'instant mis à 10 % de la taille de l'île
 	 * 
 	 */
 	private int nbRochers;
 	/**
-	 * G�re les diff�rentes cases de l'�le
-	 * avec des cases de valeurs diff�rentes repr�sentant les diff�rentqs objet du jeu
+	 * Gère les différentes cases de l'île
+	 * avec des cases de valeurs diffèrentes représentant les différents objet du jeu
 	 *   
 	 */
 	
 	public Parcelle[][] ile;
 	
 	/**
-	 * attribut nous permettant de placer al�atoirement des rocher sur la carte
-	 * et de pr�voir toutes utilisatoin d'al�at dans le jeu(chances de r�ussir son attaque , de r�ussir une action, etc...)
+	 * attribut nous permettant de placer aléatoirement des rocher sur la carte
+	 * et de prévoir toute utilisation d'aléatoire dans le jeu(chances de réussir son attaque , de réussir une action, etc...)
 	 * 
 	 */
 	Random random = new Random();
 	
 	
 	/**
-	 * Construit une �le vierge et y place
-	 * les diff�rents objet qui seront dessus(eau , navires et aventuriers , rochers) 
+	 * Construit une île vierge et y place
+	 * les différents objet qui seront dessus(eau , navires et aventuriers , rochers) 
 	 */
 
 	public Island(){
@@ -66,7 +66,7 @@ public class Island {
 	}
 	/**
 	 * 
-	 * M�thode toString qui donne un affichage texte de l'�le de l'�le
+	 * Méthode toString qui donne un affichage texte de l'île de l'île
 	 * 
 	 *@return l'affichage texte avec une coloration de ce dernier
 	 */
@@ -96,7 +96,7 @@ public class Island {
 	}
 	
 	/**
-	 * M�thode qui change la valeur d'une case de position [X,Y]
+	 * Méthode qui change la valeur d'une case de position [X,Y]
 	 * pour une autre 
 	 * 
 	 * @param chose nouvelle valeur pour la case
@@ -109,9 +109,9 @@ public class Island {
 	/**
 	 * Affiche la valeur de la case de position voulue
 	 * 
-	 * @param posX position X de la case sur l'�le
-	 * @param posY position Y de la case sur l'�le
-	 * @return valeur de la case d�sir�e
+	 * @param posX position X de la case sur l'île
+	 * @param posY position Y de la case sur l'île
+	 * @return valeur de la case désirée
 	 */
 	
 	public String affichage(int posX,int posY) {
@@ -119,8 +119,8 @@ public class Island {
 	}
 	
 	/**
-	 * Affichage graphique de l'�le gr�ce � la
-	 * classe Plateau modifi� afin de pouvoir faire des �les personnalisable 
+	 * Affichage graphique de l'île grâce à la
+	 * classe Plateau modifiée afin de pouvoir faire des îles personnalisable 
 	 * 
 	 */
 	
@@ -155,7 +155,7 @@ public class Island {
 	    }
 	
 	/**
-	 * M�thode permettant une demande � l'utilisateur de la taille voulue pour l'�le
+	 * Méthode permettant une demande à l'utilisateur de la taille voulue pour l'île
 	 *  
 	 */
 	
@@ -167,7 +167,7 @@ public class Island {
 		do {
 			rep1 = JOptionPane.showInputDialog(null, "Choississez la taille x de l'île");
 		 	rep2 = JOptionPane.showInputDialog(null, "Choississez la taille y de l'île");
-		 	nbroc = JOptionPane.showInputDialog(null, "Choisissez le pourcentage de rocher de l'�le :");
+		 	nbroc = JOptionPane.showInputDialog(null, "Choisissez le pourcentage de rocher de l'île :");
 		} while (!rep1.matches(regex) && !rep2.matches(regex)&& !nbroc.matches(regex));
 
 		xIle = Integer.parseInt(rep1);
@@ -177,7 +177,7 @@ public class Island {
 	}
 	
 	/**
-	 * M�thode rempla�ant les bords de l'�le par la valeur de l'eau
+	 * Méthode remplaçant les bords de l'île par la valeur de l'eau
 	 * 
 	 */
 	
@@ -195,8 +195,8 @@ public class Island {
 	}
 	
 	/**
-	 * Place les navires sur l'�le
-	 * chacun sur un c�t� de l'�le
+	 * Place les navires sur l'île
+	 * chacun sur un côté de l'île
 	 * puis placement de 5 aventuriers autour du navire
 	 *  
 	 */
@@ -232,8 +232,8 @@ public class Island {
 
 }
 	/**
-	 * Place les rochers sur l'�le en regardant si les rochers ne bloque pas la progression
-	 * des aventuriers sur l'�le 
+	 * Place les rochers sur l'île en regardant si les rochers ne bloque pas la progression
+	 * des aventuriers sur l'île 
 	 * 
 	 */
 
@@ -270,12 +270,12 @@ public class Island {
 		}
 	}
 	/**
-	 *  Regarde si l'on peut placer un rochers � la position donn�e
-	 *  en regardant les cases alentours pour �viter de bloquers le passage
-	 *  et retourne true si la casse ne d�range pas sinon false
-	 * @param posX : position X de la case voulue sur l'�le
-	 * @param posY : position Y de la case voulue sur l'�le
-	 * @return la non-g�nance de passage de la case
+	 *  Regarde si l'on peut placer un rochers à la position donnée
+	 *  en regardant les cases alentours pour éviter de bloquers le passage
+	 *  et retourne true si la casse ne dérange pas sinon false
+	 * @param posX : position X de la case voulue sur l'île
+	 * @param posY : position Y de la case voulue sur l'île
+	 * @return la non-génance de passage de la case
 	 */
 	private boolean verificationPlacementRochers(int posX, int posY) {
 		if (ile[posX][posY].getEmplacement() == 0) {
