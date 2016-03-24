@@ -129,32 +129,28 @@ public class Island {
 		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png"};
 		int[][] carte = new int[yIle][xIle];
 		for(int i =0; i<xIle; i++) {
-		    for(int j =0; j<yIle ; j++) {
-			if(ile[i][j].getEmplacement() == 1) {
-			    carte[j][i]=1;
+			for(int j =0; j<yIle ; j++) {
+				if(ile[i][j].getEmplacement() == 1) {
+					carte[j][i]=1;
+				} else if(ile[i][j].getEmplacement() == 2) {
+					carte[j][i]=2;
+				} else if(ile[i][j].getEmplacement() ==4 ) {
+					carte[j][i]=4;
+				} else if (ile[i][j].getEmplacement() == 5) {
+					carte[j][i]=5;
+				} else if (ile[i][j].getEmplacement() == 6) { 
+					carte[j][i]=6;
+				} else if (ile[i][j].getEmplacement()== 7) {
+					carte[j][i]=7;
+				} else {
+					carte[j][i]=8;
+				}
 			}
-			else if(ile[i][j].getEmplacement() == 2) {
-			    carte[j][i]=2;
-			}
-			else if(ile[i][j].getEmplacement() ==4 ) {
-			    carte[j][i]=4;
-			}
-			else if (ile[i][j].getEmplacement() == 5) {
-			    carte[j][i]=5;
-			} else if (ile[i][j].getEmplacement() == 6) { 
-				carte[j][i]=6;
-			} else if (ile[i][j].getEmplacement()== 7) {
-			    carte[j][i]=7;
-		    } else {
-		    	carte[j][i]=8;
-		    }
 		}
-		
+
 		Plateau plateau = new Plateau(gifs, 1);
 		plateau.setJeu(carte);
 		plateau.affichage();
-
-		}
 		
 	    }
 	
