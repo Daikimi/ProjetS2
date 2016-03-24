@@ -2,8 +2,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
-	 * La classe Island génere et gère la carte de l'île
-	 * sur laquelle seront placées les différents navires et personnages
+	 * La classe Island gï¿½nere et gï¿½re la carte de l'ï¿½le
+	 * sur laquelle seront placï¿½es les diffï¿½rents navires et personnages
 	 * elle permet auusi l'affichage et la modification d'une case
 	 * 
 	 * @author Team-F5
@@ -11,46 +11,46 @@ import javax.swing.JOptionPane;
 public class Island {
 	
 	/**
-	 * Attributs où est enregistrées la taille verticale de lîle
-	 * par défaut l'île 10
+	 * Attributs oï¿½ est enregistrï¿½es la taille verticale de lï¿½le
+	 * par dï¿½faut l'ï¿½le 10
 	 * mais est modulable lors de la construction
 	 * 
 	 */
-	public int xIle = 10; // A modifier si l'on veut
+	private int xIle = 10; // A modifier si l'on veut
 	/**
-	 * Attributs où sont enregistrées la taille horizontale de lîle
-	 * par défaut l'île est de taille 10
+	 * Attributs oï¿½ sont enregistrï¿½es la taille horizontale de lï¿½le
+	 * par dï¿½faut l'ï¿½le est de taille 10
 	 * mais est modulable lors de la construction
 	 */
 	
-	public int yIle = 10; // A modifier si l'on veut
+	private int yIle = 10; // A modifier si l'on veut
 	
 	//public int nbParcelles = (xIle*yIle) - ((xIle + yIle)*2) ; // Aire - Perimetre = Interieur du carre (l'exterieur sera de l'eau)
 	/**
-	 * nombre de rocher sur l'île
-	 * est pour l'instant mis à 10 % de la taille de l'île
+	 * nombre de rocher sur l'ï¿½le
+	 * est pour l'instant mis ï¿½ 10 % de la taille de l'ï¿½le
 	 * 
 	 */
-	public int nbRochers;
+	private int nbRochers;
 	/**
-	 * Gère les différentes cases de l'île
-	 * avec des cases de valeurs différentes représentant les différentqs objet du jeu
+	 * Gï¿½re les diffï¿½rentes cases de l'ï¿½le
+	 * avec des cases de valeurs diffï¿½rentes reprï¿½sentant les diffï¿½rentqs objet du jeu
 	 *   
 	 */
 	
 	public Parcelle[][] ile;
 	
 	/**
-	 * attribut nous permettant de placer aléatoirement des rocher sur la carte
-	 * et de prévoir toutes utilisatoin d'aléat dans le jeu(chances de réussir son attaque , de réussir une action, etc...)
+	 * attribut nous permettant de placer alï¿½atoirement des rocher sur la carte
+	 * et de prï¿½voir toutes utilisatoin d'alï¿½at dans le jeu(chances de rï¿½ussir son attaque , de rï¿½ussir une action, etc...)
 	 * 
 	 */
 	Random random = new Random();
 	
 	
 	/**
-	 * Construit une île vierge et y place
-	 * les différents objet qui seront dessus(eau , navires et aventuriers , rochers) 
+	 * Construit une ï¿½le vierge et y place
+	 * les diffï¿½rents objet qui seront dessus(eau , navires et aventuriers , rochers) 
 	 */
 
 	public Island(){
@@ -66,7 +66,7 @@ public class Island {
 	}
 	/**
 	 * 
-	 * Méthode toString qui donne un affichage texte de l'île de l'île
+	 * Mï¿½thode toString qui donne un affichage texte de l'ï¿½le de l'ï¿½le
 	 * 
 	 *@return l'affichage texte avec une coloration de ce dernier
 	 */
@@ -76,13 +76,13 @@ public class Island {
 		for (int i = 0; i < xIle; i++) {
 			System.out.print("|");
 			for (int j = 0; j < yIle; j++) {
-				if (ile[i][j].emplacement == " 0") {
+				if (ile[i][j].getEmplacement()==0) {
 					System.out.print(" " + "\u001b[30m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].emplacement == "X0") {
+				} else if (ile[i][j].getEmplacement() == 1) {
 					System.out.print(" " + "\u001b[34m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].emplacement == "R0") {
+				} else if (ile[i][j].getEmplacement() == 2) {
 					System.out.print(" " + "\u001b[37m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].emplacement == "n0" || ile[i][j].emplacement == "N0") {
+				} else if (ile[i][j].getEmplacement() == 4 || ile[i][j].getEmplacement() == 6) {
 					System.out.print(" " + "\u001b[31m" + ile[i][j].toString() + "\u001b[0m" + " |");
 				} else {
 					System.out.print(" " + "\u001b[36m" + ile[i][j].toString() + "\u001b[0m" + " |");
@@ -96,22 +96,22 @@ public class Island {
 	}
 	
 	/**
-	 * Méthode qui change la valeur d'une case de position [X,Y]
+	 * Mï¿½thode qui change la valeur d'une case de position [X,Y]
 	 * pour une autre 
 	 * 
 	 * @param chose nouvelle valeur pour la case
 	 * @param posX position X de la case voulue
 	 * @param posY position Y de la case voulue
 	 */
-	public void changement(String chose,int posX,int posY) {	
-		ile[posX][posY].changement(chose);
+	public void changement(int chose,int posX,int posY) {	
+		ile[posX][posY].setEmplacement(chose);
 	}
 	/**
 	 * Affiche la valeur de la case de position voulue
 	 * 
-	 * @param posX position X de la case sur l'île
-	 * @param posY position Y de la case sur l'île
-	 * @return valeur de la case désirée
+	 * @param posX position X de la case sur l'ï¿½le
+	 * @param posY position Y de la case sur l'ï¿½le
+	 * @return valeur de la case dï¿½sirï¿½e
 	 */
 	
 	public String affichage(int posX,int posY) {
@@ -119,8 +119,8 @@ public class Island {
 	}
 	
 	/**
-	 * Affichage graphique de l'île grâce à la
-	 * classe Plateau modifié afin de pouvoir faire des îles personnalisable 
+	 * Affichage graphique de l'ï¿½le grï¿½ce ï¿½ la
+	 * classe Plateau modifiï¿½ afin de pouvoir faire des ï¿½les personnalisable 
 	 * 
 	 */
 	
@@ -130,20 +130,20 @@ public class Island {
 		int[][] carte = new int[yIle][xIle];
 		for(int i =0; i<xIle; i++) {
 		    for(int j =0; j<yIle ; j++) {
-			if(ile[i][j].emplacement == "X0") {
+			if(ile[i][j].getEmplacement() == 1) {
 			    carte[j][i]=1;
 			}
-			else if(ile[i][j].emplacement == "R0") {
+			else if(ile[i][j].getEmplacement() == 2) {
 			    carte[j][i]=2;
 			}
-			else if(ile[i][j].emplacement == "n0") {
+			else if(ile[i][j].getEmplacement() ==4 ) {
 			    carte[j][i]=4;
 			}
-			else if (ile[i][j].emplacement.charAt(0) == 'e') {
+			else if (ile[i][j].getEmplacement() == 5) {
 			    carte[j][i]=5;
-			} else if (ile[i][j].emplacement == "N0") { 
+			} else if (ile[i][j].getEmplacement() == 6) { 
 				carte[j][i]=6;
-			} else if (ile[i][j].emplacement.charAt(0) == 'E') {
+			} else if (ile[i][j].getEmplacement()== 7) {
 			    carte[j][i]=7;
 		    } else {
 		    	carte[j][i]=8;
@@ -159,7 +159,7 @@ public class Island {
 	    }
 	
 	/**
-	 * Méthode permettant une demande à l'utilisateur de la taille voulue pour l'île
+	 * Mï¿½thode permettant une demande ï¿½ l'utilisateur de la taille voulue pour l'ï¿½le
 	 *  
 	 */
 	
@@ -171,7 +171,7 @@ public class Island {
 		do {
 			rep1 = JOptionPane.showInputDialog(null, "Choississez la taille x de l'Ã®le");
 		 	rep2 = JOptionPane.showInputDialog(null, "Choississez la taille y de l'Ã®le");
-		 	nbroc = JOptionPane.showInputDialog(null, "Choisissez le pourcentage de rocher de l'île :");
+		 	nbroc = JOptionPane.showInputDialog(null, "Choisissez le pourcentage de rocher de l'ï¿½le :");
 		} while (!rep1.matches(regex) && !rep2.matches(regex)&& !nbroc.matches(regex));
 
 		xIle = Integer.parseInt(rep1);
@@ -181,7 +181,7 @@ public class Island {
 	}
 	
 	/**
-	 * Méthode remplaçant les bords de l'île par la valeur de l'eau
+	 * Mï¿½thode remplaï¿½ant les bords de l'ï¿½le par la valeur de l'eau
 	 * 
 	 */
 	
@@ -189,18 +189,18 @@ public class Island {
 		for(int i=0;i<ile.length;i++){
 			for(int j=0;j<ile[0].length;j++){
 				if (i == 0 || i == xIle-1 || j == 0 || j == yIle-1) {
-					ile[i][j]=new Parcelle("X0");
-					ile[i][j].eau = true;
+					ile[i][j]=new Parcelle(1);
+					ile[i][j].setEau(true);
 				} else {
-					ile[i][j]=new Parcelle(" 0");
+					ile[i][j]=new Parcelle(0);
 				}
 			}
 		}
 	}
 	
 	/**
-	 * Place les navires sur l'île
-	 * chacun sur un côté de l'île
+	 * Place les navires sur l'ï¿½le
+	 * chacun sur un cï¿½tï¿½ de l'ï¿½le
 	 * puis placement de 5 aventuriers autour du navire
 	 *  
 	 */
@@ -209,65 +209,35 @@ public class Island {
 		int b1 = 1+ random.nextInt(xIle-2);
 		int b2 = 1+ random.nextInt(xIle-2);
 		
-		ile[b1][1].emplacement = "n0";
-		ile[b1][1].navire1 = true;
-		ile [b2][yIle-2].emplacement = "N0";
-		ile [b2][yIle-2].navire2 = true;
+		ile[b1][1].setEmplacement(4);
+		ile[b1][1].setNavire1(true);
+		ile [b2][yIle-2].setEmplacement(6);
+		ile [b2][yIle-2].setNavire2(true);
 
-		int increment = 1;
-
-
-	if (ile[b1-1][1].emplacement == " 0") {
-		ile[b1-1][1].emplacement = "e" + increment ;
-		increment++;
-	}
-
-	if (ile[b1+1][1].emplacement == " 0") {
-		ile[b1+1][1].emplacement = "e" + increment ;
-		increment++;
-	}
-
-	if (ile[b1][2].emplacement == " 0") {
-		ile[b1][2].emplacement = "e" + increment ;
-		increment++;
-	}
-
-	if (ile[b1-1][2].emplacement == " 0") {
-		ile[b1-1][2].emplacement = "e" + increment ;
-		increment++;
-	}
-
-	if (ile[b1+1][2].emplacement == " 0") {
-		ile[b1+1][2].emplacement = "e" + increment ;
-		increment++;
-	}
-	increment = 1;
-	if (ile[b2-1][yIle-2].emplacement == " 0") {
-		ile[b2-1][yIle-2].emplacement = "E" + increment ;
-		increment++;
-	}
-	if (ile[b2+1][yIle-2].emplacement == " 0") {
-		ile[b2+1][yIle-2].emplacement = "E" + increment ;
-		increment++;
-	}
-	if (ile[b2-1][yIle-3].emplacement == " 0") {
-		ile[b2-1][yIle-3].emplacement = "E" + increment ;
-		increment++;
-	}
-	if (ile[b2+1][yIle-3].emplacement == " 0") {
-		ile[b2+1][yIle-3].emplacement = "E" + increment ;
-		increment++;
-	}
-	if (ile[b2][yIle-3].emplacement == " 0") {
-		ile[b2][yIle-3].emplacement = "E" + increment ;
-		increment++;
-	}
+		for(int i=b1-1;i<b1+2;i++){
+			for(int j=1;j<3;j++){
+				if(ile[i][j].getEmplacement()==0){
+					ile[i][j].setEmplacement(5);
+					ile[i][j].setPersonnage(true);
+				}
+			}
+		}
+		
+		for(int i=b2-1;i<b2+2;i++){
+			for(int j=yIle-3;j<yIle-1;j++){
+				if(ile[i][j].getEmplacement()==0){
+					ile[i][j].setEmplacement(7);
+					ile[i][j].setPersonnage(true);
+				}
+			}
+		}
+	
 
 
 }
 	/**
-	 * Place les rochers sur l'île en regardant si les rochers ne bloque pas la progression
-	 * des aventuriers sur l'île 
+	 * Place les rochers sur l'ï¿½le en regardant si les rochers ne bloque pas la progression
+	 * des aventuriers sur l'ï¿½le 
 	 * 
 	 */
 
@@ -277,8 +247,8 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].emplacement = "R0";
-				ile[posX][posY].rocher = true;
+				ile[posX][posY].setEmplacement(2) ;
+				ile[posX][posY].setRocher(true);
 				r = r + 1;
 			}
 		}		
@@ -286,9 +256,9 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].emplacement = "R0";
-				ile[posX][posY].rocher = true;
-				ile[posX][posY].coffre = true;
+				ile[posX][posY].setEmplacement(2);
+				ile[posX][posY].setRocher(true);
+				ile[posX][posY].setCoffre(true);
 				r = r + 1;
 			}
 		}
@@ -296,26 +266,26 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].emplacement = "R0";
-				ile[posX][posY].rocher = true;
-				ile[posX][posY].cle = true;
+				ile[posX][posY].setEmplacement(2);
+				ile[posX][posY].setRocher(true);
+				ile[posX][posY].setCle(true);
 				r = r + 1;
 			}
 		}
 	}
 	/**
-	 *  Regarde si l'on peut placer un rochers à la position donnée
-	 *  en regardant les cases alentours pour éviter de bloquers le passage
-	 *  et retourne true si la casse ne dérange pas sinon false
-	 * @param posX : position X de la case voulue sur l'île
-	 * @param posY : position Y de la case voulue sur l'île
-	 * @return la non-génance de passage de la case
+	 *  Regarde si l'on peut placer un rochers ï¿½ la position donnï¿½e
+	 *  en regardant les cases alentours pour ï¿½viter de bloquers le passage
+	 *  et retourne true si la casse ne dï¿½range pas sinon false
+	 * @param posX : position X de la case voulue sur l'ï¿½le
+	 * @param posY : position Y de la case voulue sur l'ï¿½le
+	 * @return la non-gï¿½nance de passage de la case
 	 */
 	private boolean verificationPlacementRochers(int posX, int posY) {
-		if (ile[posX][posY].emplacement == " 0") {
-			if (ile[posX-1][posY-1].emplacement != "R0" && ile[posX-1][posY].emplacement != "R0"  && ile[posX-1][posY+1].emplacement != "R0"  && ile[posX][posY-1].emplacement != "R0"  && ile[posX][posY+1].emplacement != "R0"  && ile[posX+1][posY-1].emplacement != "R0"  && ile[posX+1][posY].emplacement != "R0"  && ile[posX+1][posY+1].emplacement != "R0") {
-				if (ile[posX-1][posY-1].emplacement != "n0" && ile[posX-1][posY].emplacement != "n0"  && ile[posX-1][posY+1].emplacement != "n0"  && ile[posX][posY-1].emplacement != "n0"  && ile[posX][posY+1].emplacement != "n0"  && ile[posX+1][posY-1].emplacement != "n0"  && ile[posX+1][posY].emplacement != "n0"  && ile[posX+1][posY+1].emplacement != "n0") {
-					if (ile[posX-1][posY-1].emplacement != "N0" && ile[posX-1][posY].emplacement != "N0"  && ile[posX-1][posY+1].emplacement != "N0"  && ile[posX][posY-1].emplacement != "N0"  && ile[posX][posY+1].emplacement != "N0"  && ile[posX+1][posY-1].emplacement != "N0"  && ile[posX+1][posY].emplacement != "N0"  && ile[posX+1][posY+1].emplacement != "N0") {
+		if (ile[posX][posY].getEmplacement() == 0) {
+			if (!ile[posX-1][posY-1].isRocher()&& !ile[posX-1][posY].isRocher() && !ile[posX-1][posY+1].isRocher() && !ile[posX][posY-1].isRocher()  && !ile[posX][posY+1].isRocher()  && !ile[posX+1][posY-1].isRocher()  && !ile[posX+1][posY].isRocher()  && !ile[posX+1][posY+1].isRocher()) {
+				if (!ile[posX-1][posY-1].isNavire1() && !ile[posX-1][posY].isNavire1() && !ile[posX-1][posY+1].isNavire1()  && !ile[posX][posY-1].isNavire1()  && !ile[posX][posY+1].isNavire1() && !ile[posX+1][posY-1].isNavire1() && !ile[posX+1][posY].isNavire1()  && !ile[posX+1][posY+1].isNavire1()) {
+					if (!ile[posX-1][posY-1].isNavire2() && !ile[posX-1][posY].isNavire2() && !ile[posX-1][posY+1].isNavire2()  && !ile[posX][posY-1].isNavire2() && !ile[posX][posY+1].isNavire2()  && !ile[posX+1][posY-1].isNavire2()  && !ile[posX+1][posY].isNavire2()  && !ile[posX+1][posY+1].isNavire2()) {
 						return true;
 					}
 					return false;
