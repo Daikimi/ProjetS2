@@ -126,7 +126,7 @@ public class Island {
 	
 	public void affichageGraphique(){
 		
-		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png"};
+		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/clé.png"};
 		int[][] carte = new int[yIle][xIle];
 		for(int i =0; i<xIle; i++) {
 			for(int j =0; j<yIle ; j++) {
@@ -134,7 +134,9 @@ public class Island {
 					carte[j][i]=1;
 				} else if(ile[i][j].getEmplacement() == 2) {
 					carte[j][i]=2;
-				} else if(ile[i][j].getEmplacement() ==4 ) {
+				} else if(ile[i][j].getEmplacement()==3){
+					carte[j][i]=3;
+				}else if(ile[i][j].getEmplacement() ==4 ) {
 					carte[j][i]=4;
 				} else if (ile[i][j].getEmplacement() == 5) {
 					carte[j][i]=5;
@@ -142,8 +144,10 @@ public class Island {
 					carte[j][i]=6;
 				} else if (ile[i][j].getEmplacement()== 7) {
 					carte[j][i]=7;
-				} else {
+				} else if (ile[i][j].getEmplacement()==8) {
 					carte[j][i]=8;
+				}else{
+					carte[i][j]=9;
 				}
 			}
 		}
