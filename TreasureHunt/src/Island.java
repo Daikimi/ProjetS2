@@ -56,7 +56,7 @@ public class Island {
 	public Island(){
 		
 		creationIle();
-		
+		//zizi
 		placementEau();
 
 		placementNavires();
