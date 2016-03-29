@@ -1,8 +1,6 @@
 import java.util.Random;
 import javax.swing.JOptionPane;
 
-//MABBIT
-
 /**
 	 * La classe Island génere et gère la carte de l'île
 	 * sur laquelle seront placées les diffèrents navires et personnages
