@@ -1,7 +1,6 @@
 import java.util.Random;
 import javax.swing.JOptionPane;
 
-//MABBIT
 
 /**
 	 * La classe Island génere et gère la carte de l'île
@@ -58,7 +57,7 @@ public class Island {
 	public Island(){
 		
 		creationIle();
-		//zizi
+		
 		placementEau();
 
 		placementNavires();
