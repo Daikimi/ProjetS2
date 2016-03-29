@@ -2,11 +2,11 @@
 abstract class Personnage{
 	protected int posX;
 	protected int posY;
-	protected int energie;
+	protected int energie=100;
+	protected int equipe;
 	protected boolean possedeClef=false;
 	protected boolean possedeTresor=false;
-	
-	
-	abstract void deplacement();
+		
+	abstract void deplacement(int posX, int posY);
 	
 }
