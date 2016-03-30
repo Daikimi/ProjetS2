@@ -20,8 +20,39 @@ public class Voleur extends Personnage {
 		}
 	}
 	
-	public void deplacement(int posX,int posY){
-		MyMouseEvent event= new MyMouseEvent();
+	public void deplacementDroite() {
+		posX+=1;
+	} 
+	public void deplacementGauche() {
+		posX-=1;
+	}
+	public void deplacementBas() {
+		posY+=1;
+	} 
+	public void deplacementHaut() {
+		posY-=1;
+	}
+	public void deplacementHautGauche(){
+		this.deplacementHaut();
+		this.deplacementGauche();
+	}
+	public void deplacementHautDroite(){
+		this.deplacementHaut();
+		this.deplacementDroite();
+	}
+	public void deplacementBasGauche(){
+		this.deplacementBas();
+		this.deplacementGauche();
+	}
+	public void deplacementBasDroite(){
+		this.deplacementBas();
+		this.deplacementDroite();
+	}
+
+	@Override
+	void deplacement(int posX, int posY) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
