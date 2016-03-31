@@ -14,6 +14,7 @@ public class Parcelle {
 	 */
 	
 	private int valeur ;
+	private Personnage perso = null;
 	
 	/**
 	 * Constructeur de Parcelle
@@ -35,8 +36,8 @@ public class Parcelle {
 		return valeur;
 	}
 
-	public void setValeur(int emplacement) {
-		this.valeur = emplacement;
+	public void setValeur(int valeur) {
+		this.valeur = valeur;
 	}
 
 	/**
@@ -45,7 +46,7 @@ public class Parcelle {
 	 * @return emplacement la valeur de la case
 	 */
 	public String toString() {
-		if(valeur==0){
+		if(valeur==8){
 			return " O"; 
 		}else if(valeur==1){
 			return "XO";
@@ -59,6 +60,14 @@ public class Parcelle {
 			return "NO";
 		}else{
 			return " E";		}
+	}
+	
+	public Personnage getPerso() {
+		return perso;
+	}
+	
+	public void setPersonnage(Personnage p) {
+		this.perso = p;
 	}
 	
 }

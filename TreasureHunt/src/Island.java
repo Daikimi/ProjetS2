@@ -40,6 +40,8 @@ public class Island {
 	 *   
 	 */
 	
+	public Parcelle[][] ileTemp;
+	
 	public static Parcelle[][] ile;
 	
 	/**
@@ -78,16 +80,16 @@ public class Island {
 		for (int i = 0; i < xIle; i++) {
 			System.out.print("|");
 			for (int j = 0; j < yIle; j++) {
-				if (ile[i][j].getValeur()==0) {
-					System.out.print(" " + "\u001b[30m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].getValeur() == 1) {
-					System.out.print(" " + "\u001b[34m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].getValeur() == 2) {
-					System.out.print(" " + "\u001b[37m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].getValeur() == 4 || ile[i][j].getValeur() == 6) {
-					System.out.print(" " + "\u001b[31m" + ile[i][j].toString() + "\u001b[0m" + " |");
+				if (ileTemp[i][j].getValeur()==8) {
+					System.out.print(" " + "\u001b[30m" + ileTemp[i][j].toString() + "\u001b[0m" + " |");
+				} else if (ileTemp[i][j].getValeur() == 1) {
+					System.out.print(" " + "\u001b[34m" + ileTemp[i][j].toString() + "\u001b[0m" + " |");
+				} else if (ileTemp[i][j].getValeur() == 2) {
+					System.out.print(" " + "\u001b[37m" + ileTemp[i][j].toString() + "\u001b[0m" + " |");
+				} else if (ileTemp[i][j].getValeur() == 4 || ileTemp[i][j].getValeur() == 6) {
+					System.out.print(" " + "\u001b[31m" + ileTemp[i][j].toString() + "\u001b[0m" + " |");
 				} else {
-					System.out.print(" " + "\u001b[36m" + ile[i][j].toString() + "\u001b[0m" + " |");
+					System.out.print(" " + "\u001b[36m" + ileTemp[i][j].toString() + "\u001b[0m" + " |");
 
 				}
 
@@ -106,7 +108,7 @@ public class Island {
 	 * @param posY position Y de la case voulue
 	 */
 	public void changement(int chose,int posX,int posY) {	
-		ile[posX][posY].setValeur(chose);
+		ileTemp[posX][posY].setValeur(chose);
 	}
 	/**
 	 * Affiche la valeur de la case de position voulue
@@ -117,7 +119,7 @@ public class Island {
 	 */
 	
 	public String affichage(int posX,int posY) {
-		return ile[posX][posY].toString(); 
+		return ileTemp[posX][posY].toString(); 
 	}
 	
 	/**
@@ -129,9 +131,19 @@ public class Island {
 	public void affichageGraphique(){
 		
 		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png"};
-		int[][] carte = new int[yIle][xIle];
-		for(int i =0; i<xIle; i++) {
-			for(int j =0; j<yIle ; j++) {
+		ile = new Parcelle[xIle+1][yIle+1];
+		for (int i = 0; i<xIle+1; i++) {
+			for (int j = 0; j<yIle+1; j++) {
+				if (i == 0 || j == 0) {
+					ile[i][j] = new Parcelle(0);
+				} else {
+					ile[i][j] = new Parcelle(ileTemp[i-1][j-1].getValeur());
+				}
+			}
+		}
+		int[][] carte = new int[yIle+1][xIle+1];
+		for(int i =0; i<xIle+1; i++) {
+			for(int j =0; j<yIle+1 ; j++) {
 				if(ile[i][j].getValeur() == 1) {
 					carte[j][i]=1;
 				} else if(ile[i][j].getValeur() == 2) {
@@ -146,16 +158,34 @@ public class Island {
 					carte[j][i]=6;
 				} else if (ile[i][j].getValeur()== 7) {
 					carte[j][i]=7;
-				} else if (ile[i][j].getValeur()==8) {
-					carte[j][i]=9;
-				}else{
+				}else if (ile[i][j].getValeur() == 8){
 					carte[j][i]=8;
+				} else if (ile[i][j].getValeur() == 9){
+					carte[j][i]=9;
+				} else {
+					carte[j][i]=0;
 				}
 			}
 		}
 
 		Plateau plateau = new Plateau(gifs, 1);
 		plateau.setJeu(carte);
+		
+		for (int i = 1 ; i < xIle+1 ; i++) {
+			plateau.setText(i, 0, String.valueOf(i)) ;
+		}
+		for (int j = 1 ; j < yIle+1 ; j++) {
+			String msg = "" ;
+			int y = j-1 ;
+			if (y < 26) {
+				msg += (char) (y + 65) ; // Convert 0 to A
+			} else {
+				msg += (char) ((y/26) + 65) ;  // Convert to AA..ZZ
+				msg += (char) ((y%26) + 65) ;
+			}
+			plateau.setText(0, j, msg) ;
+		}
+	
 		plateau.affichage();
 		
 	    }
@@ -178,7 +208,7 @@ public class Island {
 
 		xIle = Integer.parseInt(rep1);
 		yIle = Integer.parseInt(rep2);
-		ile = new Parcelle[xIle][yIle];
+		ileTemp = new Parcelle[xIle][yIle];
 		nbRochers = Integer.parseInt(nbroc);
 	}
 	
@@ -188,12 +218,12 @@ public class Island {
 	 */
 	
 	private void placementEau() {
-		for(int i=0;i<ile.length;i++){
-			for(int j=0;j<ile[0].length;j++){
+		for(int i=0;i<ileTemp.length;i++){
+			for(int j=0;j<ileTemp[0].length;j++){
 				if (i == 0 || i == xIle-1 || j == 0 || j == yIle-1) {
-					ile[i][j]=new Parcelle(1);
+					ileTemp[i][j]=new Parcelle(1);
 				} else {
-					ile[i][j]=new Parcelle(0);
+					ileTemp[i][j]=new Parcelle(8);
 				}
 			}
 		}
@@ -210,21 +240,21 @@ public class Island {
 		int b1 = 1+ random.nextInt(xIle-2);
 		int b2 = 1+ random.nextInt(xIle-2);
 		
-		ile[b1][1].setValeur(4);
-		ile [b2][yIle-2].setValeur(6);
+		ileTemp[b1][1].setValeur(4);
+		ileTemp [b2][yIle-2].setValeur(6);
 
 		for(int i=b1-1;i<b1+2;i++){
 			for(int j=1;j<3;j++){
-				if(ile[i][j].getValeur()==0){
-					ile[i][j].setValeur(5);
+				if(ileTemp[i][j].getValeur()==8){
+					ileTemp[i][j].setValeur(5);
 				}
 			}
 		}
 		
 		for(int i=b2-1;i<b2+2;i++){
 			for(int j=yIle-3;j<yIle-1;j++){
-				if(ile[i][j].getValeur()==0){
-					ile[i][j].setValeur(7);
+				if(ileTemp[i][j].getValeur()==8){
+					ileTemp[i][j].setValeur(7);
 				}
 			}
 		}
@@ -244,7 +274,7 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].setValeur(2) ;
+				ileTemp[posX][posY].setValeur(2) ;
 				r = r + 1;
 			}
 		}		
@@ -252,7 +282,7 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].setValeur(2);
+				ileTemp[posX][posY].setValeur(2);
 				r = r + 1;
 			}
 		}
@@ -260,7 +290,7 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].setValeur(2);
+				ileTemp[posX][posY].setValeur(2);
 				r = r + 1;
 			}
 		}
@@ -274,10 +304,10 @@ public class Island {
 	 * @return la non-génance de passage de la case
 	 */
 	private boolean verificationPlacementRochers(int posX, int posY) {
-		if (ile[posX][posY].getValeur() == 0) {
-			if (ile[posX-1][posY-1].getValeur() != 2 && ile[posX-1][posY].getValeur() != 2 && ile[posX-1][posY+1].getValeur() != 2 && ile[posX][posY-1].getValeur() != 2  && ile[posX][posY+1].getValeur() != 2  && ile[posX+1][posY-1].getValeur() != 2  && ile[posX+1][posY].getValeur() != 2  && ile[posX+1][posY+1].getValeur() != 2) {
-				if (ile[posX-1][posY-1].getValeur() != 4 && ile[posX-1][posY].getValeur() != 4 && ile[posX-1][posY+1].getValeur() != 4  && ile[posX][posY-1].getValeur() != 4  && ile[posX][posY+1].getValeur() != 4 && ile[posX+1][posY-1].getValeur() != 4 && ile[posX+1][posY].getValeur() != 4  && ile[posX+1][posY+1].getValeur() != 4) {
-					if (ile[posX-1][posY-1].getValeur() != 6 && ile[posX-1][posY].getValeur() != 6 && ile[posX-1][posY+1].getValeur() != 6  && ile[posX][posY-1].getValeur() != 6 && ile[posX][posY+1].getValeur() != 6  && ile[posX+1][posY-1].getValeur() != 6  && ile[posX+1][posY].getValeur() != 6  && ile[posX+1][posY+1].getValeur() != 6) {
+		if (ileTemp[posX][posY].getValeur() == 8) {
+			if (ileTemp[posX-1][posY-1].getValeur() != 2 && ileTemp[posX-1][posY].getValeur() != 2 && ileTemp[posX-1][posY+1].getValeur() != 2 && ileTemp[posX][posY-1].getValeur() != 2  && ileTemp[posX][posY+1].getValeur() != 2  && ileTemp[posX+1][posY-1].getValeur() != 2  && ileTemp[posX+1][posY].getValeur() != 2  && ileTemp[posX+1][posY+1].getValeur() != 2) {
+				if (ileTemp[posX-1][posY-1].getValeur() != 4 && ileTemp[posX-1][posY].getValeur() != 4 && ileTemp[posX-1][posY+1].getValeur() != 4  && ileTemp[posX][posY-1].getValeur() != 4  && ileTemp[posX][posY+1].getValeur() != 4 && ileTemp[posX+1][posY-1].getValeur() != 4 && ileTemp[posX+1][posY].getValeur() != 4  && ileTemp[posX+1][posY+1].getValeur() != 4) {
+					if (ileTemp[posX-1][posY-1].getValeur() != 6 && ileTemp[posX-1][posY].getValeur() != 6 && ileTemp[posX-1][posY+1].getValeur() != 6  && ileTemp[posX][posY-1].getValeur() != 6 && ileTemp[posX][posY+1].getValeur() != 6  && ileTemp[posX+1][posY-1].getValeur() != 6  && ileTemp[posX+1][posY].getValeur() != 6  && ileTemp[posX+1][posY+1].getValeur() != 6) {
 						return true;
 					}
 					return false;
