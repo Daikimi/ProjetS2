@@ -78,13 +78,13 @@ public class Island {
 		for (int i = 0; i < xIle; i++) {
 			System.out.print("|");
 			for (int j = 0; j < yIle; j++) {
-				if (ile[i][j].getEmplacement()==0) {
+				if (ile[i][j].getValeur()==0) {
 					System.out.print(" " + "\u001b[30m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].getEmplacement() == 1) {
+				} else if (ile[i][j].getValeur() == 1) {
 					System.out.print(" " + "\u001b[34m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].getEmplacement() == 2) {
+				} else if (ile[i][j].getValeur() == 2) {
 					System.out.print(" " + "\u001b[37m" + ile[i][j].toString() + "\u001b[0m" + " |");
-				} else if (ile[i][j].getEmplacement() == 4 || ile[i][j].getEmplacement() == 6) {
+				} else if (ile[i][j].getValeur() == 4 || ile[i][j].getValeur() == 6) {
 					System.out.print(" " + "\u001b[31m" + ile[i][j].toString() + "\u001b[0m" + " |");
 				} else {
 					System.out.print(" " + "\u001b[36m" + ile[i][j].toString() + "\u001b[0m" + " |");
@@ -128,28 +128,28 @@ public class Island {
 	
 	public void affichageGraphique(){
 		
-		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/clé.png"};
+		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png"};
 		int[][] carte = new int[yIle][xIle];
 		for(int i =0; i<xIle; i++) {
 			for(int j =0; j<yIle ; j++) {
-				if(ile[i][j].getEmplacement() == 1) {
+				if(ile[i][j].getValeur() == 1) {
 					carte[j][i]=1;
-				} else if(ile[i][j].getEmplacement() == 2) {
+				} else if(ile[i][j].getValeur() == 2) {
 					carte[j][i]=2;
-				} else if(ile[i][j].getEmplacement()==3){
+				} else if(ile[i][j].getValeur()==3){
 					carte[j][i]=3;
-				}else if(ile[i][j].getEmplacement() ==4 ) {
+				}else if(ile[i][j].getValeur() ==4 ) {
 					carte[j][i]=4;
-				} else if (ile[i][j].getEmplacement() == 5) {
+				} else if (ile[i][j].getValeur() == 5) {
 					carte[j][i]=5;
-				} else if (ile[i][j].getEmplacement() == 6) { 
+				} else if (ile[i][j].getValeur() == 6) { 
 					carte[j][i]=6;
-				} else if (ile[i][j].getEmplacement()== 7) {
+				} else if (ile[i][j].getValeur()== 7) {
 					carte[j][i]=7;
-				} else if (ile[i][j].getEmplacement()==8) {
-					carte[j][i]=8;
+				} else if (ile[i][j].getValeur()==8) {
+					carte[j][i]=9;
 				}else{
-					carte[i][j]=9;
+					carte[j][i]=8;
 				}
 			}
 		}
@@ -171,8 +171,8 @@ public class Island {
 		String rep2 = "";
 		String nbroc="";
 		do {
-			rep1 = JOptionPane.showInputDialog(null, "Choississez la taille x de l'île");
-		 	rep2 = JOptionPane.showInputDialog(null, "Choississez la taille y de l'île");
+			rep1 = JOptionPane.showInputDialog(null, "Choisissez la taille x de l'île");
+		 	rep2 = JOptionPane.showInputDialog(null, "Choisissez la taille y de l'île");
 		 	nbroc = JOptionPane.showInputDialog(null, "Choisissez le pourcentage de rocher de l'île :");
 		} while (!rep1.matches(regex) && !rep2.matches(regex)&& !nbroc.matches(regex));
 
@@ -218,7 +218,7 @@ public class Island {
 
 		for(int i=b1-1;i<b1+2;i++){
 			for(int j=1;j<3;j++){
-				if(ile[i][j].getEmplacement()==0){
+				if(ile[i][j].getValeur()==0){
 					ile[i][j].setEmplacement(5);
 					ile[i][j].setPersonnage(true);
 				}
@@ -227,7 +227,7 @@ public class Island {
 		
 		for(int i=b2-1;i<b2+2;i++){
 			for(int j=yIle-3;j<yIle-1;j++){
-				if(ile[i][j].getEmplacement()==0){
+				if(ile[i][j].getValeur()==0){
 					ile[i][j].setEmplacement(7);
 					ile[i][j].setPersonnage(true);
 				}
@@ -284,7 +284,7 @@ public class Island {
 	 * @return la non-génance de passage de la case
 	 */
 	private boolean verificationPlacementRochers(int posX, int posY) {
-		if (ile[posX][posY].getEmplacement() == 0) {
+		if (ile[posX][posY].getValeur() == 0) {
 			if (!ile[posX-1][posY-1].isRocher()&& !ile[posX-1][posY].isRocher() && !ile[posX-1][posY+1].isRocher() && !ile[posX][posY-1].isRocher()  && !ile[posX][posY+1].isRocher()  && !ile[posX+1][posY-1].isRocher()  && !ile[posX+1][posY].isRocher()  && !ile[posX+1][posY+1].isRocher()) {
 				if (!ile[posX-1][posY-1].isNavire1() && !ile[posX-1][posY].isNavire1() && !ile[posX-1][posY+1].isNavire1()  && !ile[posX][posY-1].isNavire1()  && !ile[posX][posY+1].isNavire1() && !ile[posX+1][posY-1].isNavire1() && !ile[posX+1][posY].isNavire1()  && !ile[posX+1][posY+1].isNavire1()) {
 					if (!ile[posX-1][posY-1].isNavire2() && !ile[posX-1][posY].isNavire2() && !ile[posX-1][posY+1].isNavire2()  && !ile[posX][posY-1].isNavire2() && !ile[posX][posY+1].isNavire2()  && !ile[posX+1][posY-1].isNavire2()  && !ile[posX+1][posY].isNavire2()  && !ile[posX+1][posY+1].isNavire2()) {

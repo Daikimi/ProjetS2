@@ -6,7 +6,5 @@ abstract class Personnage{
 	protected int equipe;
 	protected boolean possedeClef=false;
 	protected boolean possedeTresor=false;
-		
-	abstract void deplacement(int posX, int posY);
 	
 }

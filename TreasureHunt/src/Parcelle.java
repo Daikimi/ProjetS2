@@ -13,7 +13,7 @@ public class Parcelle {
 	 * 
 	 */
 	
-	private int emplacement ;
+	private int valeur ;
 	
 	/**
 	 * boolean vérifiant si la case est un navire de l'equipe 1
@@ -64,7 +64,7 @@ public class Parcelle {
 	 *  
 	 */
 	public Parcelle(int chose) {
-		emplacement = chose;
+		valeur = chose;
 	}
 	
 	/**
@@ -73,12 +73,12 @@ public class Parcelle {
 	 * @param chose la nouvelle valeur qui va être assignée à la case
 	 */
 		
-	public int getEmplacement() {
-		return emplacement;
+	public int getValeur() {
+		return valeur;
 	}
 
 	public void setEmplacement(int emplacement) {
-		this.emplacement = emplacement;
+		this.valeur = emplacement;
 	}
 
 	public boolean isNavire1() {
@@ -143,17 +143,17 @@ public class Parcelle {
 	 * @return emplacement la valeur de la case
 	 */
 	public String toString() {
-		if(emplacement==0){
+		if(valeur==0){
 			return " O"; 
-		}else if(emplacement==1){
+		}else if(valeur==1){
 			return "XO";
-		}else if(emplacement==2){
+		}else if(valeur==2){
 			return "RO";
-		}else if(emplacement==4){
+		}else if(valeur==4){
 			return "nO";
-		}else if(emplacement==5){
+		}else if(valeur==5){
 			return " e";
-		}else if(emplacement==6){
+		}else if(valeur==6){
 			return "NO";
 		}else{
 			return " E";		}

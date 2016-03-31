@@ -4,7 +4,6 @@ public class Voleur extends Personnage {
 	
 	
 	public Voleur(int posX,int posY,int equipe){
-		
 		this.posX=posX;
 		this.posY=posY;
 		this.equipe=equipe;
@@ -16,44 +15,24 @@ public class Voleur extends Personnage {
 			this.possedeClef=true;
 			System.out.println("Réussi !!!");
 		}else{
-			System.out.println("Loupé ... Tu pu la mer2!!!");
+			System.out.println("Loupé...");
 		}
 	}
 	
-	public void deplacementDroite() {
-		posX+=1;
-	} 
-	public void deplacementGauche() {
-		posX-=1;
-	}
-	public void deplacementBas() {
-		posY+=1;
-	} 
-	public void deplacementHaut() {
-		posY-=1;
-	}
+	public void deplacementDroite() {	posX+=1;	} 
+	public void deplacementGauche() {	posX-=1;	}
+	public void deplacementBas() {		posY+=1;	} 
+	public void deplacementHaut() {		posY-=1;	}
 	public void deplacementHautGauche(){
 		this.deplacementHaut();
-		this.deplacementGauche();
-	}
+		this.deplacementGauche();	}
 	public void deplacementHautDroite(){
 		this.deplacementHaut();
-		this.deplacementDroite();
-	}
+		this.deplacementDroite();	}
 	public void deplacementBasGauche(){
 		this.deplacementBas();
-		this.deplacementGauche();
-	}
+		this.deplacementGauche();	}
 	public void deplacementBasDroite(){
 		this.deplacementBas();
-		this.deplacementDroite();
-	}
-
-	@Override
-	void deplacement(int posX, int posY) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
+		this.deplacementDroite();	}
 }

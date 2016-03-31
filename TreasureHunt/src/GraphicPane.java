@@ -1,7 +1,9 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
@@ -22,6 +24,9 @@ class GraphicPane extends JPanel {
 	private ImageIcon[] images;
 	private int dimImage;
 	private int[][] jeu;
+	private String[][] text ;
+	private boolean[][] highlight = null ;
+	private Color[][] highlightColor = null ;
 	/**
 	 * Construit un plateau de jeu vide de dimension taille x taille.
 	 * Initialement, les cellules sont vides. Le constructeur demande la fourniture
@@ -45,6 +50,7 @@ class GraphicPane extends JPanel {
 			setGraphicSize() ;
 			this.setBackground(Color.LIGHT_GRAY);
 		} 
+		text = null ;
 	}
 	public Dimension getGraphicSize() {
 		return new Dimension(nbCol * dimImage, nbLig * dimImage) ;
@@ -52,15 +58,31 @@ class GraphicPane extends JPanel {
 	private void setGraphicSize() {
 		this.setPreferredSize(getGraphicSize());
 	}
-	private void showText(Graphics g, String msg) {
-		Dimension dimPage = this.getPreferredSize() ;
-		Rectangle dimText = g.getFontMetrics().getStringBounds(ERR_NOT_INIT_MSG, g).getBounds() ;
+	private void showText(Graphics g, String msg, Rectangle r) {
 		// Calcule la position du message pour qu'il soit centré.
-		int x0 = (dimPage.width - dimText.width) / 2 ;
-		int y0 = (dimPage.height - dimText.height) / 2 ;
+		Rectangle dimText = g.getFontMetrics().getStringBounds(msg, g).getBounds() ;
+		int x0 = (r.width - dimText.width) / 2 ;
+		int y0 = (r.height - dimText.height) / 2 ;
 		
 		g.setColor(Color.BLACK) ;
-		g.drawString(ERR_NOT_INIT_MSG, x0, y0) ;
+		g.drawString(msg, r.x + x0, r.y + dimImage - y0) ;
+	}
+	private void showText(Graphics g, String msg) {
+		Dimension dimPage = this.getPreferredSize() ;
+		showText(g, msg, new Rectangle(dimPage)) ;
+	}
+	/**
+	 * Dessine la surbrillance autour de la cellule placée en w/l (coord. graphiques).
+	 * La cellule fait dimImage x dimImage.
+	 * @param w la position en largeur.
+	 * @param h la position en hauteur.
+	 */
+	private void highlight(Graphics g, int w,int h, Color color) {
+		Color oldColor = g.getColor() ;
+		Color transparent = new Color(color.getRed(), color.getGreen(), color.getBlue(), 96) ;
+		g.setColor(transparent) ;
+		g.fillRect(w-1, h-1, dimImage-2, dimImage-2);
+		g.setColor(oldColor) ;
 	}
 	/**
 	 * Méthode d'affichage du composant (utilisée par Swing. Ne pas appeler directement).
@@ -68,26 +90,77 @@ class GraphicPane extends JPanel {
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		if (jeu != null) {
-			Dimension size=this.getSize();
-			int w=2,h=1,lg=0,col=0;
-			g.setColor( Color.white );
-			while ((h<size.height) && (lg < nbLig)) {
-				while ((w<size.width) && (col < nbCol)) {
-					if (jeu[col][lg]!=0)
-						g.drawImage(images[jeu[col][lg]-1].getImage(),w,h,null);
-					else
-						g.drawRect(w-1, h-1, dimImage-2, dimImage-2);
-					w+=dimImage;
-					col++;
+			{
+				Dimension size=this.getSize();
+				int w=2,h=1,lig=0,col=0;
+				g.setColor( Color.white );
+				while ((h<size.height) && (lig < nbLig)) {
+					while ((w<size.width) && (col < nbCol)) {
+						if (jeu[col][lig]!=0) {
+							g.drawImage(images[jeu[col][lig]-1].getImage(),w,h,null);
+						} else {
+							g.drawRect(w-1, h-1, dimImage-2, dimImage-2);
+						}
+						if (highlight[lig][col]) {
+							highlight(g, w, h, highlightColor[lig][col]) ;
+						}
+						w+=dimImage;
+						col++;
+					}
+					lig++;
+					col=0;
+					w=2;
+					h+=dimImage;
 				}
-				lg++;
-				col=0;
-				w=2;
-				h+=dimImage;
+			}
+			{
+				Dimension size=this.getSize();
+				int w=2,h=1,lig=0,col=0;
+				while ((h<size.height) && (lig < nbLig)) {
+					while ((w<size.width) && (col < nbCol)) {
+						String msg = getText(col, lig) ;
+						if ((msg != null) && (msg.length() > 0)) {
+							showText(g, msg, new Rectangle(w, h, dimImage, dimImage)) ;
+						}
+						w+=dimImage;
+						col++;
+					}
+					lig++;
+					col=0;
+					w=2;
+					h+=dimImage;
+				}
 			}
 		} else {
 			this.showText(g, ERR_NOT_INIT_MSG) ;
 		}
+	}
+	public void setSize() {
+		highlight = new boolean[nbLig][nbCol] ;
+		highlightColor = new Color[nbLig][nbCol] ;
+		text = new String[nbLig][nbCol] ;
+	}
+	public void clearHighlight() {
+		for (int c = 0 ; c < nbCol ; c++) {
+			for (int l = 0 ; l < nbLig ; l++) {
+				highlight[l][c] = false ;
+				highlightColor[l][c] = null ;
+			}
+		}
+	}
+	public void setHighlight(int x, int y, Color color) {
+		if (highlight != null) {
+			highlight[x][y] = true ;
+			highlightColor[x][y] = color ;
+		}
+	}
+	public void resetHighlight(int x, int y) {
+		if (highlight != null) {
+			highlight[x][y] = false ;
+		}
+	}
+	public boolean isHighlight(int x, int y) {
+		return highlight[x][y] ;
 	}
 	/**
 	 * Méthode permettant de placer les éléments sur le plateau. 
@@ -103,6 +176,31 @@ class GraphicPane extends JPanel {
 			nbCol = jeu.length ;
 			nbLig = jeu[0].length ;
 			setGraphicSize() ;
+			setSize() ;
+			clearHighlight() ;
+			clearText() ;
+			text = new String[nbCol][nbLig] ;
+		} else {
+			text = null ;
+		}
+	}
+	public void clearText() {
+		for (int c = 0 ; c < nbCol ; c++) {
+			for (int l = 0 ; l < nbLig ; l++) {
+				text[l][c] = null ;
+			}
+		}
+	}
+	public void setText(int x, int y, String msg) {
+		if (text != null) {
+			text[x][y] = msg ;
+		}
+	}
+	private String getText(int x, int y) {
+		if (text != null) {
+			return text[x][y] ;
+		} else {
+			return null ;
 		}
 	}
 	public int getX(MouseEvent event) {
@@ -116,9 +214,6 @@ class GraphicPane extends JPanel {
 	 * @return le tableau d'entiers
 	 */
 	public int[][] getJeu(){return jeu;}
-
-	public int getNbCol() {return nbCol;}
-	public int getNbLig() {return nbLig;}
 
 }
 

@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -16,7 +17,7 @@ import javax.swing.JFrame;
  * @author M2103-Team
  */
 public class Plateau {
-	private static final long serialVersionUID = 1L;
+	private static boolean defaultVisibility = true ;
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
@@ -67,6 +68,14 @@ public class Plateau {
 		}
 	}
 	/**
+	 * Détermine la visibilité par défaut des plateaux construits. La valeur initiale est true : 
+	 * tout plateau construit est immédiatement affiché.
+	 * @param defaultValue vrai si tout plateau est affiché immédiatement 
+	 */
+	public static void setDefaultVisibility(boolean defaultValue) {
+		defaultVisibility = defaultValue ;
+	}
+	/**
 	 * Construit un plateau de jeu vide de dimension taille x taille.
 	 * Initialement, les cellules sont vides. Le constructeur demande la fourniture
 	 * d'un catalogue d'images gif ou png. La fermeture de la fenêtre provoque uniquement le
@@ -84,6 +93,9 @@ public class Plateau {
 	 * d'un catalogue d'images gif ou png.
 	 * @param gif tableau 1D des chemins des fichiers des différentes images affichées.
 	 * @param taille Dimension (en nombre de cellules) d'un côté du plateau.
+	 *        <b>La taille fixée ici est la taille par défaut (plateau carré)</b> 
+	 *        (gardé pour raison de compatibilité.
+	 *        Le plateau s'ajustera en fonction des dimensions du tableau jeu.
 	 * @param withTextArea Indique si une zone de texte doit être affichée.
 	 */
 	public Plateau(String[] gif,int taille, boolean withTextArea){
@@ -93,7 +105,7 @@ public class Plateau {
 		console = null ;
 
 		// Caractéristiques initiales pour la fenetre.
-		window.setTitle("Treasure Hunt");
+		window.setTitle("Plateau de jeu ("+taille+"X"+taille+")");
 		window.setLocationRelativeTo(null);
 		window.setLayout(new BorderLayout());
 		// La fermeture de la fenetre ne fait que la cacher. 
@@ -109,7 +121,7 @@ public class Plateau {
 		resizeFromGraphic() ;
 
 		// Affichage effectif 
-		window.setVisible(true);
+		window.setVisible(defaultVisibility);
 		// Ajout des listeners.
 		graphic.addMouseListener(new Mouse());
 		window.addKeyListener(new Key()) ;
@@ -142,8 +154,29 @@ public class Plateau {
 		window.repaint(); 			// Délégué à Swing (appelle indirectement graphic.paintComponent via Swing)
 	}
 	/**
+	 * Détermine le titre de la fenetre associée.
+	 * @param title Le titre à afficher.
+	 */
+	public void setTitle(String title) {
+		window.setTitle(title) ;
+	}
+	/**
+	 * Provoque le masquage du plateau.
+	 * Le plateau est conservé en mémoire et peut être réaffiché par {@link #affichage()}.
+	 */
+	public void masquer() {
+		window.setVisible(false);
+	}
+	/**
+	 * Provoque la destruction du plateau. 
+	 * L'arrêt du programme est conditionné par la fermeture de tous les plateaux ouverts.
+	 */
+	public void close() {
+		window.dispose();
+	}
+	/**
 	 * prépare l'attente d'événements Swing (clavier ou souris).
-	 * Appelé par waitEvent() et waitEvent(int).
+	 * Appelé par waitEvent() et waitEvent(int). 
 	 */
 	private void prepareWaitEvent() {
 		currentEvent = null ;	// Annule tous les événements antérieurs
@@ -152,8 +185,12 @@ public class Plateau {
 	}
 	/**
 	 * Attends (au maximum timeout ms) l'apparition d'une entrée (souris ou clavier).
+	 * 
 	 * @param timeout La durée maximale d'attente.
 	 * @return L'événement observé si il y en a eu un, <i>null</i> sinon.
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html">java.awt.event.InputEvent</a>
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseEvent.html">java.awt.event.MouseEvent</a>
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html">java.awt.event.KeyEvent</a>
 	 */
 	public InputEvent waitEvent(int timeout) {
 		int time = 0 ;
@@ -170,7 +207,12 @@ public class Plateau {
 	}
 	/**
 	 * Attends (indéfiniment) un événement clavier ou souris. 
+	 * Pour limiter le temps d'attente (timeout) voir {@link #waitEvent(int)}.
+	 * 
 	 * @return L'événement observé.
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html">java.awt.event.InputEvent</a>
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseEvent.html">java.awt.event.MouseEvent</a>
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html">java.awt.event.KeyEvent</a>
 	 */
 	public InputEvent waitEvent() {
 		prepareWaitEvent() ;
@@ -179,42 +221,43 @@ public class Plateau {
 		}
 		return currentEvent ;
 	}
-	public void println(String message) {
-		if (console != null) {
-			console.println(message) ;
-		}
-	}
-	/**
-	 * Provoque la destruction du plateau. 
-	 * L'arrêt du programme est conditionné par la fermeture de tous les plateaux ouverts.
-	 */
-	public void close() {
-		window.dispose();
-	}
-	/**
-	 * Provoque le masquage du plateau.
-	 * Le plateau est conservé en mémoire et peut être réaffiché par {@link #affichage()}.
-	 */
-	public void masquer() {
-		window.setVisible(false);
-	}
 	/**
 	 * Calcule la ligne de la case ciblée par un mouseEvent.
-	 * @param event
-	 * @return le numéro de la ligne ciblée (0 à taille-1)
+	 * Attention: il est possible si l'utilsateur agrandi la fenêtre que le clic
+	 * se produise à l'extérieur du plateau. Cette configuration n'est pas détectée par cette méthode
+	 * qui retourne alors une valeur hors des limites. 
+	 *
+	 * @param event L'évenement souris capturé.
+	 * @return le numéro de la colonne ciblée (0 à taille-1)
 	 */
 	public int getX(MouseEvent event) {
 		return graphic.getX(event) ;
 	}
 	/**
 	 * Calcule la colonne de la case ciblée par un mouseEvent.
-	 * @param event
+	 * Attention: il est possible si l'utilsateur agrandi la fenêtre que le clic
+	 * se produise à l'extérieur du plateau. Cette configuration n'est pas détectée par cette méthode
+	 * qui retourne alors une valeur hors des limites. 
+	 *
+	 * @param event L'évenement souris capturé.
 	 * @return le numéro de la colonne ciblée (0 à taille-1)
 	 */
 	public int getY(MouseEvent event) { 	
 		return graphic.getY(event) ;
 	}
-
+	/**
+	 * Affiche un message dans la partie texte du plateau.
+	 * Si le plateau a été construit sans zone texte, cette méthode est sans effet.
+	 * Cela provoque aussi le déplacement du scroll vers l'extrémité basse de façon 
+	 * à rendre le texte ajouté visible. On ajoute automatiquement une fin de ligne 
+	 * de telle sorte que le message est seul sur sa ligne.
+	 * @param message Le message à afficher.
+	 */
+	public void println(String message) {
+		if (console != null) {
+			console.println(message) ;
+		}
+	}
 	// Note la taille initiale est calculée d'après la taille du graphique.
 	private void resizeFromGraphic() {
 		Dimension dim = graphic.getGraphicSize() ;
@@ -223,8 +266,68 @@ public class Plateau {
 		} else {
 			dim.height += 150 ;
 		}
-		System.out.println(dim) ;
 		window.getContentPane().setPreferredSize(dim) ;
 		window.pack() ;
+	}
+	/**
+	 * Efface la surbrillance pour toutes les cellules du plateau. 
+	 */
+	public void clearHighlight() {
+		if (graphic != null) {
+			graphic.clearHighlight();
+		}
+	}
+	/**
+	 * Place une cellule en surbrillance. La surbrillance provoque la superposition d'un carré translucide 
+	 * de la couleur précisée. 
+	 * Les cellules peuvent revenir à leur état normal:
+	 * <ul>
+	 * <li>globalement par un appel à {@link #clearHighlight()}</li>
+	 * <li>individuellement par un appel à {@link #resetHighlight(int, int)}</li>
+	 * </ul>
+	 * @param x La ligne de la cellule.
+	 * @param y La colonne de la cellule.
+	 * @param color La couleur du carré affiché.
+	 */
+	public void setHighlight(int x, int y, Color color) {
+		if (graphic != null) {
+			graphic.setHighlight(x, y, color);
+		}
+	}
+	/**
+	 * Efface la surbrillance pour une cellule du plateau. La cellule est déterminée par
+	 * son numéro de ligne et de colonne. Si la cellule n'était pas en surbrillance, 
+	 * cette méthode est sans effet.
+	 * @param x Numéro de ligne de la cellule à affecter.
+	 * @param y Numéro de colonne de la cellule à affecter.
+	 */
+	public void resetHighlight(int x, int y) {
+		if (graphic != null) {
+			graphic.resetHighlight(x, y);
+		}
+	}
+	/**
+	 * Permet de savoir si une cellule est actuellement en surbrillance.
+	 * @param x Le numéro de ligne de la cellule.
+	 * @param y Le numéro de colonne de la cellule.
+	 * @return true si la cellule est actuellement en surbrillance.
+	 */
+	public boolean isHighlight(int x, int y) {
+		return graphic.isHighlight(x, y) ;
+	}
+	/**
+	 * Efface l'affichage de tout texte dans la partie graphique.
+	 */
+	public void clearText() {
+		graphic.clearText() ;
+	}
+	/**
+	 * Demande l'affichage d'un texte dans une case. Le texte est centré horizontalement et verticalement. Ecrit en Color.BLACK.
+	 * @param x Le numéro de ligne de la cellule où apparaît le texte.
+	 * @param y Le numéro de colonne de la cellule où apparaît le texte.
+	 * @param msg les texte à afficher.
+	 */
+	public void setText(int x, int y, String msg) {
+		graphic.setText(x, y, msg) ;		
 	}
 }
