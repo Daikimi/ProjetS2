@@ -13,31 +13,24 @@ public class TreasureHunt {
 	public static void main(String[] args) {
 		String[] choix = {"Jouer", "Tester déplacement", "Règles", "Quitter"};
 
-		String choisir = 
-	    		(String)JOptionPane.showInputDialog(null, "Quel est votre choix ?",
-	    									"Menu",JOptionPane.QUESTION_MESSAGE,
-	    									null,choix,choix[0]);
-	    
-	    switch(choisir){   
-	    case("Jouer") :
+		int choisir = JOptionPane.showOptionDialog(null, "Quel est votre choix ?", "Bienvenue !", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
+		
+	   	if(choisir == 0) {
 	    	Island test = new Island();
 			System.out.println(test.toString());
 			test.affichageGraphique();
-			break;
-			
-	    case("Tester déplacement") :
+		}
 	    	
-	    	break;
-			
-	    case("Règles") :
+	    if(choisir == 1) { }
+	    
+	    if(choisir == 2) {
 	    	JOptionPane.showMessageDialog(null, "Les règles du jeu doivent être écrites !");
-	    	break;
-	    
-	    case("Quitter") :
-	    	System.exit(0);
-	    	break;
-	    
 	    }
-	    	
-	  }
+	   
+	    if(choisir == 3) {
+	    	System.exit(0);
+	    }
+	    
 	}
+	    	
+}

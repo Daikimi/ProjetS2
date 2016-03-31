@@ -40,7 +40,7 @@ public class Island {
 	 *   
 	 */
 	
-	public Parcelle[][] ile;
+	public static Parcelle[][] ile;
 	
 	/**
 	 * attribut nous permettant de placer aléatoirement des rocher sur la carte
@@ -285,9 +285,9 @@ public class Island {
 	 */
 	private boolean verificationPlacementRochers(int posX, int posY) {
 		if (ile[posX][posY].getValeur() == 0) {
-			if (!ile[posX-1][posY-1].isRocher()&& !ile[posX-1][posY].isRocher() && !ile[posX-1][posY+1].isRocher() && !ile[posX][posY-1].isRocher()  && !ile[posX][posY+1].isRocher()  && !ile[posX+1][posY-1].isRocher()  && !ile[posX+1][posY].isRocher()  && !ile[posX+1][posY+1].isRocher()) {
-				if (!ile[posX-1][posY-1].isNavire1() && !ile[posX-1][posY].isNavire1() && !ile[posX-1][posY+1].isNavire1()  && !ile[posX][posY-1].isNavire1()  && !ile[posX][posY+1].isNavire1() && !ile[posX+1][posY-1].isNavire1() && !ile[posX+1][posY].isNavire1()  && !ile[posX+1][posY+1].isNavire1()) {
-					if (!ile[posX-1][posY-1].isNavire2() && !ile[posX-1][posY].isNavire2() && !ile[posX-1][posY+1].isNavire2()  && !ile[posX][posY-1].isNavire2() && !ile[posX][posY+1].isNavire2()  && !ile[posX+1][posY-1].isNavire2()  && !ile[posX+1][posY].isNavire2()  && !ile[posX+1][posY+1].isNavire2()) {
+			if (ile[posX-1][posY-1].getValeur() != 2 && ile[posX-1][posY].getValeur() != 2 && ile[posX-1][posY+1].getValeur() != 2 && ile[posX][posY-1].getValeur() != 2  && ile[posX][posY+1].getValeur() != 2  && ile[posX+1][posY-1].getValeur() != 2  && ile[posX+1][posY].getValeur() != 2  && ile[posX+1][posY+1].getValeur() != 2) {
+				if (ile[posX-1][posY-1].getValeur() != 4 && ile[posX-1][posY].getValeur() != 4 && ile[posX-1][posY+1].getValeur() != 4  && ile[posX][posY-1].getValeur() != 4  && ile[posX][posY+1].getValeur() != 4 && ile[posX+1][posY-1].getValeur() != 4 && ile[posX+1][posY].getValeur() != 4  && ile[posX+1][posY+1].getValeur() != 4) {
+					if (ile[posX-1][posY-1].getValeur() != 6 && ile[posX-1][posY].getValeur() != 6 && ile[posX-1][posY+1].getValeur() != 6  && ile[posX][posY-1].getValeur() != 6 && ile[posX][posY+1].getValeur() != 6  && ile[posX+1][posY-1].getValeur() != 6  && ile[posX+1][posY].getValeur() != 6  && ile[posX+1][posY+1].getValeur() != 6) {
 						return true;
 					}
 					return false;
