@@ -8,25 +8,57 @@ public abstract class Explorateur extends Personnage{
 		super.posY=posY;
 		super.equipe=equipe;
 	}
+	
+	public void recupereClefDroite(){
+        if(Island.ile[posX+1][posY].getValeur()==9){
+            super.possedeClef=true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
+        }
+    }
+    public void recupereClefGauche(){
+        if(Island.ile[posX-1][posY].getValeur()==9){
+            super.possedeClef=true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
+        }
+    }
+    public void recupereClefBas(){
+        if(Island.ile[posX][posY+1].getValeur()==9){
+            super.possedeClef=true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
+        }
+    }
+    public void recupereClefHaut(){
+        if(Island.ile[posX][posY-1].getValeur()==9){
+            super.possedeClef=true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
+        }
+    }
 
 	public void deplacementDroite() {
-		super.posX=super.posX+1;
+		if(Island.ile[posX+1][posY].getValeur()==1 ||Island.ile[posX+1][posY].getValeur() == 5 || Island.ile[posX+1][posY].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX+1][posY].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX+1][posY].getValeur()==6){
+			JOptionPane.showMessageDialog(null, "Impossible !");
+		}else{
+		super.posX=super.posX+1;}
 	} 
 	public void deplacementGauche() {
-		if(Island.ile[posX-1][posY].getValeur()==1 ||Island.ile[posX-1][posY].getValeur() == 5 || Island.ile[posX-1][posY].getValeur()== 7 ||  Island.ile[posX][posY].getValeur()==7 && Island.ile[posX-1][posY].getValeur()==4||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX-1][posY].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "VTFF");
+		if(Island.ile[posX-1][posY].getValeur()==1 ||Island.ile[posX-1][posY].getValeur() == 5 || Island.ile[posX-1][posY].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX-1][posY].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX-1][posY].getValeur()==6){
+			JOptionPane.showMessageDialog(null, "Impossible !");
 		}else{
 		super.posX=super.posX-1;}
 	}
 	public void deplacementBas() {
-		if(Island.ile[posX][posY+1].getValeur()==1 ||Island.ile[posX][posY+1].getValeur() == 5 || Island.ile[posX][posY+1].getValeur()== 7 ||  Island.ile[posX][posY].getValeur()==7 && Island.ile[posX][posY+1].getValeur()==4||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX][posY+1].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "VTFF");
+		if(Island.ile[posX][posY+1].getValeur()==1 ||Island.ile[posX][posY+1].getValeur() == 5 || Island.ile[posX][posY+1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX][posY+1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX][posY+1].getValeur()==6){
+			JOptionPane.showMessageDialog(null, "Impossible !");
 		}else{
 			super.posY=super.posY+1;}
 	}
 	public void deplacementHaut() {
-		if(Island.ile[posX][posY-1].getValeur()==1 ||Island.ile[posX][posY-1].getValeur() == 5 || Island.ile[posX][posY-1].getValeur()== 7 ||  Island.ile[posX][posY].getValeur()==7 && Island.ile[posX][posY-1].getValeur()==4||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX][posY-1].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "VTFF");
+		if(Island.ile[posX][posY-1].getValeur()==1 ||Island.ile[posX][posY-1].getValeur() == 5 || Island.ile[posX][posY-1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX][posY-1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX][posY-1].getValeur()==6){
+			JOptionPane.showMessageDialog(null, "Impossible !");
 		}else{
 		super.posY=super.posY-1;
 		} 

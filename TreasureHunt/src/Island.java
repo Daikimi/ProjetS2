@@ -106,7 +106,7 @@ public class Island {
 	 * @param posY position Y de la case voulue
 	 */
 	public void changement(int chose,int posX,int posY) {	
-		ile[posX][posY].setEmplacement(chose);
+		ile[posX][posY].setValeur(chose);
 	}
 	/**
 	 * Affiche la valeur de la case de position voulue
@@ -192,7 +192,6 @@ public class Island {
 			for(int j=0;j<ile[0].length;j++){
 				if (i == 0 || i == xIle-1 || j == 0 || j == yIle-1) {
 					ile[i][j]=new Parcelle(1);
-					ile[i][j].setEau(true);
 				} else {
 					ile[i][j]=new Parcelle(0);
 				}
@@ -211,16 +210,13 @@ public class Island {
 		int b1 = 1+ random.nextInt(xIle-2);
 		int b2 = 1+ random.nextInt(xIle-2);
 		
-		ile[b1][1].setEmplacement(4);
-		ile[b1][1].setNavire1(true);
-		ile [b2][yIle-2].setEmplacement(6);
-		ile [b2][yIle-2].setNavire2(true);
+		ile[b1][1].setValeur(4);
+		ile [b2][yIle-2].setValeur(6);
 
 		for(int i=b1-1;i<b1+2;i++){
 			for(int j=1;j<3;j++){
 				if(ile[i][j].getValeur()==0){
-					ile[i][j].setEmplacement(5);
-					ile[i][j].setPersonnage(true);
+					ile[i][j].setValeur(5);
 				}
 			}
 		}
@@ -228,8 +224,7 @@ public class Island {
 		for(int i=b2-1;i<b2+2;i++){
 			for(int j=yIle-3;j<yIle-1;j++){
 				if(ile[i][j].getValeur()==0){
-					ile[i][j].setEmplacement(7);
-					ile[i][j].setPersonnage(true);
+					ile[i][j].setValeur(7);
 				}
 			}
 		}
@@ -249,8 +244,7 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].setEmplacement(2) ;
-				ile[posX][posY].setRocher(true);
+				ile[posX][posY].setValeur(2) ;
 				r = r + 1;
 			}
 		}		
@@ -258,9 +252,7 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].setEmplacement(2);
-				ile[posX][posY].setRocher(true);
-				ile[posX][posY].setCoffre(true);
+				ile[posX][posY].setValeur(2);
 				r = r + 1;
 			}
 		}
@@ -268,9 +260,7 @@ public class Island {
 			int posX = random.nextInt(xIle);
 			int posY = random.nextInt(yIle);
 			if (verificationPlacementRochers(posX,posY))  {
-				ile[posX][posY].setEmplacement(2);
-				ile[posX][posY].setRocher(true);
-				ile[posX][posY].setCle(true);
+				ile[posX][posY].setValeur(2);
 				r = r + 1;
 			}
 		}

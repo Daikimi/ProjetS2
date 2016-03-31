@@ -16,48 +16,6 @@ public class Parcelle {
 	private int valeur ;
 	
 	/**
-	 * boolean vérifiant si la case est un navire de l'equipe 1
-	 * 
-	 */
-	private boolean navire1 = false;
-	
-	/**
-	 * boolean vérifiant si la case est un navire de l'equipe 2
-	 * 
-	 */
-	private boolean navire2 = false;
-	
-	/**
-	 * boolean vérifiant si la case est de l'eau
-	 * 
-	 */
-	private boolean eau = false;
-	
-	/**
-	 * boolean vérifiant si la case est un rocher
-	 * 
-	 */
-	private boolean rocher = false;
-	
-	/**
-	 * boolean vérifiant si la case est un coffre caché
-	 * 
-	 */
-	private boolean coffre = false;
-	
-	/**
-	 * boolean vérifiant si la case est un rocher contenant la clé du coffre
-	 * 
-	 */
-	private boolean cle = false;
-	/**
-	 * boolean vérifiant si la case est un personnage
-	 * 
-	 */
-	private boolean personnage = false;
-	
-	
-	/**
 	 * Constructeur de Parcelle
 	 * assigne une valeur à la case
 	 * @param chose la valeur assignée à la case
@@ -77,64 +35,8 @@ public class Parcelle {
 		return valeur;
 	}
 
-	public void setEmplacement(int emplacement) {
+	public void setValeur(int emplacement) {
 		this.valeur = emplacement;
-	}
-
-	public boolean isNavire1() {
-		return navire1;
-	}
-
-	public void setNavire1(boolean navire1) {
-		this.navire1 = navire1;
-	}
-
-	public boolean isNavire2() {
-		return navire2;
-	}
-
-	public void setNavire2(boolean navire2) {
-		this.navire2 = navire2;
-	}
-
-	public boolean isEau() {
-		return eau;
-	}
-
-	public void setEau(boolean eau) {
-		this.eau = eau;
-	}
-
-	public boolean isRocher() {
-		return rocher;
-	}
-
-	public void setRocher(boolean rocher) {
-		this.rocher = rocher;
-	}
-
-	public boolean isCoffre() {
-		return coffre;
-	}
-
-	public void setCoffre(boolean coffre) {
-		this.coffre = coffre;
-	}
-
-	public boolean isCle() {
-		return cle;
-	}
-
-	public void setCle(boolean cle) {
-		this.cle = cle;
-	}
-
-	public boolean isPersonnage() {
-		return personnage;
-	}
-
-	public void setPersonnage(boolean personnage) {
-		this.personnage = personnage;
 	}
 
 	/**

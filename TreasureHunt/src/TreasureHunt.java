@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 public class TreasureHunt {
 
 	public static void main(String[] args) {
+		
 		String[] choix = {"Jouer", "Tester déplacement", "Règles", "Quitter"};
 
 		int choisir = JOptionPane.showOptionDialog(null, "Quel est votre choix ?", "Bienvenue !", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
