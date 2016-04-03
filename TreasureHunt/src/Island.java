@@ -42,6 +42,8 @@ public class Island {
 	
 	public Parcelle[][] ileTemp;
 	
+	public Plateau plateau;
+	
 	public static Parcelle[][] ile;
 	
 	/**
@@ -108,7 +110,11 @@ public class Island {
 	 * @param posY position Y de la case voulue
 	 */
 	public void changement(int chose,int posX,int posY) {	
-		ileTemp[posX][posY].setValeur(chose);
+		ileTemp[posX-1][posY-1].setValeur(chose);
+	}
+	
+	public int getValeur(int posX, int posY) {
+		return ile[posX][posY].getValeur();
 	}
 	/**
 	 * Affiche la valeur de la case de position voulue
@@ -168,7 +174,7 @@ public class Island {
 			}
 		}
 
-		Plateau plateau = new Plateau(gifs, 1);
+		plateau = new Plateau(gifs, 1);
 		plateau.setJeu(carte);
 		
 		for (int i = 1 ; i < xIle+1 ; i++) {

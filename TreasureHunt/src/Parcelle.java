@@ -1,4 +1,4 @@
-	/**
+/**
 	 * La classe Parcelle gère une case de l'île
 	 *  en prenant la valeur de la case voulue
 	 *  dans la classe ile
