@@ -1,4 +1,4 @@
-
+import javax.swing.JOptionPane;
 
 public class Voleur extends Personnage {
 	
@@ -19,20 +19,52 @@ public class Voleur extends Personnage {
 		}
 	}
 	
-	public void deplacementDroite() {	posX+=1;	} 
-	public void deplacementGauche() {	posX-=1;	}
-	public void deplacementBas() {		posY+=1;	} 
-	public void deplacementHaut() {		posY-=1;	}
-	public void deplacementHautGauche(){
-		this.deplacementHaut();
-		this.deplacementGauche();	}
-	public void deplacementHautDroite(){
-		this.deplacementHaut();
-		this.deplacementDroite();	}
+	public void deplacementDroite() {
+		super.deplacementDroite();
+	} 
+	public void deplacementGauche() {
+		super.deplacementGauche();
+	}
+	public void deplacementBas() {
+		super.deplacementBas();
+	}
+	public void deplacementHaut() {
+		super.deplacementHaut();
+	}
+	public void deplacementBasDroit(){
+		if(Island.ile[posX+1][posY+1].getValeur()==1 ||Island.ile[posX+1][posY+1].getValeur() == 5 || Island.ile[posX+1][posY+1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX+1][posY+1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX+1][posY+1].getValeur()==6){
+			JOptionPane.showMessageDialog(null, "Impossible !");
+		}else{
+			posX+=1;
+			posY+=1;
+		}
+	}
+	
 	public void deplacementBasGauche(){
-		this.deplacementBas();
-		this.deplacementGauche();	}
-	public void deplacementBasDroite(){
-		this.deplacementBas();
-		this.deplacementDroite();	}
+		if(Island.ile[posX+1][posY-1].getValeur()==1 ||Island.ile[posX+1][posY-1].getValeur() == 5 || Island.ile[posX+1][posY-1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX+1][posY-1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX+1][posY-1].getValeur()==6){
+			JOptionPane.showMessageDialog(null, "Impossible !");
+		}else{
+			posX+=1;
+			posY-=1;
+		}
+	}
+	
+	public void deplacementHautGauche(){
+		if(Island.ile[posX-1][posY-1].getValeur()==1 ||Island.ile[posX-1][posY-1].getValeur() == 5 || Island.ile[posX-1][posY-1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX-1][posY-1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX-1][posY-1].getValeur()==6){
+			JOptionPane.showMessageDialog(null, "Impossible !");
+		}else{
+			posX-=1;
+			posY-=1;
+		}
+	}
+	
+	public void deplacementHautDroit(){
+		if(Island.ile[posX-1][posY+1].getValeur()==1 ||Island.ile[posX-1][posY+1].getValeur() == 5 || Island.ile[posX-1][posY+1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX-1][posY+1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX-1][posY+1].getValeur()==6){
+			JOptionPane.showMessageDialog(null, "Impossible !");
+		}else{
+			posX-=1;
+			posY+=1;
+		}
+	}
+	
 }

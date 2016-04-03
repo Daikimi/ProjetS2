@@ -38,29 +38,16 @@ public abstract class Explorateur extends Personnage{
         }
     }
 
-	public void deplacementDroite() {
-		if(Island.ile[posX+1][posY].getValeur()==1 ||Island.ile[posX+1][posY].getValeur() == 5 || Island.ile[posX+1][posY].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX+1][posY].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX+1][posY].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "Impossible !");
-		}else{
-		super.posX=super.posX+1;}
+    public void deplacementDroite() {
+		super.deplacementDroite();
 	} 
 	public void deplacementGauche() {
-		if(Island.ile[posX-1][posY].getValeur()==1 ||Island.ile[posX-1][posY].getValeur() == 5 || Island.ile[posX-1][posY].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX-1][posY].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX-1][posY].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "Impossible !");
-		}else{
-		super.posX=super.posX-1;}
+		super.deplacementGauche();
 	}
 	public void deplacementBas() {
-		if(Island.ile[posX][posY+1].getValeur()==1 ||Island.ile[posX][posY+1].getValeur() == 5 || Island.ile[posX][posY+1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX][posY+1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX][posY+1].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "Impossible !");
-		}else{
-			super.posY=super.posY+1;}
+		super.deplacementBas();
 	}
 	public void deplacementHaut() {
-		if(Island.ile[posX][posY-1].getValeur()==1 ||Island.ile[posX][posY-1].getValeur() == 5 || Island.ile[posX][posY-1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX][posY-1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX][posY-1].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "Impossible !");
-		}else{
-		super.posY=super.posY-1;
-		} 
+		super.deplacementHaut();
 	}
 }
