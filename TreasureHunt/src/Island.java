@@ -136,7 +136,7 @@ public class Island {
 	
 	public void affichageGraphique(){
 		
-		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png"};
+		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png", "lib/1.voleur.png", "lib/2.voleur.png"};
 		ile = new Parcelle[xIle+1][yIle+1];
 		for (int i = 0; i<xIle+1; i++) {
 			for (int j = 0; j<yIle+1; j++) {
@@ -170,6 +170,8 @@ public class Island {
 					carte[j][i]=9;
 				}else if (ile[i][j].getValeur() == 10){
 					carte[j][i]=10;
+				}else if (ile[i][j].getValeur() == 11){
+					carte[j][i]=11;
 				} else {
 					carte[j][i]=0;
 				}
@@ -251,6 +253,12 @@ public class Island {
 		ileTemp[b1][1].setValeur(4);
 		ileTemp [b2][yIle-2].setValeur(6);
 
+		if(ileTemp[b1-1][2].getValeur()==8){
+			ileTemp[b1-1][2].setValeur(10);
+		}
+		if(ileTemp[b1+1][2].getValeur()==8){
+			ileTemp[b1+1][2].setValeur(10);
+		}
 		for(int i=b1-1;i<b1+2;i++){
 			for(int j=1;j<3;j++){
 				if(ileTemp[i][j].getValeur()==8){
@@ -258,12 +266,18 @@ public class Island {
 				}
 			}
 		}
-		
+		if(ileTemp[b2-1][yIle-3].getValeur()==8){
+			ileTemp[b2-1][yIle-3].setValeur(11);
+		}
+		if(ileTemp[b2+1][yIle-3].getValeur()==8){
+			ileTemp[b2+1][yIle-3].setValeur(11);
+		}
 		for(int i=b2-1;i<b2+2;i++){
 			for(int j=yIle-3;j<yIle-1;j++){
 				if(ileTemp[i][j].getValeur()==8){
 					ileTemp[i][j].setValeur(7);
 				}
+				
 			}
 		}
 	
@@ -325,6 +339,14 @@ public class Island {
 			return false;
 		}
 		return false;
+	}
+	
+	public int getXIle(){
+		return xIle;
+	}
+	
+	public int getYIle() {
+		return yIle;
 	}
 
 }

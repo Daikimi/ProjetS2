@@ -20,18 +20,9 @@ public class Voleur extends Personnage {
 		energie-=10;
 	}
 	
-	public void deplacementDroite() {
-		super.deplacementDroite();
+	public void deplacement() {
+		super.deplacement();
 	} 
-	public void deplacementGauche() {
-		super.deplacementGauche();
-	}
-	public void deplacementBas() {
-		super.deplacementBas();
-	}
-	public void deplacementHaut() {
-		super.deplacementHaut();
-	}
 	public void deplacementBasDroit(){
 		if(Island.ile[posX+1][posY+1].getValeur()==1 ||Island.ile[posX+1][posY+1].getValeur() == 5 || Island.ile[posX+1][posY+1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX+1][posY+1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX+1][posY+1].getValeur()==6){
 			JOptionPane.showMessageDialog(null, "Impossible !");

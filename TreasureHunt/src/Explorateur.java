@@ -42,18 +42,9 @@ public abstract class Explorateur extends Personnage{
         energie-=5;
     }
 
-    public void deplacementDroite() {
-		super.deplacementDroite();
+    public void deplacement() {
+		super.deplacement();
 	} 
-	public void deplacementGauche() {
-		super.deplacementGauche();
-	}
-	public void deplacementBas() {
-		super.deplacementBas();
-	}
-	public void deplacementHaut() {
-		super.deplacementHaut();
-	}
 	
 	public void repos(){
 		super.repos();

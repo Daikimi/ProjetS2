@@ -32,16 +32,16 @@ public class Piegeur extends Personnage{
 	}
 	
 	public void deplacementDroite() {
-		super.deplacementDroite();
+		super.deplacement();
 	} 
 	public void deplacementGauche() {
-		super.deplacementGauche();
+		super.deplacement();
 	}
 	public void deplacementBas() {
-		super.deplacementBas();
+		super.deplacement();
 	}
 	public void deplacementHaut() {
-		super.deplacementHaut();
+		super.deplacement();
 	}
 	public void deplacementBasDroit(){
 		if(Island.ile[posX+1][posY+1].getValeur()==1 ||Island.ile[posX+1][posY+1].getValeur() == 5 || Island.ile[posX+1][posY+1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX+1][posY+1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX+1][posY+1].getValeur()==6){
