@@ -1,40 +1,40 @@
 # ProjetS2 - Treasure Hunt
 
-###Lug réparera le code auparavant, pour permettre un meilleur développement du projet.
-
-###Jalon 2 : éléments contrôlés par menu (xxxTableau + JOptionPane) => Nicolas (n'hésites pas à demander si tu as besoin d'aide)
-
-#### L'objectif est de pouvoir tester les différents éléments du jeu via un menu (sans être dans une partie)
-    - On doit pouvoir placer les personnages sur la grille à des places précises (spécifiées via un menu),
-    et leur faire réaliser les différentes actions possibles.
+Achevé le jalon 2 : interdire le déplacement d'objet mis a part les personnages         ( fait )
+                    mis en place des différent deplacement en fonction des joueurs (voleur  8 deplacement , explorateur 4 deplacement)
 
 
-#### Première étape du Jalon2: => Toinou parce que de toute façon il va demander à Lug
-    - Ajouter l'explorateur
-    - Saisir  la cible /direction de l'action (explorateur => déplacement)
-    - Respect des règles du jeu, selon votre choix
-        soit ne proposer que les actions valides,
-        soit vérifier que l'action choisie est valide.
+
+Nicolas:
+
+    Test de tous les éléments du jeu via un menu (sans être dans une partie):
+
+        on doit pouvoir placer les personnages sur la grille,
+        à des places précises (spécifiées via un menu),
+        et leur faire réaliser toutes les actions (avec contrôle de validité).
 
 
-    - Contrôle du déplacement pour les explorateurs, selon la parcelle d'arrivée :
-        explorateur <=> 4 directions
-        parcelle
-            vide (terrain clair) : déplacement
-            mer : impossible
-            personnage : impossible
-            navire ami : remontée à bord
-                remarque pour la suite :
-                    uniquement s'il reste au moins un personnage de l'équipe sur l'île
-                    le repos (récupération d'énergie) sera traité plus tard
-            navire ennemi : impossible
-            rocher : soulever reposer
-                rien en dessous : continuer quête
-                clef : prendre clef
-                coffre :
-                    si clef transportée : prendre trésor
-                    sinon mémoriser emplacement coffre
+Lug:
+
+    Constituer deux équipes avec choix des personnages : explorateurs, voleurs, guerriers, piégeurs,
+    Dérouler une partie :
+        alternance des joueurs avec vues différentes
+        contrôle de l'évolution des niveaux d'énergie
+        déclaration du vainqueur à l'issue de la partie
+            soit par mort de tous les personnages d'une équipe,
+            soit par retour du trésor dans un des navires.
 
 
-#### Deuxième étape du Jalon2: (Ceci n'est pas impératif, selon un message sur le forum de JM Place, voilà pourquoi c'est Lug qui s'en occupera)
-  - Ajouter le voleur et ses actions (attention déplacement dans les huit directions)
+Florian:
+
+Jeu contre l'ordinateur (ordinateur vs ordinateur , ordinateur vs humain)
+        Mise en place de stratégies rudimentaires (choix basés sur des règles simples avec une part aléatoire)
+
+Quelques propositions, à titre indicatif (à vous d'en imaginer d'autres)
+
+        constituer une équipe majoritairement d'un certain type de personnages,
+        50% de chance de poursuivre dans la même direction,
+        n'avoir qu'un personnage sur l'île,
+        débarquer prioritairement un certain type de personnages,
+        chercher à encadrer le navire adverse, pour voler plutôt que d'explorer...
+
