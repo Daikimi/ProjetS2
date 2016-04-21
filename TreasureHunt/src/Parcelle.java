@@ -14,7 +14,7 @@ public class Parcelle {
 	 */
 	
 	private int valeur ;
-	private Personnage perso = null;
+	public Personnage perso = null;
 	
 	/**
 	 * Constructeur de Parcelle
