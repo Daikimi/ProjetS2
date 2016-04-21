@@ -168,6 +168,8 @@ public class Island {
 					carte[j][i]=8;
 				} else if (ile[i][j].getValeur() == 9){
 					carte[j][i]=9;
+				}else if (ile[i][j].getValeur() == 10){
+					carte[j][i]=10;
 				} else {
 					carte[j][i]=0;
 				}

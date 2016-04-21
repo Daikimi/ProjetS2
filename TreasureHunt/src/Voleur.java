@@ -17,6 +17,7 @@ public class Voleur extends Personnage {
 		}else{
 			System.out.println("Loupé...");
 		}
+		energie-=10;
 	}
 	
 	public void deplacementDroite() {
@@ -38,6 +39,7 @@ public class Voleur extends Personnage {
 			posX+=1;
 			posY+=1;
 		}
+		energie--;
 	}
 	
 	public void deplacementBasGauche(){
@@ -47,6 +49,7 @@ public class Voleur extends Personnage {
 			posX+=1;
 			posY-=1;
 		}
+		energie--;
 	}
 	
 	public void deplacementHautGauche(){
@@ -56,6 +59,7 @@ public class Voleur extends Personnage {
 			posX-=1;
 			posY-=1;
 		}
+		energie--;
 	}
 	
 	public void deplacementHautDroit(){
@@ -65,6 +69,7 @@ public class Voleur extends Personnage {
 			posX-=1;
 			posY+=1;
 		}
+		energie--;
 	}
 	
 }

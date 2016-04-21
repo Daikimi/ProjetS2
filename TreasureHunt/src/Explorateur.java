@@ -15,6 +15,7 @@ public abstract class Explorateur extends Personnage{
         }else{
             JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
         }
+        energie-=5;
     }
     public void recupereClefGauche(){
         if(Island.ile[posX-1][posY].getValeur()==9){
@@ -22,6 +23,7 @@ public abstract class Explorateur extends Personnage{
         }else{
             JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
         }
+        energie-=5;
     }
     public void recupereClefBas(){
         if(Island.ile[posX][posY+1].getValeur()==9){
@@ -29,6 +31,7 @@ public abstract class Explorateur extends Personnage{
         }else{
             JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
         }
+        energie-=5;
     }
     public void recupereClefHaut(){
         if(Island.ile[posX][posY-1].getValeur()==9){
@@ -36,6 +39,7 @@ public abstract class Explorateur extends Personnage{
         }else{
             JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
         }
+        energie-=5;
     }
 
     public void deplacementDroite() {
@@ -49,5 +53,9 @@ public abstract class Explorateur extends Personnage{
 	}
 	public void deplacementHaut() {
 		super.deplacementHaut();
+	}
+	
+	public void repos(){
+		super.repos();
 	}
 }
