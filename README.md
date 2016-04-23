@@ -18,7 +18,9 @@ Lug:
 
     Constituer deux équipes avec choix des personnages : explorateurs, voleurs, guerriers, piégeurs,
     
-    le joueur doit pouvoir choissir la classe qu'il veut en cliquant sur son navire , un menu avec les choix de classe apparait, le personnage choisis doit apparaitre dans l'une des cases adjacente au navire
+    le joueur doit pouvoir choissir la classe qu'il veut en cliquant sur son navire ,
+    un menu avec les choix de classe apparait, 
+    le personnage choisis doit apparaitre dans l'une des cases adjacente au navire
 
 
 Florian:
