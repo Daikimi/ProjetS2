@@ -21,6 +21,7 @@ public class Plateau {
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
+	private static int nbJ = 1;
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
 	 * initialisé à null au début de la scrutation et rempli par l'événement observé 
@@ -105,7 +106,11 @@ public class Plateau {
 		console = null ;
 
 		// Caractéristiques initiales pour la fenetre.
-		window.setTitle("Plateau de jeu");
+		window.setTitle("Joueur" +nbJ);
+		nbJ++;
+		if (nbJ == 3) {
+			nbJ = 1;
+		}
 		window.setLocationRelativeTo(null);
 		window.setLayout(new BorderLayout());
 		// La fermeture de la fenetre ne fait que la cacher. 
@@ -256,6 +261,11 @@ public class Plateau {
 	public void println(String message) {
 		if (console != null) {
 			console.println(message) ;
+		}
+	}
+	public void print(String message) {
+		if (console != null) {
+			console.print(message) ;
 		}
 	}
 	// Note la taille initiale est calculée d'après la taille du graphique.

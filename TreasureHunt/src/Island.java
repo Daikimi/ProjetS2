@@ -70,6 +70,16 @@ public class Island {
 		placementRochers();
 		
 	}
+	
+	public Island(Island island){
+		ileTemp = new Parcelle[island.getXIle()][island.getYIle()];
+		
+		for (int i = 0; i < island.getXIle(); i++) {
+   			for (int j = 0; j < island.getYIle(); j++){
+   				this.ileTemp[i][j] = island.ileTemp[i][j];
+   			}
+   		}
+	}
 	/**
 	 * 
 	 * Méthode toString qui donne un affichage texte de l'île de l'île
@@ -178,7 +188,7 @@ public class Island {
 			}
 		}
 
-		plateau = new Plateau(gifs, 1);
+		plateau = new Plateau(gifs, 1, true);
 		plateau.setJeu(carte);
 		
 		for (int i = 1 ; i < xIle+1 ; i++) {

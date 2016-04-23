@@ -19,4 +19,10 @@ class ConsolePane extends JScrollPane {
 		JScrollBar vertical = this.getVerticalScrollBar() ;
 		vertical.setValue(vertical.getMaximum()) ;
 	}
+	public void print(String message) {
+		textArea.append(message) ;
+		// Positionne la scrollPane à son extrémité inférieure.
+		JScrollBar vertical = this.getVerticalScrollBar() ;
+		vertical.setValue(vertical.getMaximum()) ;
+	}
 }
