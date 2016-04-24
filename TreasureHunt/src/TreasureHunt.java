@@ -332,17 +332,24 @@ public class TreasureHunt {
 						res[0]=test.plateau.getX((MouseEvent) evenement) ;
 						res[1]=test.plateau.getY((MouseEvent) evenement) ;
 					}
-				} while(test.getValeur(res[0], res[1]) == 1 || test.getValeur(res[0], res[1]) == 2  || test.getValeur(res[0], res[1]) == 3  || test.getValeur(res[0], res[1]) == 4  || test.getValeur(res[0], res[1]) == 6  || test.getValeur(res[0], res[1]) == 8 || test.getValeur(res[0], res[1])==9);
+				} while(test.getValeur(res[0], res[1]) == 1 || test.getValeur(res[0], res[1]) == 2  || test.getValeur(res[0], res[1]) == 3  || /*test.getValeur(res[0], res[1]) == 4  || test.getValeur(res[0], res[1]) == 6  ||*/ test.getValeur(res[0], res[1]) == 8 || test.getValeur(res[0], res[1])==9);
 
 				char ch = (char) (res[0]+64);
 					
 				System.out.print("Case : "+res[1]+ ch);
-				
+				int perso=-1 ;
 				if (Island.ile[res[0]][res[1]].getValeur()==5 || Island.ile[res[0]][res[1]].getValeur()==7) {
 					highlight4(test, res[0],res[1]);
 				}
 				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11) {
+
 					highlight8(test, res[0], res[1]);
+				}
+				if(Island.ile[res[0]][res[1]].getValeur()==4 || Island.ile[res[0]][res[1]].getValeur()==6){
+					perso=menuNavire(test, res[0] , res[1]);
+
+					highlight8(test, res[0], res[1]);
+
 				}
 				
 				boolean clic2 = false;
@@ -359,18 +366,94 @@ public class TreasureHunt {
 					}
 					
 				} while (!clic2);
-				
-				if (test.getValeur(res[0], res[1]) == 5 || test.getValeur(res[0], res[1]) == 7 || test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11) {
+				if(perso==-1 ){
+					if (test.getValeur(res[0], res[1]) == 5 || test.getValeur(res[0], res[1]) == 7 || test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11) {
 					
-					if (res[3] == res[1]+1 && res[2] == res[0]) {
-						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-							JOptionPane.showMessageDialog(null, "Impossible !");
-							for (int i = 0; i < test.getXIle(); i++) {
-								for (int j = 0; j < test.getYIle(); j++){
-									test.plateau.resetHighlight(i, j);
-								}							
+						if (res[3] == res[1]+1 && res[2] == res[0]) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+							
+								//Valeur de la première case => temp
+								int temp = test.getValeur(res[0], res[1]);
+								//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+								//Valeur de la deuxième case => première case
+								test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
+								//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+								// Valeur temp => deuxième case
+								test.changement(temp, res[2], res[3]);
+								//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
 							}
-						} else {
+							test.plateau.masquer();
+							test.affichageGraphique();
+							turn++;
+							
+							}
+						
+					
+					
+						if (res[3] == res[1]-1 && res[2] == res[0]) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+							//Valeur de la première case => temp
+							int temp = test.getValeur(res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							//Valeur de la deuxième case => première case
+							test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							// Valeur temp => deuxième case
+							test.changement(temp, res[2], res[3]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+											
+							test.plateau.masquer();
+							test.affichageGraphique();
+							turn++;
+							}
+						}
+						if (res[3] == res[1] && res[2] == res[0]+1) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+							//Valeur de la première case => temp
+							int temp = test.getValeur(res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							//Valeur de la deuxième case => première case
+							test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							// Valeur temp => deuxième case
+							test.changement(temp, res[2], res[3]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+											
+							test.plateau.masquer();
+							test.affichageGraphique();
+							turn++;
+							}
+						}
+						if (res[3] == res[1] && res[2] == res[0]-1) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
 							//Valeur de la première case => temp
 							int temp = test.getValeur(res[0], res[1]);
 							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
@@ -388,177 +471,289 @@ public class TreasureHunt {
 						}
 					
 					
-					if (res[3] == res[1]-1 && res[2] == res[0]) {
-						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-							JOptionPane.showMessageDialog(null, "Impossible !");
-							for (int i = 0; i < test.getXIle(); i++) {
-								for (int j = 0; j < test.getYIle(); j++){
-									test.plateau.resetHighlight(i, j);
-								}							
+						if (res[3] == res[1]+1 && res[2] == res[0]+1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+							//Valeur de la première case => temp
+							int temp = test.getValeur(res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							//Valeur de la deuxième case => première case
+							test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							// Valeur temp => deuxième case
+							test.changement(temp, res[2], res[3]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+											
+							test.plateau.masquer();
+							test.affichageGraphique();
+							turn++;
 							}
-						} else {
-						//Valeur de la première case => temp
-						int temp = test.getValeur(res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						//Valeur de la deuxième case => première case
-						test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						// Valeur temp => deuxième case
-						test.changement(temp, res[2], res[3]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-										
-						test.plateau.masquer();
-						test.affichageGraphique();
-						turn++;
+						}
+						if (res[3] == res[1]+1 && res[2] == res[0]-1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+							//Valeur de la première case => temp
+							int temp = test.getValeur(res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							//Valeur de la deuxième case => première case
+							test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							// Valeur temp => deuxième case
+							test.changement(temp, res[2], res[3]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+											
+							test.plateau.masquer();
+							test.affichageGraphique();
+							turn++;
+							}
+						}
+						
+						if (res[3] == res[1]-1 && res[2] == res[0]+1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+							//Valeur de la première case => temp
+							int temp = test.getValeur(res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							//Valeur de la deuxième case => première case
+							test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							// Valeur temp => deuxième case
+							test.changement(temp, res[2], res[3]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+											
+							test.plateau.masquer();
+							test.affichageGraphique();
+							turn++;
+							}
+						}
+						if (res[3] == res[1]-1 && res[2] == res[0]-1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+							//Valeur de la première case => temp
+							int temp = test.getValeur(res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							//Valeur de la deuxième case => première case
+							test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+							// Valeur temp => deuxième case
+							test.changement(temp, res[2], res[3]);
+							//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
+											
+							test.plateau.masquer();
+							test.affichageGraphique();
+							turn++;
+							}
 						}
 					}
-					if (res[3] == res[1] && res[2] == res[0]+1) {
-						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-							JOptionPane.showMessageDialog(null, "Impossible !");
-							for (int i = 0; i < test.getXIle(); i++) {
-								for (int j = 0; j < test.getYIle(); j++){
-									test.plateau.resetHighlight(i, j);
-								}							
+				}else{
+						if (res[3] == res[1]+1 && res[2] == res[0]) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+								if(perso==5){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
+								}
+								if(perso==7){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 2));
+								}
+								if(perso==10){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 1));
+								}
+								if(perso==11){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 2));
+								}
+								if(perso==12){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 1));
+								}
+								if(perso==13){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 2));
+								}
+								if(perso==14){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 1));
+								}
+								if(perso==7){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
+								}	
+							
+								test.plateau.masquer();
+								test.affichageGraphique();
+								turn++;
 							}
-						} else {
-						//Valeur de la première case => temp
-						int temp = test.getValeur(res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						//Valeur de la deuxième case => première case
-						test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						// Valeur temp => deuxième case
-						test.changement(temp, res[2], res[3]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-										
-						test.plateau.masquer();
-						test.affichageGraphique();
-						turn++;
-						}
+						
 					}
-					if (res[3] == res[1] && res[2] == res[0]-1) {
-						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-							JOptionPane.showMessageDialog(null, "Impossible !");
-							for (int i = 0; i < test.getXIle(); i++) {
-								for (int j = 0; j < test.getYIle(); j++){
-									test.plateau.resetHighlight(i, j);
-								}							
+						if (res[3] == res[1]-1 && res[2] == res[0]) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+								if(perso==5){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
+								}
+								if(perso==7){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 2));
+								}
+								if(perso==10){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 1));
+								}
+								if(perso==11){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 2));
+								}
+								if(perso==12){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 1));
+								}
+								if(perso==13){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 2));
+								}
+								if(perso==14){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 1));
+								}
+								if(perso==7){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
+								}	
+						}
+						if (res[3] == res[1] && res[2] == res[0]+1) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+								if(perso==5){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
+								}
+								if(perso==7){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 2));
+								}
+								if(perso==10){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 1));
+								}
+								if(perso==11){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 2));
+								}
+								if(perso==12){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 1));
+								}
+								if(perso==13){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 2));
+								}
+								if(perso==14){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 1));
+								}
+								if(perso==7){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
+								}											
+								test.plateau.masquer();
+								test.affichageGraphique();
+								turn++;
 							}
-						} else {
-						//Valeur de la première case => temp
-						int temp = test.getValeur(res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						//Valeur de la deuxième case => première case
-						test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						// Valeur temp => deuxième case
-						test.changement(temp, res[2], res[3]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-										
-						test.plateau.masquer();
-						test.affichageGraphique();
-						turn++;
 						}
-					}
-				
-				
-					if (res[3] == res[1]+1 && res[2] == res[0]+1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
-						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-							JOptionPane.showMessageDialog(null, "Impossible !");
-							for (int i = 0; i < test.getXIle(); i++) {
-								for (int j = 0; j < test.getYIle(); j++){
-									test.plateau.resetHighlight(i, j);
-								}							
+						if (res[3] == res[1] && res[2] == res[0]-1) {
+							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+								JOptionPane.showMessageDialog(null, "Impossible !");
+								for (int i = 0; i < test.getXIle(); i++) {
+									for (int j = 0; j < test.getYIle(); j++){
+										test.plateau.resetHighlight(i, j);
+									}							
+								}
+							} else {
+								if(perso==5){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
+								}
+								if(perso==7){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 2));
+								}
+								if(perso==10){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 1));
+								}
+								if(perso==11){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 2));
+								}
+								if(perso==12){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 1));
+								}
+								if(perso==13){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 2));
+								}
+								if(perso==14){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 1));
+								}
+								if(perso==7){
+									test.ile[res[2]][res[3]].setValeur(perso);
+									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
+								}				
+							test.plateau.masquer();
+							test.affichageGraphique();
+							turn++;
 							}
-						} else {
-						//Valeur de la première case => temp
-						int temp = test.getValeur(res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						//Valeur de la deuxième case => première case
-						test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						// Valeur temp => deuxième case
-						test.changement(temp, res[2], res[3]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-										
-						test.plateau.masquer();
-						test.affichageGraphique();
-						turn++;
 						}
-					}
-					if (res[3] == res[1]+1 && res[2] == res[0]-1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
-						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-							JOptionPane.showMessageDialog(null, "Impossible !");
-							for (int i = 0; i < test.getXIle(); i++) {
-								for (int j = 0; j < test.getYIle(); j++){
-									test.plateau.resetHighlight(i, j);
-								}							
-							}
-						} else {
-						//Valeur de la première case => temp
-						int temp = test.getValeur(res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						//Valeur de la deuxième case => première case
-						test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						// Valeur temp => deuxième case
-						test.changement(temp, res[2], res[3]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-										
-						test.plateau.masquer();
-						test.affichageGraphique();
-						turn++;
-						}
-					}
 					
-					if (res[3] == res[1]-1 && res[2] == res[0]+1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
-						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-							JOptionPane.showMessageDialog(null, "Impossible !");
-							for (int i = 0; i < test.getXIle(); i++) {
-								for (int j = 0; j < test.getYIle(); j++){
-									test.plateau.resetHighlight(i, j);
-								}							
-							}
-						} else {
-						//Valeur de la première case => temp
-						int temp = test.getValeur(res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						//Valeur de la deuxième case => première case
-						test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						// Valeur temp => deuxième case
-						test.changement(temp, res[2], res[3]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-										
-						test.plateau.masquer();
-						test.affichageGraphique();
-						turn++;
-						}
-					}
-					if (res[3] == res[1]-1 && res[2] == res[0]-1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
-						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-							JOptionPane.showMessageDialog(null, "Impossible !");
-							for (int i = 0; i < test.getXIle(); i++) {
-								for (int j = 0; j < test.getYIle(); j++){
-									test.plateau.resetHighlight(i, j);
-								}							
-							}
-						} else {
-						//Valeur de la première case => temp
-						int temp = test.getValeur(res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						//Valeur de la deuxième case => première case
-						test.changement(test.getValeur(res[2], res[3]), res[0], res[1]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-						// Valeur temp => deuxième case
-						test.changement(temp, res[2], res[3]);
-						//System.out.println(temp + " " + test.getValeur(res[0], res[1]) + " " + test.getValeur(res[2], res[3]));
-										
-						test.plateau.masquer();
-						test.affichageGraphique();
-						turn++;
-						}
-					}
+				}
 				}
 				
 			if (evenement instanceof KeyEvent) {
@@ -578,12 +773,82 @@ public class TreasureHunt {
 	    if(choisir == 3) {
 	    	System.exit(0);
 	    }
-	    }
+		
+			}
 	    }
 
 
 	    
 	
+
+
+	private static int menuNavire(Island test, int i, int j) {
+		// TODO Auto-generated method stub
+		/* ID personnages: 
+		 * explo : e1 5 , e2 7
+		 * voleur : e1 10 , e2 11
+		 * piegeur: e1 12 , e2 13 
+		 * guerrier :  e1 14 , e2 15
+		 *  
+		 */
+		JOptionPane jop=new JOptionPane();
+		int perso = 0;
+		String[] choix=new String[]{"Explorateur","Voleur","Guerrier","Piégeur","Sortir"};
+		if(test.getValeur(i, j)==4){
+			perso = JOptionPane.showOptionDialog(null, "J1 Quel personnage souhaitez vous débarquez :" , "Debarquement de personnage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null, choix,choix[0]);
+			if(perso==0){
+				highlight4(test,i,j);
+				return 5;
+				
+			}
+			if(perso==1){
+				highlight4(test,i,j);
+				return 10;
+				
+			}
+			if(perso==2){
+				highlight4(test,i,j);
+				return 14;
+				
+			}
+			if(perso==3){
+				highlight4(test,i,j);
+				return 12;
+			}
+		}else{
+			perso = JOptionPane.showOptionDialog(null, "J2 Quel personnage souhaitez vous débarquez :" , "Debarquement de personnage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null, choix,choix[0]);			
+			if(perso==0){
+				highlight4(test,i,j);
+				return 7;
+				
+			}
+			if(perso==1){
+				highlight4(test,i,j);
+				return 11;
+				
+			}
+			if(perso==2){
+				highlight4(test,i,j);
+				return 15;
+			}
+			if(perso==3){
+				highlight4(test,i,j);
+				return 13;
+				
+			}
+		}
+		return -1;
+		
+		
+
+	}
+
+
+
+
+
+
+
 	/**
 	 * Méthode permettant de mettre en surbrillance les cases aux points cardinaux si celles-ci sont accessibles.
 	 * @param i Ile sur laquelle apporter la modification
@@ -591,6 +856,7 @@ public class TreasureHunt {
 	 * @param y position Y voulue
 	 */
 	static void highlight4(Island i, int x, int y) {
+
 		
 		if (Island.ile[x+1][y].getValeur()==8) {
 			i.plateau.setHighlight(x+1, y, Color.blue);

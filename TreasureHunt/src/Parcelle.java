@@ -16,6 +16,9 @@ public class Parcelle {
 	 */
 	
 	private int valeur ;
+
+
+
 	
 	/**
 	 * Variable de classe Personnage permettant de contrôler un personnage actif.
@@ -23,6 +26,7 @@ public class Parcelle {
 	private Personnage perso = null;
 	//private ArrayList<Personnage> personnages = new ArrayList<>(); // Sera utilisé plus tard.
 	
+
 	/**
 	 * Constructeur de Parcelle
 	 * assigne une valeur à la case
@@ -44,7 +48,7 @@ public class Parcelle {
 	/**
 	 * Méthode de type setter
 	 * qui assigne une nouvelle valeur à la case
-	 * @param chose la nouvelle valeur qui va être assignée à la case
+	 * @param valeur la nouvelle valeur qui va être assignée à la case
 	 */
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
@@ -89,7 +93,7 @@ public class Parcelle {
 	public void setPersonnage(Personnage p) {
 		this.perso = p;
 	}
-	
+
 	/*public void ajoutPersonnage(Personnage p) {
 		this.personnages.add(p);
 	}
@@ -97,5 +101,6 @@ public class Parcelle {
 	public void supprimerPersonnage(Personnage p) {
 		this.personnages.remove(p);
 	}*/
+
 	
 }

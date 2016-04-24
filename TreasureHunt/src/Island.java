@@ -165,8 +165,8 @@ public class Island {
 	
 	public void affichageGraphique(){
 		
-		//Il faut ajouter 1.guerrier.png, 2.guerrier.png, 1.piegeur.png,2.piegeur.png,piege.png (dans cet ordre, sinon des réglages déjà fait seront obsolètes.
 		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png", "lib/1.voleur.png", "lib/2.voleur.png"};
+
 		ile = new Parcelle[xIle+1][yIle+1];
 		for (int i = 0; i<xIle+1; i++) {
 			for (int j = 0; j<yIle+1; j++) {
@@ -202,7 +202,15 @@ public class Island {
 					carte[j][i]=10;
 				}else if (ile[i][j].getValeur() == 11){
 					carte[j][i]=11;
-				} else {
+				}else if (ile[i][j].getValeur() == 12){
+					carte[j][i]=12;
+				} else if (ile[i][j].getValeur() == 13){
+					carte[j][i]=13;
+				}   else if (ile[i][j].getValeur() == 14){
+					carte[j][i]=14;
+				}   else if (ile[i][j].getValeur() == 15){
+					carte[j][i]=15;
+				}  else{
 					carte[j][i]=0;
 				}
 			}
@@ -283,9 +291,11 @@ public class Island {
 		
 		if(ileTemp[b1-1][2].getValeur()==8){
 			ileTemp[b1-1][2].setValeur(10);
+
 		}
 		if(ileTemp[b1+1][2].getValeur()==8){
 			ileTemp[b1+1][2].setValeur(10);
+
 		}
 		for(int i=b1-1;i<b1+2;i++){
 			for(int j=1;j<3;j++){
@@ -296,9 +306,11 @@ public class Island {
 		}
 		if(ileTemp[b2-1][yIle-3].getValeur()==8){
 			ileTemp[b2-1][yIle-3].setValeur(11);
+
 		}
 		if(ileTemp[b2+1][yIle-3].getValeur()==8){
 			ileTemp[b2+1][yIle-3].setValeur(11);
+
 		}
 		for(int i=b2-1;i<b2+2;i++){
 			for(int j=yIle-3;j<yIle-1;j++){
