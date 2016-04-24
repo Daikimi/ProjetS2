@@ -1,5 +1,11 @@
 import java.awt.event.KeyEvent;
 
+/**
+ * Méthode permettant de récupérer un évènement clavier.
+ * @author M2105-Team
+ *
+ */
+
 public class MyKeyEvent implements Event {
 
 	private KeyEvent keyEvent = null ;

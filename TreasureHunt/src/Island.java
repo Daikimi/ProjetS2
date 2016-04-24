@@ -42,7 +42,15 @@ public class Island {
 	
 	public Parcelle[][] ileTemp;
 	
+	/**
+	 * Plateau graphique permettant l'affichage du jeu.
+	 */
 	public Plateau plateau;
+	
+	/**
+	 * attribut qui permet de créer le plateau (des cases vides ont étés ajoutées pour
+	 * permettre une lecture plus facile de la grille.
+	 */
 	
 	public static Parcelle[][] ile;
 	
@@ -70,6 +78,10 @@ public class Island {
 		placementRochers();
 		
 	}
+	/**
+	 * Construit une ile en copiant une autre
+	 * @param island Ile modèle
+	 */
 	
 	public Island(Island island){
 		ileTemp = new Parcelle[island.getXIle()][island.getYIle()];
@@ -123,9 +135,6 @@ public class Island {
 		ileTemp[posX-1][posY-1].setValeur(chose);
 	}
 	
-	public int getValeur(int posX, int posY) {
-		return ile[posX][posY].getValeur();
-	}
 	/**
 	 * Affiche la valeur de la case de position voulue
 	 * 
@@ -133,7 +142,17 @@ public class Island {
 	 * @param posY position Y de la case sur l'île
 	 * @return valeur de la case désirée
 	 */
+	public int getValeur(int posX, int posY) {
+		return ile[posX][posY].getValeur();
+	}
 	
+	/**
+	 * Méthode obsolète
+	 * 
+	 * @param posX position X de la case sur l'île
+	 * @param posY position Y de la case sur l'île
+	 * @return valeur de la case désirée
+	 */
 	public String affichage(int posX,int posY) {
 		return ileTemp[posX][posY].toString(); 
 	}
@@ -146,6 +165,7 @@ public class Island {
 	
 	public void affichageGraphique(){
 		
+		//Il faut ajouter 1.guerrier.png, 2.guerrier.png, 1.piegeur.png,2.piegeur.png,piege.png (dans cet ordre, sinon des réglages déjà fait seront obsolètes.
 		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png", "lib/1.voleur.png", "lib/2.voleur.png"};
 		ile = new Parcelle[xIle+1][yIle+1];
 		for (int i = 0; i<xIle+1; i++) {
@@ -212,7 +232,6 @@ public class Island {
 	
 	/**
 	 * Méthode permettant une demande à l'utilisateur de la taille voulue pour l'île
-	 *  
 	 */
 	
 	private void creationIle() {
@@ -234,7 +253,6 @@ public class Island {
 	
 	/**
 	 * Méthode remplaçant les bords de l'île par la valeur de l'eau
-	 * 
 	 */
 	
 	private void placementEau() {
@@ -253,7 +271,6 @@ public class Island {
 	 * Place les navires sur l'île
 	 * chacun sur un côté de l'île
 	 * puis placement de 5 aventuriers autour du navire
-	 *  
 	 */
 
 	private void placementNavires() {
@@ -262,7 +279,8 @@ public class Island {
 		
 		ileTemp[b1][1].setValeur(4);
 		ileTemp [b2][yIle-2].setValeur(6);
-
+		
+		
 		if(ileTemp[b1-1][2].getValeur()==8){
 			ileTemp[b1-1][2].setValeur(10);
 		}
@@ -290,14 +308,19 @@ public class Island {
 				
 			}
 		}
-	
-
-
+		/*// NE SERA UTILE QU'APRES REMANIEMENT DES DONNEES (et encore, cela devra être amélioré par IHM
+		int nbPersoJ1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Combien de personnages le joueur 1 désire-t-il ?"));
+		int nbExploJ1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Combien d'explorateurs le joueur 1 désire-t-il ?"));
+		int nbVoleurJ1 = nbPersoJ1 - nbExploJ1;
+		int nbPersoJ2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Combien de personnages le joueur 2 désire-t-il ?"));
+		int nbExploJ2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Combien d'explorateurs le joueur 2 désire-t-il ?"));
+		int nbVoleurJ2 = nbPersoJ2 - nbExploJ2;
+		*/
+		
 }
 	/**
 	 * Place les rochers sur l'île en regardant si les rochers ne bloque pas la progression
 	 * des aventuriers sur l'île 
-	 * 
 	 */
 
 	private void placementRochers() {
@@ -351,10 +374,18 @@ public class Island {
 		return false;
 	}
 	
+	/**
+	 * Méthode permettant d'obtenir la valeur de xIle.
+	 * @return Valeur xIle
+	 */
 	public int getXIle(){
 		return xIle;
 	}
 	
+	/**
+	 * Méthode permettant d'obtenir la valeur de yIle.
+	 * @return Valeur yIle
+	 */
 	public int getYIle() {
 		return yIle;
 	}

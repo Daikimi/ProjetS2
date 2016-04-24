@@ -1,5 +1,10 @@
 import java.awt.event.MouseEvent;
 
+/**
+ * Méthode permettant de récupérer un évènement de souris
+ * @author M2105-Team
+ */
+
 public class MyMouseEvent implements Event {
 
 	private int x ;

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
 	 * La classe Parcelle gère une case de l'île
 	 *  en prenant la valeur de la case voulue
@@ -14,7 +16,12 @@ public class Parcelle {
 	 */
 	
 	private int valeur ;
-	public Personnage perso = null;
+	
+	/**
+	 * Variable de classe Personnage permettant de contrôler un personnage actif.
+	 */
+	private Personnage perso = null;
+	//private ArrayList<Personnage> personnages = new ArrayList<>(); // Sera utilisé plus tard.
 	
 	/**
 	 * Constructeur de Parcelle
@@ -25,17 +32,20 @@ public class Parcelle {
 	public Parcelle(int chose) {
 		valeur = chose;
 	}
+	/**
+	 * Méthode de type getter
+	 * qui permet de récupérer la valeur de la Parcelle.
+	 * @return valeur de la parcelle
+	 */
+	public int getValeur() {
+		return valeur;
+	}
 	
 	/**
 	 * Méthode de type setter
 	 * qui assigne une nouvelle valeur à la case
 	 * @param chose la nouvelle valeur qui va être assignée à la case
 	 */
-		
-	public int getValeur() {
-		return valeur;
-	}
-
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
 	}
@@ -62,12 +72,30 @@ public class Parcelle {
 			return " E";		}
 	}
 	
+	/**
+	 * Méthode de type getter
+	 * qui permet de récupérer le Personnage de la Parcelle.
+	 * @return valeur de la parcelle
+	 */
 	public Personnage getPerso() {
 		return perso;
 	}
 	
+	/**
+	 * Méthode de type setter
+	 * qui assigne un nouveau personnage à la case
+	 * @param p la nouvelle valeur qui va être assignée à la case
+	 */
 	public void setPersonnage(Personnage p) {
 		this.perso = p;
 	}
+	
+	/*public void ajoutPersonnage(Personnage p) {
+		this.personnages.add(p);
+	}
+	
+	public void supprimerPersonnage(Personnage p) {
+		this.personnages.remove(p);
+	}*/
 	
 }

@@ -8,10 +8,8 @@ import java.awt.event.KeyEvent;
 
 /**
  * Classe contenant le main qui sert à lancer la partie et appeler les diverses 
- * méthodes d'autre classe 
- * 
+ * méthodes d'autre classes (ainsi que les méthodes de highlight désignée dans cette classe). 
  * @author Team-F5
- *
  */
 
 public class TreasureHunt {
@@ -42,7 +40,7 @@ public class TreasureHunt {
 	   						res[0]=equipe[jActif].plateau.getX((MouseEvent) evenement) ;
 	   						res[1]=equipe[jActif].plateau.getY((MouseEvent) evenement) ;
 	   					}
-	   				} while(equipe[jActif].getValeur(res[0], res[1]) == 1 || equipe[jActif].getValeur(res[0], res[1]) == 2  || equipe[jActif].getValeur(res[0], res[1]) == 3  || equipe[jActif].getValeur(res[0], res[1]) == 4  || equipe[jActif].getValeur(res[0], res[1]) == 6  || equipe[jActif].getValeur(res[0], res[1]) == 7 || equipe[jActif].getValeur(res[0], res[1]) == 8 || equipe[jActif].getValeur(res[0], res[1])==9 || equipe[jActif].getValeur(res[0], res[1]) == 11);
+	   				} while(equipe[jActif].getValeur(res[0], res[1]) == 1 || equipe[jActif].getValeur(res[0], res[1]) == 2  || equipe[jActif].getValeur(res[0], res[1]) == 3 || equipe[jActif].getValeur(res[0], res[1]) == 4  || equipe[jActif].getValeur(res[0], res[1]) == 6  || equipe[jActif].getValeur(res[0], res[1]) == 7 || equipe[jActif].getValeur(res[0], res[1]) == 8 || equipe[jActif].getValeur(res[0], res[1])==9 || equipe[jActif].getValeur(res[0], res[1]) == 11);
 	   			} else { //J2 Clic1
 	   				do {
 	   					equipe[jActif].affichageGraphique();
@@ -51,13 +49,16 @@ public class TreasureHunt {
 	   						res[0]=equipe[jActif].plateau.getX((MouseEvent) evenement) ;
 	   						res[1]=equipe[jActif].plateau.getY((MouseEvent) evenement) ;
 	   					}
-	   				} while(equipe[jActif].getValeur(res[0], res[1]) == 1 || equipe[jActif].getValeur(res[0], res[1]) == 2  || equipe[jActif].getValeur(res[0], res[1]) == 3  || equipe[jActif].getValeur(res[0], res[1]) == 4  || equipe[jActif].getValeur(res[0], res[1]) == 5  || equipe[jActif].getValeur(res[0], res[1]) == 6 || equipe[jActif].getValeur(res[0], res[1]) == 8 || equipe[jActif].getValeur(res[0], res[1])==9 || equipe[jActif].getValeur(res[0], res[1]) == 10);
+	   				} while(equipe[jActif].getValeur(res[0], res[1]) == 1 || equipe[jActif].getValeur(res[0], res[1]) == 2  || equipe[jActif].getValeur(res[0], res[1]) == 3  || equipe[jActif].getValeur(res[0], res[1]) == 4  || equipe[jActif].getValeur(res[0], res[1]) == 5 || equipe[jActif].getValeur(res[0], res[1]) == 6 || equipe[jActif].getValeur(res[0], res[1]) == 8 || equipe[jActif].getValeur(res[0], res[1])==9 || equipe[jActif].getValeur(res[0], res[1]) == 10);
 	   			}
+	   			//Affichage case sélectionnée au premier clic
    				ch = (char) (res[0]+64);
    				equipe[jActif].plateau.print("Case : "+res[1]+ ch);
+   				//Highligh Explorateur
    				if (Island.ile[res[0]][res[1]].getValeur()==5 || Island.ile[res[0]][res[1]].getValeur()==7) {
    					highlight4(equipe[jActif], res[0],res[1]);
    				}
+   				//Highlight Voleur
    				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11) {
    					highlight8(equipe[jActif], res[0], res[1]);
    				}
@@ -271,6 +272,33 @@ public class TreasureHunt {
    				} else {
    					jActif = 0;
    				}
+   				
+   				
+   				for (int i = 1; i < equipe[jActif].getXIle()+1; i++){
+   					if (equipe[jActif].ile[i][2].getPerso() != null) {
+	   					if (equipe[jActif].ile[i][2].getValeur() == 4 && equipe[jActif].ile[i][2].getPerso().possedeTresor) {
+	   						fin = true;
+	   						JOptionPane.showMessageDialog(null, "Le joueur 1 a gagné, il a ramené le trésor à son navire !");
+	   					}
+	   				}
+   				}
+   				for (int i = 1; i < equipe[jActif].getXIle()+1; i++){
+   					if (equipe[jActif].ile[i][2].getPerso() != null) {
+	   					if (equipe[jActif].ile[i][equipe[jActif].getYIle()-2].getValeur() == 6 && equipe[jActif].ile[i][equipe[jActif].getYIle()-2].getPerso().possedeTresor) {
+	   						fin = true;
+	   						JOptionPane.showMessageDialog(null, "Le joueur 2 a gagné, il a ramené le trésor à son navire !");
+	   					}
+	   				}
+   				}
+   				//Ne sera utile qu'après avoir remanié les données
+   				/*if (nbPersoJ1 == 0) {
+   					fin = true;
+   					JOptionPane.showMessageDialog(null, "Le joueur 2 a gagné, il a vaincu l'équipe adverse !");
+   				}
+   				if (nbPersoJ2 == 0) {
+   					fin = true;
+   					JOptionPane.showMessageDialog(null, "Le joueur 1 a gagné, il a vaincu l'équipe adverse !");
+   				}*/
 	} while (!fin);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -556,7 +584,12 @@ public class TreasureHunt {
 
 	    
 	
-
+	/**
+	 * Méthode permettant de mettre en surbrillance les cases aux points cardinaux si celles-ci sont accessibles.
+	 * @param i Ile sur laquelle apporter la modification
+	 * @param x position X voulue
+	 * @param y position Y voulue
+	 */
 	static void highlight4(Island i, int x, int y) {
 		
 		if (Island.ile[x+1][y].getValeur()==8) {
@@ -572,6 +605,12 @@ public class TreasureHunt {
 			i.plateau.setHighlight(x, y-1, Color.blue);
 		}
 	}
+	/**
+	 * Méthode reprenant highlight4 et y ajoutant les 4 cases restantes entourant la cible du clic.
+	 * @param i Ile sur laquelle apporter la modification
+	 * @param x position X voulue
+	 * @param y position Y voulue
+	 */
 	static void highlight8(Island i, int x, int y) {
 		highlight4(i,x,y);
 		if (Island.ile[x-1][y-1].getValeur()==8) {

@@ -1,14 +1,25 @@
-import javax.swing.JOptionPane;
-
+/**
+ * Classe Voleur héritant de Personnage.
+ * Le Voleur est le seul type de Personnage pouvant fouiller les poches des autres Personnages.
+ * @author Team-F5
+ */
 public class Voleur extends Personnage {
 	
-	
+	/**
+	 * Constructeur de la classe Voleur
+	 * @param posX position X désirée
+	 * @param posY position Y désirée
+	 * @param equipe équipe désirée
+	 */
 	public Voleur(int posX,int posY,int equipe){
 		this.posX=posX;
 		this.posY=posY;
 		this.equipe=equipe;
 	}
-	
+	/**
+	 * Méthode permettant de voler un autre Personnage
+	 * @param victime Personnage qui va subir le vol
+	 */
 	public void vol(Personnage victime){
 		if(victime.possedeClef){
 			victime.possedeClef=false;
@@ -20,47 +31,16 @@ public class Voleur extends Personnage {
 		energie-=10;
 	}
 	
+	/**
+	 * Méthode de déplacement généralisée.
+	 */
 	public void deplacement() {
 		super.deplacement();
-	} 
-	public void deplacementBasDroit(){
-		if(Island.ile[posX+1][posY+1].getValeur()==1 ||Island.ile[posX+1][posY+1].getValeur() == 5 || Island.ile[posX+1][posY+1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX+1][posY+1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX+1][posY+1].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "Impossible !");
-		}else{
-			posX+=1;
-			posY+=1;
-		}
-		energie--;
+	} 	
+	/**
+	 * Méthode de repos généralisée.
+	 */
+	public void repos(){
+		super.repos();
 	}
-	
-	public void deplacementBasGauche(){
-		if(Island.ile[posX+1][posY-1].getValeur()==1 ||Island.ile[posX+1][posY-1].getValeur() == 5 || Island.ile[posX+1][posY-1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX+1][posY-1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX+1][posY-1].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "Impossible !");
-		}else{
-			posX+=1;
-			posY-=1;
-		}
-		energie--;
-	}
-	
-	public void deplacementHautGauche(){
-		if(Island.ile[posX-1][posY-1].getValeur()==1 ||Island.ile[posX-1][posY-1].getValeur() == 5 || Island.ile[posX-1][posY-1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX-1][posY-1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX-1][posY-1].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "Impossible !");
-		}else{
-			posX-=1;
-			posY-=1;
-		}
-		energie--;
-	}
-	
-	public void deplacementHautDroit(){
-		if(Island.ile[posX-1][posY+1].getValeur()==1 ||Island.ile[posX-1][posY+1].getValeur() == 5 || Island.ile[posX-1][posY+1].getValeur()== 7 ||  (Island.ile[posX][posY].getValeur()==7 && Island.ile[posX-1][posY+1].getValeur()==4) ||Island.ile[posX][posY].getValeur()==5 && Island.ile[posX-1][posY+1].getValeur()==6){
-			JOptionPane.showMessageDialog(null, "Impossible !");
-		}else{
-			posX-=1;
-			posY+=1;
-		}
-		energie--;
-	}
-	
 }
