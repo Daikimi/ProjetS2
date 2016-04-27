@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 
 public class TreasureHunt {
 
+	@SuppressWarnings("all")
 	public static void main(String[] args) {
 		
 		String[] choix = {"Jouer", "Tester déplacement", "Règles", "Quitter"};
@@ -341,14 +342,13 @@ public class TreasureHunt {
 				if (Island.ile[res[0]][res[1]].getValeur()==5 || Island.ile[res[0]][res[1]].getValeur()==7) {
 					highlight4(test, res[0],res[1]);
 				}
-				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11) {
+				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 ) {
 
 					highlight8(test, res[0], res[1]);
 				}
 				if(Island.ile[res[0]][res[1]].getValeur()==4 || Island.ile[res[0]][res[1]].getValeur()==6){
 					perso=menuNavire(test, res[0] , res[1]);
 
-					highlight8(test, res[0], res[1]);
 
 				}
 				
@@ -582,6 +582,7 @@ public class TreasureHunt {
 								if(perso==5){
 									test.ile[res[2]][res[3]].setValeur(perso);
 									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
+									System.out.println(test.affichage(res[2], res[3]));
 								}
 								if(perso==7){
 									test.ile[res[2]][res[3]].setValeur(perso);
@@ -610,8 +611,12 @@ public class TreasureHunt {
 								if(perso==7){
 									test.ile[res[2]][res[3]].setValeur(perso);
 									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
-								}	
-							
+								}
+								for(int i=0;i<test.getXIle();i++){
+									for(int j=0;j<test.getYIle();j++){
+										test.plateau.resetHighlight(i, j);
+									}
+								}
 								test.plateau.masquer();
 								test.affichageGraphique();
 								turn++;
@@ -658,7 +663,16 @@ public class TreasureHunt {
 								if(perso==7){
 									test.ile[res[2]][res[3]].setValeur(perso);
 									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
-								}	
+								}
+								for(int i=0;i<test.getXIle();i++){
+									for(int j=0;j<test.getYIle();j++){
+										test.plateau.resetHighlight(i, j);
+									}
+								}
+								test.plateau.masquer();
+								test.affichageGraphique();
+								turn++;
+							}
 						}
 						if (res[3] == res[1] && res[2] == res[0]+1) {
 							if(Island.ile[res[2]][res[3]].getValeur()!=8){
@@ -701,9 +715,15 @@ public class TreasureHunt {
 									test.ile[res[2]][res[3]].setValeur(perso);
 									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
 								}											
+								for(int i=0;i<test.getXIle();i++){
+									for(int j=0;j<test.getYIle();j++){
+										test.plateau.resetHighlight(i, j);
+									}
+								}
 								test.plateau.masquer();
 								test.affichageGraphique();
 								turn++;
+
 							}
 						}
 						if (res[3] == res[1] && res[2] == res[0]-1) {
@@ -747,13 +767,17 @@ public class TreasureHunt {
 									test.ile[res[2]][res[3]].setValeur(perso);
 									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
 								}				
-							test.plateau.masquer();
-							test.affichageGraphique();
-							turn++;
+								for(int i=0;i<test.getXIle();i++){
+									for(int j=0;j<test.getYIle();j++){
+										test.plateau.resetHighlight(i, j);
+									}
+								}
+								test.plateau.masquer();
+								test.affichageGraphique();
+								turn++;
+
 							}
 						}
-					
-				}
 				}
 				
 			if (evenement instanceof KeyEvent) {
@@ -783,15 +807,6 @@ public class TreasureHunt {
 
 
 	private static int menuNavire(Island test, int i, int j) {
-		// TODO Auto-generated method stub
-		/* ID personnages: 
-		 * explo : e1 5 , e2 7
-		 * voleur : e1 10 , e2 11
-		 * piegeur: e1 12 , e2 13 
-		 * guerrier :  e1 14 , e2 15
-		 *  
-		 */
-		JOptionPane jop=new JOptionPane();
 		int perso = 0;
 		String[] choix=new String[]{"Explorateur","Voleur","Guerrier","Piégeur","Sortir"};
 		if(test.getValeur(i, j)==4){

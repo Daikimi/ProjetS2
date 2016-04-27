@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 /**
 	 * La classe Parcelle gère une case de l'île
