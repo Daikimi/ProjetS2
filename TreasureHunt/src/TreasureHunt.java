@@ -23,68 +23,69 @@ public class TreasureHunt {
 		
 	   	if(choisir == 0) {
 	   		
-	   		Island[] equipe = new Island[2];
-	   		equipe[0] = new Island();
-	   		equipe[1] = new Island(equipe[0]);
+	   		Island equipe = new Island();
 	   		boolean fin = false;
 	   		InputEvent evenement;
 	   		int[] res = new int[4];
 	   		int jActif = 0;
 	   		char ch;
-
+	   		
 	   		do {
 	   			if (jActif == 0) { //J1 Clic1
 	   				do {
-	   					equipe[jActif].affichageGraphique();
-	   					evenement = equipe[jActif].plateau.waitEvent();
+	   					equipe.affichageGraphique();
+	   					equipe.plateau.println("C'est au tour du joueur 1 !");
+	   					evenement = equipe.plateau.waitEvent();
 	   					if (evenement instanceof MouseEvent) {
-	   						res[0]=equipe[jActif].plateau.getX((MouseEvent) evenement) ;
-	   						res[1]=equipe[jActif].plateau.getY((MouseEvent) evenement) ;
+	   						res[0]=equipe.plateau.getX((MouseEvent) evenement) ;
+	   						res[1]=equipe.plateau.getY((MouseEvent) evenement) ;
 	   					}
-	   				} while(equipe[jActif].getValeur(res[0], res[1]) == 1 || equipe[jActif].getValeur(res[0], res[1]) == 2  || equipe[jActif].getValeur(res[0], res[1]) == 3 || equipe[jActif].getValeur(res[0], res[1]) == 4  || equipe[jActif].getValeur(res[0], res[1]) == 6  || equipe[jActif].getValeur(res[0], res[1]) == 7 || equipe[jActif].getValeur(res[0], res[1]) == 8 || equipe[jActif].getValeur(res[0], res[1])==9 || equipe[jActif].getValeur(res[0], res[1]) == 11);
+	   				} while(equipe.getValeur(res[0], res[1]) == 1 || equipe.getValeur(res[0], res[1]) == 2  || equipe.getValeur(res[0], res[1]) == 3 || equipe.getValeur(res[0], res[1]) == 4  || equipe.getValeur(res[0], res[1]) == 6  || equipe.getValeur(res[0], res[1]) == 7 || equipe.getValeur(res[0], res[1]) == 8 || equipe.getValeur(res[0], res[1])==9 || equipe.getValeur(res[0], res[1]) == 11);
 	   			} else { //J2 Clic1
 	   				do {
-	   					equipe[jActif].affichageGraphique();
-	   					evenement = equipe[jActif].plateau.waitEvent();
+	   					equipe.affichageGraphique();
+	   					equipe.plateau.println("C'est au tour du joueur 2 !");
+	   					evenement = equipe.plateau.waitEvent();
 	   					if (evenement instanceof MouseEvent) {
-	   						res[0]=equipe[jActif].plateau.getX((MouseEvent) evenement) ;
-	   						res[1]=equipe[jActif].plateau.getY((MouseEvent) evenement) ;
+	   						res[0]=equipe.plateau.getX((MouseEvent) evenement) ;
+	   						res[1]=equipe.plateau.getY((MouseEvent) evenement) ;
 	   					}
-	   				} while(equipe[jActif].getValeur(res[0], res[1]) == 1 || equipe[jActif].getValeur(res[0], res[1]) == 2  || equipe[jActif].getValeur(res[0], res[1]) == 3  || equipe[jActif].getValeur(res[0], res[1]) == 4  || equipe[jActif].getValeur(res[0], res[1]) == 5 || equipe[jActif].getValeur(res[0], res[1]) == 6 || equipe[jActif].getValeur(res[0], res[1]) == 8 || equipe[jActif].getValeur(res[0], res[1])==9 || equipe[jActif].getValeur(res[0], res[1]) == 10);
+	   				} while(equipe.getValeur(res[0], res[1]) == 1 || equipe.getValeur(res[0], res[1]) == 2  || equipe.getValeur(res[0], res[1]) == 3  || equipe.getValeur(res[0], res[1]) == 4  || equipe.getValeur(res[0], res[1]) == 5 || equipe.getValeur(res[0], res[1]) == 6 || equipe.getValeur(res[0], res[1]) == 8 || equipe.getValeur(res[0], res[1])==9 || equipe.getValeur(res[0], res[1]) == 10);
 	   			}
+	   			equipe.affichageGraphique();
 	   			//Affichage case sélectionnée au premier clic
    				ch = (char) (res[0]+64);
-   				equipe[jActif].plateau.print("Case : "+res[1]+ ch);
+   				equipe.plateau.print("Case : "+res[1]+ ch);
    				//Highligh Explorateur
    				if (Island.ile[res[0]][res[1]].getValeur()==5 || Island.ile[res[0]][res[1]].getValeur()==7) {
-   					highlight4(equipe[jActif], res[0],res[1]);
+   					highlight4(equipe, res[0],res[1]);
    				}
    				//Highlight Voleur
    				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11) {
-   					highlight8(equipe[jActif], res[0], res[1]);
+   					highlight8(equipe, res[0], res[1]);
    				}
    				boolean clic2 = false;
    				do{
-   					evenement =  equipe[jActif].plateau.waitEvent();
+   					evenement =  equipe.plateau.waitEvent();
 
-   					res[2]=equipe[jActif].plateau.getX((MouseEvent) evenement) ;
-   					res[3]=equipe[jActif].plateau.getY((MouseEvent) evenement) ;
+   					res[2]=equipe.plateau.getX((MouseEvent) evenement) ;
+   					res[3]=equipe.plateau.getY((MouseEvent) evenement) ;
    					if ((res[3] == res[1]+1 && res[2] == res[0]) || (res[3] == res[1]-1 && res[2] == res[0]) || (res[3] == res[1] && res[2] == res[0]+1) || (res[3] == res[1] && res[2] == res[0]-1) || (res[3] == res[1]+1 && res[2] == res[0]+1) || (res[3] == res[1]-1 && res[2] == res[0]+1) || (res[3] == res[1]+1 && res[2] == res[0]-1) || (res[3] == res[1]-1 && res[2] == res[0]-1)) {
    						clic2 = true;
    						
    						char ch2 = (char) (res[2]+64);
-   						equipe[jActif].plateau.println("; "+res[3]+ ch2);
-   						evenement = equipe[jActif].plateau.waitEvent(1000);
+   						equipe.plateau.println("; "+res[3]+ ch2);
+   						evenement = equipe.plateau.waitEvent(1000);
    					}   					
    				} while (!clic2);
-   				if (equipe[jActif].getValeur(res[0], res[1]) == 5 || equipe[jActif].getValeur(res[0], res[1]) == 7 || equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11) {
+   				if (equipe.getValeur(res[0], res[1]) == 5 || equipe.getValeur(res[0], res[1]) == 7 || equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11 || equipe.getValeur(res[0], res[1]) == 12 || equipe.getValeur(res[0], res[1]) == 13  || equipe.getValeur(res[0], res[1]) == 14 || equipe.getValeur(res[0], res[1]) == 15) {
    					
-   					if ((res[3] == res[1]-1 && res[2] == res[0]-1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]-1 && res[2] == res[0]+1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]+1 && res[2] == res[0]-1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]+1 && res[2] == res[0]+1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) || (res[3] == res[1] && res[2] == res[0]-1) || (res[3] == res[1] && res[2] == res[0]+1) || (res[3] == res[1]+1 && res[2] == res[0]) || (res[3] == res[1]-1 && res[2] == res[0])) {
-   						deplacement(equipe[jActif], res[0], res[1], res[2], res[3]);
+   					if ((res[3] == res[1]-1 && res[2] == res[0]-1 && (equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]-1 && res[2] == res[0]+1 && (equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]+1 && res[2] == res[0]-1 && (equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]+1 && res[2] == res[0]+1 && (equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11)) || (res[3] == res[1] && res[2] == res[0]-1) || (res[3] == res[1] && res[2] == res[0]+1) || (res[3] == res[1]+1 && res[2] == res[0]) || (res[3] == res[1]-1 && res[2] == res[0])) {
+   						deplacement(equipe, res[0], res[1], res[2], res[3]);
    						}
    					if (evenement instanceof KeyEvent) {
    						int keyCode = ((KeyEvent) evenement).getKeyCode() ;
-   						if (keyCode == 27) { // equipe[jActif] escape key
+   						if (keyCode == 27) { // equipe escape key
    							fin = true ;
    						}
    					}
@@ -96,17 +97,17 @@ public class TreasureHunt {
    				}
    				
    				
-   				for (int i = 1; i < equipe[jActif].getXIle()+1; i++){
-   					if (equipe[jActif].ile[i][2].getPerso() != null) {
-	   					if (equipe[jActif].ile[i][2].getValeur() == 4 && equipe[jActif].ile[i][2].getPerso().possedeTresor) {
+   				for (int i = 1; i < equipe.getXIle()+1; i++){
+   					if (equipe.ile[i][2].getPerso() != null) {
+	   					if (equipe.ile[i][2].getValeur() == 4 && equipe.ile[i][2].getPerso().possedeTresor) {
 	   						fin = true;
 	   						JOptionPane.showMessageDialog(null, "Le joueur 1 a gagné, il a ramené le trésor à son navire !");
 	   					}
 	   				}
    				}
-   				for (int i = 1; i < equipe[jActif].getXIle()+1; i++){
-   					if (equipe[jActif].ile[i][2].getPerso() != null) {
-	   					if (equipe[jActif].ile[i][equipe[jActif].getYIle()-2].getValeur() == 6 && equipe[jActif].ile[i][equipe[jActif].getYIle()-2].getPerso().possedeTresor) {
+   				for (int i = 1; i < equipe.getXIle()+1; i++){
+   					if (equipe.ile[i][2].getPerso() != null) {
+	   					if (equipe.ile[i][equipe.getYIle()-2].getValeur() == 6 && equipe.ile[i][equipe.getYIle()-2].getPerso().possedeTresor) {
 	   						fin = true;
 	   						JOptionPane.showMessageDialog(null, "Le joueur 2 a gagné, il a ramené le trésor à son navire !");
 	   					}
@@ -744,6 +745,8 @@ public class TreasureHunt {
 				joueur.changement(joueur.getValeur(res2, res3), res0, res1);
 				// Valeur temp => deuxième case
 				joueur.changement(temp, res2, res3);
+				joueur.ile[res2][res3].setPersonnage(joueur.ile[res0][res1].getPerso());
+				joueur.ile[res2][res3].setPersonnage(null);
 								
 				joueur.plateau.masquer();
 				}

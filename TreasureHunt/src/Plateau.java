@@ -106,11 +106,7 @@ public class Plateau {
 		console = null ;
 
 		// Caractéristiques initiales pour la fenetre.
-		window.setTitle("Joueur" +nbJ);
-		nbJ++;
-		if (nbJ == 3) {
-			nbJ = 1;
-		}
+		window.setTitle("Treasure Hunt");
 		window.setLocationRelativeTo(null);
 		window.setLayout(new BorderLayout());
 		// La fermeture de la fenetre ne fait que la cacher. 

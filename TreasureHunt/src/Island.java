@@ -291,6 +291,7 @@ public class Island {
 		
 		if(ileTemp[b1-1][2].getValeur()==8){
 			ileTemp[b1-1][2].setValeur(10);
+			
 
 		}
 		if(ileTemp[b1+1][2].getValeur()==8){
