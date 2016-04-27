@@ -79,188 +79,9 @@ public class TreasureHunt {
    				} while (!clic2);
    				if (equipe[jActif].getValeur(res[0], res[1]) == 5 || equipe[jActif].getValeur(res[0], res[1]) == 7 || equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11) {
    					
-   					if (res[3] == res[1]+1 && res[2] == res[0]) {
-   						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-   							JOptionPane.showMessageDialog(null, "Impossible !");
-   							for (int i = 0; i < equipe[jActif].getXIle(); i++) {
-   								for (int j = 0; j < equipe[jActif].getYIle(); j++){
-   									equipe[jActif].plateau.resetHighlight(i, j);
-   								}							
-   							}
-   						} else {
-   							//Valeur de la première case => temp
-   							int temp = equipe[jActif].getValeur(res[0], res[1]);
-   							//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-   							//Valeur de la deuxième case => première case
-   							equipe[jActif].changement(equipe[jActif].getValeur(res[2], res[3]), res[0], res[1]);
-   							//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-   							// Valeur temp => deuxième case
-   							equipe[jActif].changement(temp, res[2], res[3]);
-   							//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-   											
-   							equipe[jActif].plateau.masquer();
-   							}
+   					if ((res[3] == res[1]-1 && res[2] == res[0]-1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]-1 && res[2] == res[0]+1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]+1 && res[2] == res[0]-1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]+1 && res[2] == res[0]+1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) || (res[3] == res[1] && res[2] == res[0]-1) || (res[3] == res[1] && res[2] == res[0]+1) || (res[3] == res[1]+1 && res[2] == res[0]) || (res[3] == res[1]-1 && res[2] == res[0])) {
+   						deplacement(equipe[jActif], res[0], res[1], res[2], res[3]);
    						}
-   					
-   					
-   					if (res[3] == res[1]-1 && res[2] == res[0]) {
-   						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-   							JOptionPane.showMessageDialog(null, "Impossible !");
-   							for (int i = 0; i < equipe[jActif].getXIle(); i++) {
-   								for (int j = 0; j < equipe[jActif].getYIle(); j++){
-   									equipe[jActif].plateau.resetHighlight(i, j);
-   								}							
-   							}
-   						} else {
-	   						//Valeur de la première case => temp
-	   						int temp = equipe[jActif].getValeur(res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						//Valeur de la deuxième case => première case
-	   						equipe[jActif].changement(equipe[jActif].getValeur(res[2], res[3]), res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						// Valeur temp => deuxième case
-	   						equipe[jActif].changement(temp, res[2], res[3]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   										
-	   						equipe[jActif].plateau.masquer();
-   						}
-   					}
-   					if (res[3] == res[1] && res[2] == res[0]+1) {
-   						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-   							JOptionPane.showMessageDialog(null, "Impossible !");
-   							for (int i = 0; i < equipe[jActif].getXIle(); i++) {
-   								for (int j = 0; j < equipe[jActif].getYIle(); j++){
-   									equipe[jActif].plateau.resetHighlight(i, j);
-   								}							
-   							}
-   						} else {
-	   						//Valeur de la première case => temp
-	   						int temp = equipe[jActif].getValeur(res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						//Valeur de la deuxième case => première case
-	   						equipe[jActif].changement(equipe[jActif].getValeur(res[2], res[3]), res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						// Valeur temp => deuxième case
-	   						equipe[jActif].changement(temp, res[2], res[3]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   										
-	   						equipe[jActif].plateau.masquer();
-   						}
-   					}
-   					if (res[3] == res[1] && res[2] == res[0]-1) {
-   						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-   							JOptionPane.showMessageDialog(null, "Impossible !");
-   							for (int i = 0; i < equipe[jActif].getXIle(); i++) {
-   								for (int j = 0; j < equipe[jActif].getYIle(); j++){
-   									equipe[jActif].plateau.resetHighlight(i, j);
-   								}							
-   							}
-   						} else {
-	   						//Valeur de la première case => temp
-	   						int temp = equipe[jActif].getValeur(res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						//Valeur de la deuxième case => première case
-	   						equipe[jActif].changement(equipe[jActif].getValeur(res[2], res[3]), res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						// Valeur temp => deuxième case
-	   						equipe[jActif].changement(temp, res[2], res[3]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   										
-	   						equipe[jActif].plateau.masquer();
-   						}
-   					}
-
-
-   					if (res[3] == res[1]+1 && res[2] == res[0]+1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) {
-   						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-   							JOptionPane.showMessageDialog(null, "Impossible !");
-   							for (int i = 0; i < equipe[jActif].getXIle(); i++) {
-   								for (int j = 0; j < equipe[jActif].getYIle(); j++){
-   									equipe[jActif].plateau.resetHighlight(i, j);
-   								}							
-   							}
-   						} else {
-	   						//Valeur de la première case => temp
-	   						int temp = equipe[jActif].getValeur(res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						//Valeur de la deuxième case => première case
-	   						equipe[jActif].changement(equipe[jActif].getValeur(res[2], res[3]), res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						// Valeur temp => deuxième case
-	   						equipe[jActif].changement(temp, res[2], res[3]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   										
-	   						equipe[jActif].plateau.masquer();
-   						}
-   					}
-   					if (res[3] == res[1]+1 && res[2] == res[0]-1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) {
-   						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-   							JOptionPane.showMessageDialog(null, "Impossible !");
-   							for (int i = 0; i < equipe[jActif].getXIle(); i++) {
-   								for (int j = 0; j < equipe[jActif].getYIle(); j++){
-   									equipe[jActif].plateau.resetHighlight(i, j);
-   								}							
-   							}
-   						} else {
-	   						//Valeur de la première case => temp
-	   						int temp = equipe[jActif].getValeur(res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						//Valeur de la deuxième case => première case
-	   						equipe[jActif].changement(equipe[jActif].getValeur(res[2], res[3]), res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						// Valeur temp => deuxième case
-	   						equipe[jActif].changement(temp, res[2], res[3]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   										
-	   						equipe[jActif].plateau.masquer();
-   						}
-   					}
-   					
-   					if (res[3] == res[1]-1 && res[2] == res[0]+1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) {
-   						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-   							JOptionPane.showMessageDialog(null, "Impossible !");
-   							for (int i = 0; i < equipe[jActif].getXIle(); i++) {
-   								for (int j = 0; j < equipe[jActif].getYIle(); j++){
-   									equipe[jActif].plateau.resetHighlight(i, j);
-   								}							
-   							}
-   						} else {
-	   						//Valeur de la première case => temp
-	   						int temp = equipe[jActif].getValeur(res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						//Valeur de la deuxième case => première case
-	   						equipe[jActif].changement(equipe[jActif].getValeur(res[2], res[3]), res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						// Valeur temp => deuxième case
-	   						equipe[jActif].changement(temp, res[2], res[3]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   										
-	   						equipe[jActif].plateau.masquer();
-   						}
-   					}
-   					if (res[3] == res[1]-1 && res[2] == res[0]-1 && (equipe[jActif].getValeur(res[0], res[1]) == 10 || equipe[jActif].getValeur(res[0], res[1]) == 11)) {
-   						if(Island.ile[res[2]][res[3]].getValeur()!=8){
-   							JOptionPane.showMessageDialog(null, "Impossible !");
-   							for (int i = 0; i < equipe[jActif].getXIle(); i++) {
-   								for (int j = 0; j < equipe[jActif].getYIle(); j++){
-   									equipe[jActif].plateau.resetHighlight(i, j);
-   								}							
-   							}
-   						} else {
-	   						//Valeur de la première case => temp
-	   						int temp = equipe[jActif].getValeur(res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						//Valeur de la deuxième case => première case
-	   						equipe[jActif].changement(equipe[jActif].getValeur(res[2], res[3]), res[0], res[1]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   						// Valeur temp => deuxième case
-	   						equipe[jActif].changement(temp, res[2], res[3]);
-	   						//System.out.println(temp + " " + equipe[jActif].getValeur(res[0], res[1]) + " " + equipe[jActif].getValeur(res[2], res[3]));
-	   										
-	   						equipe[jActif].plateau.masquer();
-	   						}
-   					}
-
    					if (evenement instanceof KeyEvent) {
    						int keyCode = ((KeyEvent) evenement).getKeyCode() ;
    						if (keyCode == 27) { // equipe[jActif] escape key
@@ -906,5 +727,25 @@ public class TreasureHunt {
 		if (Island.ile[x+1][y+1].getValeur()==8) {
 			i.plateau.setHighlight(x+1, y+1, Color.blue);
 		}
-	}	
+	}
+	
+	private static void deplacement (Island joueur, int res0, int res1, int res2, int res3) {
+		if(Island.ile[res2][res3].getValeur()!=8){
+				JOptionPane.showMessageDialog(null, "Impossible !");
+				for (int i = 0; i < joueur.getXIle(); i++) {
+					for (int j = 0; j < joueur.getYIle(); j++){
+						joueur.plateau.resetHighlight(i, j);
+					}							
+				}
+			} else {
+				//Valeur de la première case => temp
+				int temp = joueur.getValeur(res0, res1);
+				//Valeur de la deuxième case => première case
+				joueur.changement(joueur.getValeur(res2, res3), res0, res1);
+				// Valeur temp => deuxième case
+				joueur.changement(temp, res2, res3);
+								
+				joueur.plateau.masquer();
+				}
+	}
 }

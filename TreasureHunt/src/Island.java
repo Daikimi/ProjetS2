@@ -165,7 +165,7 @@ public class Island {
 	
 	public void affichageGraphique(){
 		
-		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png", "lib/1.voleur.png", "lib/2.voleur.png"};
+		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png", "lib/1.voleur.png", "lib/2.voleur.png", "lib/1.piegeur.png", "lib/2.piegeur.png", "lib/1.guerrier.png", "lib/2.guerrier.png", "lib/piege.png"};
 
 		ile = new Parcelle[xIle+1][yIle+1];
 		for (int i = 0; i<xIle+1; i++) {
