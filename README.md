@@ -1,18 +1,10 @@
 # ProjetS2 - Treasure Hunt
 
-Achevé le jalon 2 : interdire le déplacement d'objet mis a part les personnages         ( fait )
-                    mis en place des différent deplacement en fonction des joueurs (voleur  8 deplacement , explorateur 4 deplacement)
-
-
-
-Nicolas:
-
-    Test de tous les éléments du jeu via un menu (sans être dans une partie):
-
-        on doit pouvoir placer les personnages sur la grille,
-        à des places précises (spécifiées via un menu),
-        et leur faire réaliser toutes les actions (avec contrôle de validité).
-
+  Terminer jalon 3 :  -mis en place des différent deplacement en fonction des joueurs (voleur  8 deplacement , explorateur 4                          deplacement)
+                      -Possibilité de soulever rochers
+                      -créer systeme de "vie" des perso (deplacements, differentes actions, etc)
+  
+  
 
 Lug:
 
