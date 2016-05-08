@@ -17,18 +17,22 @@ import javax.swing.event.ChangeListener;
 //TODO Remplir les listeners pour récupérer les valeurs.
 //TODO Finir les règles.
 //TODO Créer les tests.
+//TODO (J1 + J2) getExplorateurSliders, voleurSliders, piegeurSliders, guerrierSliders
 
 public class MenuTreasureHunt {
 	
+	JFrame fenetre = new JFrame("Menu Treasure Hunt - Accueil");
+	JMenuBar menuBar;
+	JMenu accueil, regles, j1, j2, options, test;
+	JPanel gaucheOptions, droiteOptions, gaucheJ1, droiteJ1, gaucheJ2, droiteJ2, accueilPanel, reglesPanel, j1Panel, j2Panel, optionsPanel, testPanel;
+	JSlider tailleSlider, rochersSlider, explorateurSliderJ1, voleurSliderJ1, piegeurSliderJ1, guerrierSliderJ1, explorateurSliderJ2, voleurSliderJ2, piegeurSliderJ2, guerrierSliderJ2;
+	JLabel tailleLabel, rochersLabel, explorateurLabelJ1, voleurLabelJ1, piegeurLabelJ1, guerrierLabelJ1, explorateurLabelJ2, voleurLabelJ2, piegeurLabelJ2, guerrierLabelJ2, reglesLabel;
+	JButton jouerAccueil, quitterAccueil;
+	int totalJ1, totalJ2;
+	Island ile;
+	
 	public MenuTreasureHunt() {
-		JFrame fenetre = new JFrame("Menu Treasure Hunt");
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JMenuBar menuBar;
-		JMenu accueil, regles, j1, j2, options, test;
-		JPanel accueilPanel, reglesPanel, j1Panel, j2Panel, optionsPanel, testPanel;
-		JButton jouerAccueil, quitterAccueil;
-		JLabel reglesLabel;
 		
 		accueilPanel = new JPanel();
 		reglesPanel = new JPanel();
@@ -42,6 +46,24 @@ public class MenuTreasureHunt {
 		// DEBUT Accueil
 		accueilPanel.setLayout(new BoxLayout(accueilPanel, BoxLayout.X_AXIS));
 		jouerAccueil = new JButton("Jouer");
+		jouerAccueil.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				totalJ1 = explorateurSliderJ1.getValue() + voleurSliderJ1.getValue() + 
+						piegeurSliderJ1.getValue() + guerrierSliderJ1.getValue();
+				totalJ2 = explorateurSliderJ2.getValue() + voleurSliderJ2.getValue() + 
+						piegeurSliderJ2.getValue() + guerrierSliderJ2.getValue();
+				System.out.println("Taille : " + tailleSlider.getValue() + " Rochers : " + rochersSlider.getValue() +
+						"\nJ1 : " + 
+						explorateurSliderJ1.getValue() + "-" + voleurSliderJ1.getValue() + "-" + 
+						piegeurSliderJ1.getValue() + "-" + guerrierSliderJ1.getValue() + " = " +
+						getTotalJ1() +
+						"\nJ2 : " + 
+						explorateurSliderJ2.getValue() + "-" + voleurSliderJ2.getValue() + "-" + 
+						piegeurSliderJ2.getValue() + "-" + guerrierSliderJ2.getValue() + " = " +
+						getTotalJ2());
+				ile = new Island(tailleSlider.getValue(), tailleSlider.getValue(), rochersSlider.getValue(), explorateurSliderJ1.getValue(), voleurSliderJ1.getValue(), piegeurSliderJ1.getValue(), guerrierSliderJ1.getValue(), explorateurSliderJ2.getValue(), voleurSliderJ2.getValue(), piegeurSliderJ2.getValue(), guerrierSliderJ2.getValue());
+			}
+		});
 		quitterAccueil = new JButton("Quitter");
 		quitterAccueil.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -64,14 +86,11 @@ public class MenuTreasureHunt {
 		
 		//DEBUT J1
 		j1Panel.setLayout(new BoxLayout(j1Panel, BoxLayout.X_AXIS));
-		JPanel gaucheJ1, droiteJ1;
-		JSlider explorateurSliderJ1, voleurSliderJ1, piegeurSliderJ1, guerrierSliderJ1;
-		JLabel explorateurLabelJ1, voleurLabelJ1, piegeurLabelJ1, guerrierLabelJ1;
 		
-		explorateurSliderJ1 = new JSlider(0, 4, 0);
-		voleurSliderJ1 = new JSlider(0, 4, 0);
-		piegeurSliderJ1 = new JSlider(0, 4, 0);
-		guerrierSliderJ1 = new JSlider(0, 4, 0);
+		explorateurSliderJ1 = new JSlider(0, 4, 1);
+		voleurSliderJ1 = new JSlider(0, 4, 1);
+		piegeurSliderJ1 = new JSlider(0, 4, 1);
+		guerrierSliderJ1 = new JSlider(0, 4, 1);
 		
 		explorateurLabelJ1 = new JLabel();
 		voleurLabelJ1 = new JLabel();
@@ -83,19 +102,19 @@ public class MenuTreasureHunt {
 		
 		gaucheJ1.setLayout(new BoxLayout(gaucheJ1, BoxLayout.Y_AXIS));
 		
-		explorateurLabelJ1.setText("Nombre d'explorateurs : " +explorateurSliderJ1.getValue());
+		explorateurLabelJ1.setText("  Nombre d'explorateurs : " +explorateurSliderJ1.getValue());
 		gaucheJ1.add(explorateurLabelJ1);
 		gaucheJ1.add(Box.createVerticalGlue());
 		
-		voleurLabelJ1.setText("Nombre de voleurs : " +voleurSliderJ1.getValue());
+		voleurLabelJ1.setText("  Nombre de voleurs : " +voleurSliderJ1.getValue());
 		gaucheJ1.add(voleurLabelJ1);
 		gaucheJ1.add(Box.createVerticalGlue());
 		
-		piegeurLabelJ1.setText("Nombre de piègeurs : " +piegeurSliderJ1.getValue());
+		piegeurLabelJ1.setText("  Nombre de piègeurs : " +piegeurSliderJ1.getValue());
 		gaucheJ1.add(piegeurLabelJ1);
 		gaucheJ1.add(Box.createVerticalGlue());
 		
-		guerrierLabelJ1.setText("Nombre de guerriers : "+guerrierSliderJ1.getValue());
+		guerrierLabelJ1.setText("  Nombre de guerriers : "+guerrierSliderJ1.getValue());
 		gaucheJ1.add(guerrierLabelJ1);
 		gaucheJ1.add(Box.createVerticalGlue());
 		
@@ -107,7 +126,7 @@ public class MenuTreasureHunt {
 		explorateurSliderJ1.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				explorateurLabelJ1.setText("Nombre d'explorateurs : "+explorateurSliderJ1.getValue());
+				explorateurLabelJ1.setText("  Nombre d'explorateurs : "+explorateurSliderJ1.getValue());
 			}
 		});
 		explorateurPanelJ1.add(Box.createHorizontalGlue());
@@ -118,7 +137,7 @@ public class MenuTreasureHunt {
 		voleurSliderJ1.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				voleurLabelJ1.setText("Nombre de voleurs : "+voleurSliderJ1.getValue());
+				voleurLabelJ1.setText("  Nombre de voleurs : "+voleurSliderJ1.getValue());
 			}
 		});
 		voleurPanelJ1.add(Box.createHorizontalGlue());
@@ -129,7 +148,7 @@ public class MenuTreasureHunt {
 		piegeurSliderJ1.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				piegeurLabelJ1.setText("Nombre de piègeurs : "+piegeurSliderJ1.getValue());
+				piegeurLabelJ1.setText("  Nombre de piègeurs : "+piegeurSliderJ1.getValue());
 			}
 		});
 		piegeurPanelJ1.add(Box.createHorizontalGlue());
@@ -140,7 +159,7 @@ public class MenuTreasureHunt {
 		guerrierSliderJ1.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				guerrierLabelJ1.setText("Nombre de guerriers : "+guerrierSliderJ1.getValue());
+				guerrierLabelJ1.setText("  Nombre de guerriers : "+guerrierSliderJ1.getValue());
 			}
 		});
 		guerrierPanelJ1.add(Box.createHorizontalGlue());
@@ -156,14 +175,11 @@ public class MenuTreasureHunt {
 		
 		//DEBUT J2
 		j2Panel.setLayout(new BoxLayout(j2Panel, BoxLayout.X_AXIS));
-		JPanel gaucheJ2, droiteJ2;
-		JSlider explorateurSliderJ2, voleurSliderJ2, piegeurSliderJ2, guerrierSliderJ2;
-		JLabel explorateurLabelJ2, voleurLabelJ2, piegeurLabelJ2, guerrierLabelJ2;
 		
-		explorateurSliderJ2 = new JSlider(0, 4, 0);
-		voleurSliderJ2 = new JSlider(0, 4, 0);
-		piegeurSliderJ2 = new JSlider(0, 4, 0);
-		guerrierSliderJ2 = new JSlider(0, 4, 0);
+		explorateurSliderJ2 = new JSlider(0, 4, 1);
+		voleurSliderJ2 = new JSlider(0, 4, 1);
+		piegeurSliderJ2 = new JSlider(0, 4, 1);
+		guerrierSliderJ2 = new JSlider(0, 4, 1);
 		
 		explorateurLabelJ2 = new JLabel();
 		voleurLabelJ2 = new JLabel();
@@ -173,16 +189,16 @@ public class MenuTreasureHunt {
 		gaucheJ2 = new JPanel();
 		droiteJ2 = new JPanel();
 		gaucheJ2.setLayout(new BoxLayout(gaucheJ2, BoxLayout.Y_AXIS));
-		explorateurLabelJ2.setText("Nombre d'explorateurs : " +explorateurSliderJ2.getValue());
+		explorateurLabelJ2.setText("  Nombre d'explorateurs : " +explorateurSliderJ2.getValue());
 		gaucheJ2.add(explorateurLabelJ2);
 		gaucheJ2.add(Box.createVerticalGlue());
-		voleurLabelJ2.setText("Nombre de voleurs : " +voleurSliderJ2.getValue());
+		voleurLabelJ2.setText("  Nombre de voleurs : " +voleurSliderJ2.getValue());
 		gaucheJ2.add(voleurLabelJ2);
 		gaucheJ2.add(Box.createVerticalGlue());
-		piegeurLabelJ2.setText("Nombre de piègeurs : " +piegeurSliderJ2.getValue());
+		piegeurLabelJ2.setText("  Nombre de piègeurs : " +piegeurSliderJ2.getValue());
 		gaucheJ2.add(piegeurLabelJ2);
 		gaucheJ2.add(Box.createVerticalGlue());
-		guerrierLabelJ2.setText("Nombre de guerriers : "+guerrierSliderJ2.getValue());
+		guerrierLabelJ2.setText("  Nombre de guerriers : "+guerrierSliderJ2.getValue());
 		gaucheJ2.add(guerrierLabelJ2);
 		gaucheJ2.add(Box.createVerticalGlue());
 		droiteJ2.setLayout(new BoxLayout(droiteJ2, BoxLayout.Y_AXIS));
@@ -193,7 +209,7 @@ public class MenuTreasureHunt {
 		explorateurSliderJ2.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				explorateurLabelJ2.setText("Nombre d'explorateurs : "+explorateurSliderJ2.getValue());
+				explorateurLabelJ2.setText("  Nombre d'explorateurs : "+explorateurSliderJ2.getValue());
 			}
 		});
 		explorateurPanelJ2.add(Box.createHorizontalGlue());
@@ -203,7 +219,7 @@ public class MenuTreasureHunt {
 		voleurSliderJ2.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				voleurLabelJ2.setText("Nombre de voleurs : "+voleurSliderJ2.getValue());
+				voleurLabelJ2.setText("  Nombre de voleurs : "+voleurSliderJ2.getValue());
 			}
 		});
 		voleurPanelJ2.add(Box.createHorizontalGlue());
@@ -213,7 +229,7 @@ public class MenuTreasureHunt {
 		piegeurSliderJ2.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				piegeurLabelJ2.setText("Nombre de piègeurs : "+piegeurSliderJ2.getValue());
+				piegeurLabelJ2.setText("  Nombre de piègeurs : "+piegeurSliderJ2.getValue());
 			}
 		});
 		piegeurPanelJ2.add(Box.createHorizontalGlue());
@@ -223,7 +239,7 @@ public class MenuTreasureHunt {
 		guerrierSliderJ2.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				guerrierLabelJ2.setText("Nombre de guerriers : "+guerrierSliderJ2.getValue());
+				guerrierLabelJ2.setText("  Nombre de guerriers : "+guerrierSliderJ2.getValue());
 			}
 		});
 		guerrierPanelJ2.add(Box.createHorizontalGlue());
@@ -238,9 +254,52 @@ public class MenuTreasureHunt {
 		//FIN J2
 		
 		//DEBUT Options
-		JSlider taille, rochers;
-		taille = new JSlider(10,15,10);
-		rochers = new JSlider(10,14,10);
+		tailleSlider = new JSlider(10,15,10);
+		rochersSlider = new JSlider(10,14,10);
+		
+		gaucheOptions = new JPanel();
+		droiteOptions = new JPanel();
+		
+		
+		gaucheOptions.setLayout(new BoxLayout(gaucheOptions, BoxLayout.Y_AXIS));
+		tailleLabel = new JLabel();
+		tailleLabel.setText("  Taille : " +tailleSlider.getValue());
+		gaucheOptions.add(tailleLabel);
+		gaucheOptions.add(Box.createVerticalGlue());
+		
+		rochersLabel = new JLabel();
+		rochersLabel.setText("  Rochers (%) : " +rochersSlider.getValue());
+		gaucheOptions.add(rochersLabel);
+		gaucheOptions.add(Box.createVerticalGlue());
+		
+		droiteOptions.setLayout(new BoxLayout(droiteOptions, BoxLayout.Y_AXIS));
+		JPanel taillePanel = new JPanel();
+		taillePanel.add(Box.createHorizontalGlue());
+		taillePanel.add(tailleSlider);
+		tailleSlider.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				tailleLabel.setText("  Taille : "+tailleSlider.getValue());
+			}
+		});
+		taillePanel.add(Box.createHorizontalGlue());
+
+		JPanel rochersPanel = new JPanel();
+		rochersPanel.add(Box.createHorizontalGlue());
+		rochersPanel.add(rochersSlider);
+		rochersSlider.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				rochersLabel.setText("  Rochers (%) : "+rochersSlider.getValue());
+			}
+		});
+		rochersPanel.add(Box.createHorizontalGlue());
+		
+		droiteOptions.add(taillePanel);
+		droiteOptions.add(rochersPanel);
+		
+		optionsPanel.add(gaucheOptions);
+		optionsPanel.add(droiteOptions);
 		
 		//FIN Options
 		
@@ -253,6 +312,7 @@ public class MenuTreasureHunt {
 		accueil = new JMenu("Accueil");
 		accueil.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				fenetre.setTitle("Menu Treasure Hunt - Accueil");
 				fenetre.getContentPane().add(accueilPanel);
 				accueilPanel.setVisible(true);
 				reglesPanel.setVisible(false);
@@ -268,6 +328,7 @@ public class MenuTreasureHunt {
 		regles = new JMenu("Règles");
 		regles.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				fenetre.setTitle("Menu Treasure Hunt - Règles");
 				fenetre.getContentPane().add(reglesPanel);
 				accueilPanel.setVisible(false);
 				reglesPanel.setVisible(true);
@@ -283,6 +344,7 @@ public class MenuTreasureHunt {
 		j1 = new JMenu("Joueur 1");
 		j1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				fenetre.setTitle("Menu Treasure Hunt - Joueur 1");
 				accueilPanel.setVisible(false);
 				reglesPanel.setVisible(false);
 				fenetre.getContentPane().add(j1Panel);
@@ -298,6 +360,7 @@ public class MenuTreasureHunt {
 		j2 = new JMenu("Joueur 2");
 		j2.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				fenetre.setTitle("Menu Treasure Hunt - Joueur 2");
 				fenetre.getContentPane().add(j2Panel);
 				j2Panel.setVisible(true);
 				accueilPanel.setVisible(false);
@@ -313,6 +376,7 @@ public class MenuTreasureHunt {
 		options = new JMenu("Options de Jeu");
 		options.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				fenetre.setTitle("Menu Treasure Hunt - Options de Jeu");
 				fenetre.getContentPane().add(optionsPanel);
 				optionsPanel.setVisible(true);
 				accueilPanel.setVisible(false);
@@ -328,6 +392,7 @@ public class MenuTreasureHunt {
 		test = new JMenu("Tests de Jeu");
 		test.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				fenetre.setTitle("Menu Treasure Hunt - Test de Jeu");
 				fenetre.getContentPane().add(testPanel);
 				testPanel.setVisible(true);
 				optionsPanel.setVisible(false);
@@ -354,14 +419,21 @@ public class MenuTreasureHunt {
 	    fenetre.setVisible(true);
 	}
 	
-	 public static void main(String[] args) {
-	      //Schedule a job for the event-dispatching thread:
-	      //creating and showing this application’s GUI.
-	      javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	        public void run() {
-	          new MenuTreasureHunt();
-	        }
-	    });
-	  }
+		public int getTotalJ1() {
+			return totalJ1;
+		}
+		public int getTotalJ2() {
+			return totalJ2;
+		}
+		
+		public static void main(String[] args) {
+			//Schedule a job for the event-dispatching thread:
+			//creating and showing this application’s GUI.
+			javax.swing.SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					new MenuTreasureHunt();
+				}
+			});
+		}
 
 }

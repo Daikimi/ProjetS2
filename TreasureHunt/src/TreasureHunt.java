@@ -17,15 +17,16 @@ public class TreasureHunt {
 	@SuppressWarnings("all")
 	public static void main(String[] args) {
 		
-		String[] choix = {"Jouer", "Tester déplacement", "Règles", "Quitter"};
-
+		MenuTreasureHunt instance = new MenuTreasureHunt();
+		String[] choix = {"Lancer", "Tester déplacement", "Règles", "Quitter"};
+//LE CODE NE FONCTIONNE PAS ACTUELLEMENT, IL FAUT QUE JE TROUVE COMMENT FAIRE PASSER LE instance EN
+// PRIORITE, CAR SI IL EST PLACE APRES LE CHOISIR == 0, IL Y A ERREUR ET SI PLACE LA, LE JOP A LA PRIORITE...
 		int choisir = JOptionPane.showOptionDialog(null, "Quel est votre choix ?", "Bienvenue !", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
-		
 	   	if(choisir == 0) {
 	   		
-	   		Island equipe = new Island();
-	   		boolean fin = false;
 	   		InputEvent evenement;
+	   		Island equipe = new Island(instance.ile);
+	   		boolean fin = false;
 	   		int[] res = new int[4];
 	   		int jActif = 0;
 	   		char ch;

@@ -1,4 +1,4 @@
-
+import java.util.HashMap;
 
 /**
 	 * La classe Parcelle gère une case de l'île
@@ -24,7 +24,7 @@ public class Parcelle {
 	 * Variable de classe Personnage permettant de contrôler un personnage actif.
 	 */
 	private Personnage perso = null;
-	//private ArrayList<Personnage> personnages = new ArrayList<>(); // Sera utilisé plus tard.
+	HashMap<String,Personnage> personnages = new HashMap<>(); // N'est utilisé que si c'est un bateau
 	
 
 	/**

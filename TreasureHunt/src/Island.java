@@ -68,15 +68,17 @@ public class Island {
 	 */
 
 	public Island(){
-		
 		creationIle();
-		
 		placementEau();
-
 		placementNavires();
-		
+		placementRochers();	
+	}
+	
+	public Island(int xIle, int yIle, int rochers, int exp1,  int vol1, int pi1, int gue1, int exp2, int vol2, int pi2, int gue2) {
+		creationIle(xIle, yIle, rochers);
+		placementEau();
+		placementNavires(exp1, vol1, pi1, gue1, exp2, vol2, pi2, gue2);
 		placementRochers();
-		
 	}
 	/**
 	 * Construit une ile en copiant une autre
@@ -242,6 +244,13 @@ public class Island {
 	 * Méthode permettant une demande à l'utilisateur de la taille voulue pour l'île
 	 */
 	
+	private void creationIle(int x, int y, int r) {
+		xIle = x;
+		yIle = y;
+		ileTemp = new Parcelle[xIle][yIle];
+		nbRochers = r;
+	}
+	
 	private void creationIle() {
 		String regex = "[0-9]+";
 		String rep1 = "";
@@ -284,53 +293,41 @@ public class Island {
 	private void placementNavires() {
 		int b1 = 1+ random.nextInt(xIle-2);
 		int b2 = 1+ random.nextInt(xIle-2);
-		
+		ileTemp[b1][1].setValeur(4);
+		ileTemp [b2][yIle-2].setValeur(6);
+}
+	private void placementNavires(int e1, int v1, int p1, int g1, int e2, int v2, int p2, int g2) {
+		int b1 = 1+ random.nextInt(xIle-2);
+		int b2 = 1+ random.nextInt(xIle-2);
 		ileTemp[b1][1].setValeur(4);
 		ileTemp [b2][yIle-2].setValeur(6);
 		
+		for (int a = 0; a < e1; a++) {
+			ileTemp[b1][1].personnages.put("Explorateur "+(a+1), new Explorateur(b1, 1, 1));
+		}
+		for (int a = 0; a < v1; a++) {
+			ileTemp[b1][1].personnages.put("Voleur "+(a+1), new Voleur(b1, 1, 1));
+		}
+		for (int a = 0; a < p1; a++) {
+			ileTemp[b1][1].personnages.put("Piegeur "+(a+1), new Piegeur(b1, 1, 1));
+		}
+		for (int a = 0; a < g1; a++) {
+			ileTemp[b1][1].personnages.put("Guerrier "+(a+1), new Guerrier(b1, 1, 1));
+		}
 		
-		if(ileTemp[b1-1][2].getValeur()==8){
-			ileTemp[b1-1][2].setValeur(10);
-			
-
+		for (int a = 0; a < e2; a++) {
+			ileTemp[b1][1].personnages.put("Explorateur "+(a+1), new Explorateur(b1, 1, 1));
 		}
-		if(ileTemp[b1+1][2].getValeur()==8){
-			ileTemp[b1+1][2].setValeur(10);
-
+		for (int a = 0; a < v2; a++) {
+			ileTemp[b1][1].personnages.put("Voleur "+(a+1), new Voleur(b1, 1, 1));
 		}
-		for(int i=b1-1;i<b1+2;i++){
-			for(int j=1;j<3;j++){
-				if(ileTemp[i][j].getValeur()==8){
-					ileTemp[i][j].setValeur(5);
-				}
-			}
+		for (int a = 0; a < p2; a++) {
+			ileTemp[b1][1].personnages.put("Piegeur "+(a+1), new Piegeur(b1, 1, 1));
 		}
-		if(ileTemp[b2-1][yIle-3].getValeur()==8){
-			ileTemp[b2-1][yIle-3].setValeur(11);
-
+		for (int a = 0; a < g2; a++) {
+			ileTemp[b1][1].personnages.put("Guerrier "+(a+1), new Guerrier(b1, 1, 1));
 		}
-		if(ileTemp[b2+1][yIle-3].getValeur()==8){
-			ileTemp[b2+1][yIle-3].setValeur(11);
-
-		}
-		for(int i=b2-1;i<b2+2;i++){
-			for(int j=yIle-3;j<yIle-1;j++){
-				if(ileTemp[i][j].getValeur()==8){
-					ileTemp[i][j].setValeur(7);
-				}
-				
-			}
-		}
-		/*// NE SERA UTILE QU'APRES REMANIEMENT DES DONNEES (et encore, cela devra être amélioré par IHM
-		int nbPersoJ1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Combien de personnages le joueur 1 désire-t-il ?"));
-		int nbExploJ1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Combien d'explorateurs le joueur 1 désire-t-il ?"));
-		int nbVoleurJ1 = nbPersoJ1 - nbExploJ1;
-		int nbPersoJ2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Combien de personnages le joueur 2 désire-t-il ?"));
-		int nbExploJ2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Combien d'explorateurs le joueur 2 désire-t-il ?"));
-		int nbVoleurJ2 = nbPersoJ2 - nbExploJ2;
-		*/
-		
-}
+	}
 	/**
 	 * Place les rochers sur l'île en regardant si les rochers ne bloque pas la progression
 	 * des aventuriers sur l'île 
