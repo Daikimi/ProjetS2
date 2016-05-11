@@ -257,9 +257,9 @@ public class Island {
 		String rep2 = "";
 		String nbroc="";
 		do {
-			rep1 = JOptionPane.showInputDialog(null, "Choisissez la taille x de l'île");
-		 	rep2 = JOptionPane.showInputDialog(null, "Choisissez la taille y de l'île");
-		 	nbroc = JOptionPane.showInputDialog(null, "Choisissez le pourcentage de rocher de l'île :");
+			rep1 = JOptionPane.showInputDialog(null, "Choisissez la taille x de l'île",10);
+		 	rep2 = JOptionPane.showInputDialog(null, "Choisissez la taille y de l'île",10);
+		 	nbroc = JOptionPane.showInputDialog(null, "Choisissez le pourcentage de rocher de l'île :",10);
 		} while (!rep1.matches(regex) && !rep2.matches(regex)&& !nbroc.matches(regex));
 
 		xIle = Integer.parseInt(rep1);
@@ -295,7 +295,8 @@ public class Island {
 		int b2 = 1+ random.nextInt(xIle-2);
 		ileTemp[b1][1].setValeur(4);
 		ileTemp [b2][yIle-2].setValeur(6);
-}
+	}
+	
 	private void placementNavires(int e1, int v1, int p1, int g1, int e2, int v2, int p2, int g2) {
 		int b1 = 1+ random.nextInt(xIle-2);
 		int b2 = 1+ random.nextInt(xIle-2);

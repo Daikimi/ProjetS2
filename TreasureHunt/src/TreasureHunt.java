@@ -14,10 +14,10 @@ import java.awt.event.KeyEvent;
 
 public class TreasureHunt {
 
-	@SuppressWarnings("all")
+	
 	public static void main(String[] args) {
 		
-		MenuTreasureHunt instance = new MenuTreasureHunt();
+		
 		String[] choix = {"Lancer", "Tester déplacement", "Règles", "Quitter"};
 //LE CODE NE FONCTIONNE PAS ACTUELLEMENT, IL FAUT QUE JE TROUVE COMMENT FAIRE PASSER LE instance EN
 // PRIORITE, CAR SI IL EST PLACE APRES LE CHOISIR == 0, IL Y A ERREUR ET SI PLACE LA, LE JOP A LA PRIORITE...
@@ -25,7 +25,7 @@ public class TreasureHunt {
 	   	if(choisir == 0) {
 	   		
 	   		InputEvent evenement;
-	   		Island equipe = new Island(instance.ile);
+	   		Island equipe = new Island();
 	   		boolean fin = false;
 	   		int[] res = new int[4];
 	   		int jActif = 0;
@@ -53,7 +53,6 @@ public class TreasureHunt {
 	   					}
 	   				} while(equipe.getValeur(res[0], res[1]) == 1 || equipe.getValeur(res[0], res[1]) == 2  || equipe.getValeur(res[0], res[1]) == 3  || equipe.getValeur(res[0], res[1]) == 4  || equipe.getValeur(res[0], res[1]) == 5 || equipe.getValeur(res[0], res[1]) == 6 || equipe.getValeur(res[0], res[1]) == 8 || equipe.getValeur(res[0], res[1])==9 || equipe.getValeur(res[0], res[1]) == 10);
 	   			}
-	   			equipe.affichageGraphique();
 	   			//Affichage case sélectionnée au premier clic
    				ch = (char) (res[0]+64);
    				equipe.plateau.print("Case : "+res[1]+ ch);
@@ -165,7 +164,7 @@ public class TreasureHunt {
 				if (Island.ile[res[0]][res[1]].getValeur()==5 || Island.ile[res[0]][res[1]].getValeur()==7) {
 					highlight4(test, res[0],res[1]);
 				}
-				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 ) {
+				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15) {
 
 					highlight8(test, res[0], res[1]);
 				}
@@ -190,7 +189,7 @@ public class TreasureHunt {
 					
 				} while (!clic2);
 				if(perso==-1 ){
-					if (test.getValeur(res[0], res[1]) == 5 || test.getValeur(res[0], res[1]) == 7 || test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11) {
+					if (test.getValeur(res[0], res[1]) == 5 || test.getValeur(res[0], res[1]) == 7 || Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15) {
 					
 						if (res[3] == res[1]+1 && res[2] == res[0]) {
 							if(Island.ile[res[2]][res[3]].getValeur()!=8){
@@ -294,7 +293,7 @@ public class TreasureHunt {
 						}
 					
 					
-						if (res[3] == res[1]+1 && res[2] == res[0]+1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
+						if (res[3] == res[1]+1 && res[2] == res[0]+1 && (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15)) {
 							if(Island.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
@@ -318,7 +317,7 @@ public class TreasureHunt {
 							turn++;
 							}
 						}
-						if (res[3] == res[1]+1 && res[2] == res[0]-1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
+						if (res[3] == res[1]+1 && res[2] == res[0]-1 && (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15)) {
 							if(Island.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
@@ -343,7 +342,7 @@ public class TreasureHunt {
 							}
 						}
 						
-						if (res[3] == res[1]-1 && res[2] == res[0]+1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
+						if (res[3] == res[1]-1 && res[2] == res[0]+1 && (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15)) {
 							if(Island.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
@@ -367,7 +366,7 @@ public class TreasureHunt {
 							turn++;
 							}
 						}
-						if (res[3] == res[1]-1 && res[2] == res[0]-1 && (test.getValeur(res[0], res[1]) == 10 || test.getValeur(res[0], res[1]) == 11)) {
+						if (res[3] == res[1]-1 && res[2] == res[0]-1 && (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15)) {
 							if(Island.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
@@ -392,215 +391,11 @@ public class TreasureHunt {
 							}
 						}
 					}
-				}else{
-						if (res[3] == res[1]+1 && res[2] == res[0]) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
-								JOptionPane.showMessageDialog(null, "Impossible !");
-								for (int i = 0; i < test.getXIle(); i++) {
-									for (int j = 0; j < test.getYIle(); j++){
-										test.plateau.resetHighlight(i, j);
-									}							
-								}
-							} else {
-								if(perso==5){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
-									System.out.println(test.affichage(res[2], res[3]));
-								}
-								if(perso==7){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 2));
-								}
-								if(perso==10){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 1));
-								}
-								if(perso==11){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 2));
-								}
-								if(perso==12){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 1));
-								}
-								if(perso==13){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 2));
-								}
-								if(perso==14){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 1));
-								}
-								if(perso==7){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
-								}
-								for(int i=0;i<test.getXIle();i++){
-									for(int j=0;j<test.getYIle();j++){
-										test.plateau.resetHighlight(i, j);
-									}
-								}
-								test.plateau.masquer();
-								test.affichageGraphique();
-								turn++;
-							}
-						
-					}
-						if (res[3] == res[1]-1 && res[2] == res[0]) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
-								JOptionPane.showMessageDialog(null, "Impossible !");
-								for (int i = 0; i < test.getXIle(); i++) {
-									for (int j = 0; j < test.getYIle(); j++){
-										test.plateau.resetHighlight(i, j);
-									}							
-								}
-							} else {
-								if(perso==5){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
-								}
-								if(perso==7){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 2));
-								}
-								if(perso==10){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 1));
-								}
-								if(perso==11){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 2));
-								}
-								if(perso==12){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 1));
-								}
-								if(perso==13){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 2));
-								}
-								if(perso==14){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 1));
-								}
-								if(perso==7){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
-								}
-								for(int i=0;i<test.getXIle();i++){
-									for(int j=0;j<test.getYIle();j++){
-										test.plateau.resetHighlight(i, j);
-									}
-								}
-								test.plateau.masquer();
-								test.affichageGraphique();
-								turn++;
-							}
-						}
-						if (res[3] == res[1] && res[2] == res[0]+1) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
-								JOptionPane.showMessageDialog(null, "Impossible !");
-								for (int i = 0; i < test.getXIle(); i++) {
-									for (int j = 0; j < test.getYIle(); j++){
-										test.plateau.resetHighlight(i, j);
-									}							
-								}
-							} else {
-								if(perso==5){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
-								}
-								if(perso==7){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 2));
-								}
-								if(perso==10){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 1));
-								}
-								if(perso==11){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 2));
-								}
-								if(perso==12){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 1));
-								}
-								if(perso==13){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 2));
-								}
-								if(perso==14){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 1));
-								}
-								if(perso==7){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
-								}											
-								for(int i=0;i<test.getXIle();i++){
-									for(int j=0;j<test.getYIle();j++){
-										test.plateau.resetHighlight(i, j);
-									}
-								}
-								test.plateau.masquer();
-								test.affichageGraphique();
-								turn++;
-
-							}
-						}
-						if (res[3] == res[1] && res[2] == res[0]-1) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
-								JOptionPane.showMessageDialog(null, "Impossible !");
-								for (int i = 0; i < test.getXIle(); i++) {
-									for (int j = 0; j < test.getYIle(); j++){
-										test.plateau.resetHighlight(i, j);
-									}							
-								}
-							} else {
-								if(perso==5){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 1));
-								}
-								if(perso==7){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Explorateur(res[2], res[3], 2));
-								}
-								if(perso==10){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 1));
-								}
-								if(perso==11){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Voleur(res[2], res[3], 2));
-								}
-								if(perso==12){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 1));
-								}
-								if(perso==13){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Piegeur(res[2], res[3], 2));
-								}
-								if(perso==14){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 1));
-								}
-								if(perso==7){
-									test.ile[res[2]][res[3]].setValeur(perso);
-									test.ile[res[2]][res[3]].setPersonnage(new Guerrier(res[2], res[3], 2));
-								}				
-								for(int i=0;i<test.getXIle();i++){
-									for(int j=0;j<test.getYIle();j++){
-										test.plateau.resetHighlight(i, j);
-									}
-								}
-								test.plateau.masquer();
-								test.affichageGraphique();
-								turn++;
-
-							}
-						}
+				}else {
+						placementPerso(res,test,perso);
+						test.plateau.masquer();
+						test.affichageGraphique();
+						turn++;
 				}
 				
 			if (evenement instanceof KeyEvent) {
@@ -635,42 +430,42 @@ public class TreasureHunt {
 		if(test.getValeur(i, j)==4){
 			perso = JOptionPane.showOptionDialog(null, "J1 Quel personnage souhaitez vous débarquez :" , "Debarquement de personnage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null, choix,choix[0]);
 			if(perso==0){
-				highlight4(test,i,j);
+				highlight8(test,i,j);
 				return 5;
 				
 			}
 			if(perso==1){
-				highlight4(test,i,j);
+				highlight8(test,i,j);
 				return 10;
 				
 			}
 			if(perso==2){
-				highlight4(test,i,j);
+				highlight8(test,i,j);
 				return 14;
 				
 			}
 			if(perso==3){
-				highlight4(test,i,j);
+				highlight8(test,i,j);
 				return 12;
 			}
 		}else{
 			perso = JOptionPane.showOptionDialog(null, "J2 Quel personnage souhaitez vous débarquez :" , "Debarquement de personnage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null, choix,choix[0]);			
 			if(perso==0){
-				highlight4(test,i,j);
+				highlight8(test,i,j);
 				return 7;
 				
 			}
 			if(perso==1){
-				highlight4(test,i,j);
+				highlight8(test,i,j);
 				return 11;
 				
 			}
 			if(perso==2){
-				highlight4(test,i,j);
+				highlight8(test,i,j);
 				return 15;
 			}
 			if(perso==3){
-				highlight4(test,i,j);
+				highlight8(test,i,j);
 				return 13;
 				
 			}
@@ -752,4 +547,57 @@ public class TreasureHunt {
 				joueur.plateau.masquer();
 				}
 	}
-}
+	
+	private static void placementPerso(int[]res , Island ile , int perso ){
+		if((res[3] == res[1] && res[2] == res[0]-1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15)) ||
+				(res[3] == res[1] && res[2] == res[0]+1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15)) || 
+				(res[3] == res[1]-1 && res[2] == res[0] && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15)) || 
+				(res[3] == res[1]+1 && res[2] == res[0] && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15)) || 
+				(res[3] == res[1]+1 && res[2] == res[0]+1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15)) ||
+				(res[3] == res[1]+1 && res[2] == res[0]-1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15)) ||
+				(res[3] == res[1]-1 && res[2] == res[0]+1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15) ) ||
+				(res[3] == res[1]-1 && res[2] == res[0]-1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15) )){
+			if(Island.ile[res[2]][res[3]].getValeur()!=8){
+				JOptionPane.showMessageDialog(null, "Impossible !");
+				for (int i = 0; i < ile.getXIle(); i++) {
+					for (int j = 0; j < ile.getYIle(); j++){
+						ile.plateau.resetHighlight(i, j);
+					}							
+				}
+			}
+		}else{
+			ile.ileTemp[res[2]-1][res[3]-1].setValeur(perso);
+			switch(perso){
+			case 5:
+				ile.ileTemp[res[2]][res[3]].setPersonnage(new Explorateur(res[2],res[3],1));
+				break;
+			case 7:
+				ile.ileTemp[res[2]][res[3]].setPersonnage(new Explorateur(res[2],res[3],2));
+				break;
+			case 10:
+				ile.ileTemp[res[2]][res[3]].setPersonnage(new Voleur(res[2],res[3],1));
+				break;
+			case 11:
+				ile.ileTemp[res[2]][res[3]].setPersonnage(new Voleur(res[2],res[3],2));
+				break;
+			case 12:
+				ile.ileTemp[res[2]][res[3]].setPersonnage(new Piegeur(res[2],res[3],1));
+				break;
+			case 13:
+				ile.ileTemp[res[2]][res[3]].setPersonnage(new Piegeur(res[2],res[3],2));
+				break;
+			case 14:
+				ile.ileTemp[res[2]][res[3]].setPersonnage(new Guerrier(res[2],res[3],1));
+				break;
+			case 15:
+				ile.ileTemp[res[2]][res[3]].setPersonnage(new Guerrier(res[2],res[3],2));
+				break;
+				
+			}
+			
+		}
+		
+	}
+		
+	}
+	

@@ -42,35 +42,45 @@ public class Piegeur extends Personnage{
 	 * Méthode permettant de poser un piège à droite du Piégeur.
 	 */
 	public void piegerDroit(){
+	
 		pieger(posX,posY+1);		
+	
 	}
 	
 	/**
 	 * Méthode permettant de poser un piège à gauche du Piégeur.
 	 */
 	public void piegerGauche(){
+	
 		pieger(posX,posY-1);		
+	
 	}
 	
 	/**
 	 * Méthode permettant de poser un piège au dessus du Piégeur.
 	 */
 	public void piegerHaut(){
+	
 		pieger(posX-1,posY);		
+	
 	}
 	
 	/**
 	 * Méthode permettant de poser un piège au dessous du Piégeur.
 	 */
 	public void piegerBas(){
+	
 		pieger(posX+1,posY);		
+	
 	}
 	
 	/**
 	 * Méthode de déplacement généralisée.
 	 */
 	public void deplacement() {
+		
 		super.deplacement();
+	
 	} 
 	
 	/**

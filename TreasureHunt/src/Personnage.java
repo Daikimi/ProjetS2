@@ -45,4 +45,12 @@ abstract class Personnage{
 			energie+=10;
 		}
 	}
+	
+	public boolean mort(){
+		if(energie<=0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
