@@ -22,8 +22,8 @@ public class Explorateur extends Personnage{
 	/**
 	 * Méthode permettant de fouiller et récupérer la clé à droite de l'Explorateur si elle s'y trouve.
 	 */
-	public void recupereClefDroite(){
-        if(Island.ile[posX+1][posY].getValeur()==9){
+	public void recupereClefDroite(Island i){
+        if(i.ile[posX+1][posY].getValeur()==9){
             super.possedeClef=true;
         }else{
             JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
@@ -33,8 +33,8 @@ public class Explorateur extends Personnage{
 	/**
 	 * Méthode permettant de fouiller et récupérer la clé à gauche de l'Explorateur si elle s'y trouve.
 	 */
-    public void recupereClefGauche(){
-        if(Island.ile[posX-1][posY].getValeur()==9){
+    public void recupereClefGauche(Island i){
+        if(i.ile[posX-1][posY].getValeur()==9){
             super.possedeClef=true;
         }else{
             JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
@@ -44,8 +44,8 @@ public class Explorateur extends Personnage{
     /**
 	 * Méthode permettant de fouiller et récupérer la clé en dessous de l'Explorateur si elle s'y trouve.
 	 */
-    public void recupereClefBas(){
-        if(Island.ile[posX][posY+1].getValeur()==9){
+    public void recupereClefBas(Island i){
+        if(i.ile[posX][posY+1].getValeur()==9){
             super.possedeClef=true;
         }else{
             JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
@@ -55,8 +55,8 @@ public class Explorateur extends Personnage{
     /**
 	 * Méthode permettant de fouiller et récupérer la clé au dessus de l'Explorateur si elle s'y trouve.
 	 */
-    public void recupereClefHaut(){
-        if(Island.ile[posX][posY-1].getValeur()==9){
+    public void recupereClefHaut(Island i){
+        if(i.ile[posX][posY-1].getValeur()==9){
             super.possedeClef=true;
         }else{
             JOptionPane.showMessageDialog(null, "Rien en dessous du rocher !");
@@ -73,7 +73,7 @@ public class Explorateur extends Personnage{
 	/**
 	 * Méthode de repos généralisée.
 	 */
-	public void repos(){
-		super.repos();
+	public void repos(Island i){
+		super.repos(i);
 	}
 }

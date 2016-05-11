@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * Classe Guerrier héritant de Personnage.
  * Le Guerrier est le seul type de Personnage pouvant frapper les autres Personnages.
@@ -25,8 +23,7 @@ public class Guerrier extends Personnage{
 	 * @param victime Personnage visé par l'attaque.
 	 */
 	public void frapper(Personnage victime){
-		victime.energie-=new Random().nextInt(20)+1;
-		this.energie-=10;
+		super.frapper(victime);
 	}
 	
 	/**
@@ -38,7 +35,7 @@ public class Guerrier extends Personnage{
 	/**
 	 * Méthode de repos généralisée.
 	 */
-	public void repos(){
-		super.repos();
+	public void repos(Island i){
+		super.repos(i);
 	}
 }

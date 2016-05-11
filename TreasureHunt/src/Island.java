@@ -52,7 +52,7 @@ public class Island {
 	 * permettre une lecture plus facile de la grille.
 	 */
 	
-	public static Parcelle[][] ile;
+	public Parcelle[][] ile;
 	
 	/**
 	 * attribut nous permettant de placer aléatoirement des rocher sur la carte
@@ -167,7 +167,24 @@ public class Island {
 	
 	public void affichageGraphique(){
 		
-		String[] gifs = {"lib/mer.png" , "lib/rocher.png" , "lib/coffre.png" , "lib/1.navire.png" , "lib/1.explorateur.png", "lib/2.navire.png" , "lib/2.explorateur.png", "lib/sable.png","lib/cle.png", "lib/1.voleur.png", "lib/2.voleur.png", "lib/1.piegeur.png", "lib/2.piegeur.png", "lib/1.guerrier.png", "lib/2.guerrier.png", "lib/piege.png"};
+		String[] gifs = {
+				"lib/mer.png",               // 1
+				"lib/rocher.png",            // 2
+				"lib/coffre.png",            // 3
+				"lib/1.navire.png",          // 4
+				"lib/1.explorateur.png",     // 5
+				"lib/2.navire.png",          // 6
+				"lib/2.explorateur.png",     // 7
+				"lib/sable.png",             // 8
+				"lib/cle.png",               // 9
+				"lib/1.voleur.png",          // 10
+				"lib/2.voleur.png",          // 11
+				"lib/1.piegeur.png",         // 12
+				"lib/2.piegeur.png",         // 13
+				"lib/1.guerrier.png",        // 14
+				"lib/2.guerrier.png",        // 15
+				"lib/piege.png"              // 16
+				};
 
 		ile = new Parcelle[xIle+1][yIle+1];
 		for (int i = 0; i<xIle+1; i++) {
@@ -301,32 +318,32 @@ public class Island {
 		int b1 = 1+ random.nextInt(xIle-2);
 		int b2 = 1+ random.nextInt(xIle-2);
 		ileTemp[b1][1].setValeur(4);
-		ileTemp [b2][yIle-2].setValeur(6);
+		ileTemp[b2][yIle-2].setValeur(6);
 		
 		for (int a = 0; a < e1; a++) {
-			ileTemp[b1][1].personnages.put("Explorateur "+(a+1), new Explorateur(b1, 1, 1));
+			ile[b1][1].personnages.put("Explorateur "+(a+1), new Explorateur(b1, 1, 1));
 		}
 		for (int a = 0; a < v1; a++) {
-			ileTemp[b1][1].personnages.put("Voleur "+(a+1), new Voleur(b1, 1, 1));
+			ile[b1][1].personnages.put("Voleur "+(a+1), new Voleur(b1, 1, 1));
 		}
 		for (int a = 0; a < p1; a++) {
-			ileTemp[b1][1].personnages.put("Piegeur "+(a+1), new Piegeur(b1, 1, 1));
+			ile[b1][1].personnages.put("Piegeur "+(a+1), new Piegeur(b1, 1, 1));
 		}
 		for (int a = 0; a < g1; a++) {
-			ileTemp[b1][1].personnages.put("Guerrier "+(a+1), new Guerrier(b1, 1, 1));
+			ile[b1][1].personnages.put("Guerrier "+(a+1), new Guerrier(b1, 1, 1));
 		}
 		
 		for (int a = 0; a < e2; a++) {
-			ileTemp[b1][1].personnages.put("Explorateur "+(a+1), new Explorateur(b1, 1, 1));
+			ile[b2][yIle-2].personnages.put("Explorateur "+(a+1), new Explorateur(b2, yIle-2, 2));
 		}
 		for (int a = 0; a < v2; a++) {
-			ileTemp[b1][1].personnages.put("Voleur "+(a+1), new Voleur(b1, 1, 1));
+			ile[b2][yIle-2].personnages.put("Voleur "+(a+1), new Voleur(b2, yIle-2, 2));
 		}
 		for (int a = 0; a < p2; a++) {
-			ileTemp[b1][1].personnages.put("Piegeur "+(a+1), new Piegeur(b1, 1, 1));
+			ile[b2][yIle-2].personnages.put("Piegeur "+(a+1), new Piegeur(b2, yIle-2, 2));
 		}
 		for (int a = 0; a < g2; a++) {
-			ileTemp[b1][1].personnages.put("Guerrier "+(a+1), new Guerrier(b1, 1, 1));
+			ile[b2][yIle-2].personnages.put("Guerrier "+(a+1), new Guerrier(b2, yIle-2, 2));
 		}
 	}
 	/**

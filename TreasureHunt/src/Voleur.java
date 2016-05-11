@@ -21,14 +21,7 @@ public class Voleur extends Personnage {
 	 * @param victime Personnage qui va subir le vol
 	 */
 	public void vol(Personnage victime){
-		if(victime.possedeClef){
-			victime.possedeClef=false;
-			this.possedeClef=true;
-			System.out.println("Réussi !!!");
-		}else{
-			System.out.println("Loupé...");
-		}
-		energie-=10;
+		super.vol(victime);
 	}
 	
 	/**
@@ -40,7 +33,7 @@ public class Voleur extends Personnage {
 	/**
 	 * Méthode de repos généralisée.
 	 */
-	public void repos(){
-		super.repos();
+	public void repos(Island i){
+		super.repos(i);
 	}
 }

@@ -21,7 +21,6 @@ public class Plateau {
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
-	private static int nbJ = 1;
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
 	 * initialisé à null au début de la scrutation et rempli par l'événement observé 
@@ -107,7 +106,7 @@ public class Plateau {
 
 		// Caractéristiques initiales pour la fenetre.
 		window.setTitle("Treasure Hunt");
-		window.setLocationRelativeTo(null);
+		window.setLocation(100,100);
 		window.setLayout(new BorderLayout());
 		// La fermeture de la fenetre ne fait que la cacher. 
 		// cf Javadoc setDefaultCloseOperation

@@ -19,8 +19,6 @@ public class TreasureHunt {
 		
 		
 		String[] choix = {"Lancer", "Tester déplacement", "Règles", "Quitter"};
-//LE CODE NE FONCTIONNE PAS ACTUELLEMENT, IL FAUT QUE JE TROUVE COMMENT FAIRE PASSER LE instance EN
-// PRIORITE, CAR SI IL EST PLACE APRES LE CHOISIR == 0, IL Y A ERREUR ET SI PLACE LA, LE JOP A LA PRIORITE...
 		int choisir = JOptionPane.showOptionDialog(null, "Quel est votre choix ?", "Bienvenue !", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, choix, choix[0]);
 	   	if(choisir == 0) {
 	   		
@@ -29,7 +27,6 @@ public class TreasureHunt {
 	   		boolean fin = false;
 	   		int[] res = new int[4];
 	   		int jActif = 0;
-	   		char ch;
 	   		
 	   		do {
 	   			if (jActif == 0) { //J1 Clic1
@@ -41,7 +38,7 @@ public class TreasureHunt {
 	   						res[0]=equipe.plateau.getX((MouseEvent) evenement) ;
 	   						res[1]=equipe.plateau.getY((MouseEvent) evenement) ;
 	   					}
-	   				} while(equipe.getValeur(res[0], res[1]) == 1 || equipe.getValeur(res[0], res[1]) == 2  || equipe.getValeur(res[0], res[1]) == 3 || equipe.getValeur(res[0], res[1]) == 4  || equipe.getValeur(res[0], res[1]) == 6  || equipe.getValeur(res[0], res[1]) == 7 || equipe.getValeur(res[0], res[1]) == 8 || equipe.getValeur(res[0], res[1])==9 || equipe.getValeur(res[0], res[1]) == 11);
+	   				} while(equipe.getValeur(res[0], res[1]) == 1 || equipe.getValeur(res[0], res[1]) == 2  || equipe.getValeur(res[0], res[1]) == 3 || equipe.getValeur(res[0], res[1]) == 6  || equipe.getValeur(res[0], res[1]) == 7 || equipe.getValeur(res[0], res[1]) == 8 || equipe.getValeur(res[0], res[1])==9 || equipe.getValeur(res[0], res[1]) == 11);
 	   			} else { //J2 Clic1
 	   				do {
 	   					equipe.affichageGraphique();
@@ -51,19 +48,89 @@ public class TreasureHunt {
 	   						res[0]=equipe.plateau.getX((MouseEvent) evenement) ;
 	   						res[1]=equipe.plateau.getY((MouseEvent) evenement) ;
 	   					}
-	   				} while(equipe.getValeur(res[0], res[1]) == 1 || equipe.getValeur(res[0], res[1]) == 2  || equipe.getValeur(res[0], res[1]) == 3  || equipe.getValeur(res[0], res[1]) == 4  || equipe.getValeur(res[0], res[1]) == 5 || equipe.getValeur(res[0], res[1]) == 6 || equipe.getValeur(res[0], res[1]) == 8 || equipe.getValeur(res[0], res[1])==9 || equipe.getValeur(res[0], res[1]) == 10);
+	   				} while(equipe.getValeur(res[0], res[1]) == 1 || equipe.getValeur(res[0], res[1]) == 2  || equipe.getValeur(res[0], res[1]) == 3  || equipe.getValeur(res[0], res[1]) == 4  || equipe.getValeur(res[0], res[1]) == 5|| equipe.getValeur(res[0], res[1]) == 8 || equipe.getValeur(res[0], res[1])==9 || equipe.getValeur(res[0], res[1]) == 10);
 	   			}
 	   			//Affichage case sélectionnée au premier clic
-   				ch = (char) (res[0]+64);
-   				equipe.plateau.print("Case : "+res[1]+ ch);
+	   			
+	   			
+	   			
+	   			////////////////////////////////////////////////////
+	   			//Printeur de l'état du personnage sélectionné
+	   			////////////////////////////////////////////////////
+	   			
+	   			if ( equipe.ile[res[0]][res[1]].getPerso() != null ) {
+	   				if (equipe.ile[res[0]][res[1]].getPerso() instanceof Explorateur) {
+	   					equipe.plateau.print("Explorateur \nPoint de Vie : " + equipe.ile[res[0]][res[1]].getPerso().energie + "\nInventaire : " );
+	   					if (equipe.ile[res[0]][res[1]].getPerso().possedeClef == true || equipe.ile[res[0]][res[1]].getPerso().possedeTresor == true) {
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedeClef == true) {
+	   							equipe.plateau.print("Clef | ");
+	   						}
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedeTresor == true) {
+	   							equipe.plateau.print("Trésor | ");
+	   						}
+	   					} else {
+	   						equipe.plateau.print("Vide");
+	   					}
+	   				}
+	   				if (equipe.ile[res[0]][res[1]].getPerso() instanceof Voleur) {
+	   					equipe.plateau.print("Voleur \nPoint de Vie : " + equipe.ile[res[0]][res[1]].getPerso().energie + "\nInventaire : " );
+	   					if (equipe.ile[res[0]][res[1]].getPerso().possedeClef == true || equipe.ile[res[0]][res[1]].getPerso().possedeTresor == true || equipe.ile[res[0]][res[1]].getPerso().possedeClef == true) {
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedeClef == true) {
+	   							equipe.plateau.print("Clef | ");
+	   						}
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedeTresor == true) {
+	   							equipe.plateau.print("Trésor | ");
+	   						}
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedeArme == true) {
+	   							equipe.plateau.print("Arme | ");
+	   						}
+	   					} else {
+	   						equipe.plateau.print("Vide");
+	   					}
+	   				}
+	   				if (equipe.ile[res[0]][res[1]].getPerso() instanceof Guerrier) {
+	   					equipe.plateau.print("Guerrier \nPoint de Vie : " + equipe.ile[res[0]][res[1]].getPerso().energie + "\nInventaire : " );
+	   					if (equipe.ile[res[0]][res[1]].getPerso().possedeArme == true || equipe.ile[res[0]][res[1]].getPerso().possedeTresor == true) {
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedeArme == true) {
+	   							equipe.plateau.print("Arme | ");
+	   						}
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedeTresor == true) {
+	   							equipe.plateau.print("Trésor | ");
+	   						}
+	   					} else {
+	   						equipe.plateau.print("Vide");
+	   					}
+	   				}
+	   				if (equipe.ile[res[0]][res[1]].getPerso() instanceof Piegeur) {
+	   					equipe.plateau.print("Piégeur \nPoint de Vie : " + equipe.ile[res[0]][res[1]].getPerso().energie + "\nInventaire : " );
+	   					if (equipe.ile[res[0]][res[1]].getPerso().possedeTresor == true || equipe.ile[res[0]][res[1]].getPerso().possedePiege == true) {
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedeTresor == true) {
+	   							equipe.plateau.print("Trésor | ");
+	   						}
+	   						if (equipe.ile[res[0]][res[1]].getPerso().possedePiege == true) {
+	   							equipe.plateau.print("Piège | ");
+	   						}
+	   					} else {
+	   						equipe.plateau.print("Vide");
+	   					}
+	   				}
+	   			}
+	   			///////////////////////////////////////////////////////////////
+	   			///////////////////////////////////////////////////////////////
+   				
    				//Highligh Explorateur
-   				if (Island.ile[res[0]][res[1]].getValeur()==5 || Island.ile[res[0]][res[1]].getValeur()==7) {
+   				if (equipe.ile[res[0]][res[1]].getValeur()==5 || equipe.ile[res[0]][res[1]].getValeur()==7) {
    					highlight4(equipe, res[0],res[1]);
    				}
-   				//Highlight Voleur
-   				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11) {
+   				//Highlight Bateau, Voleur, Guerrier, Piégeur
+   				if (equipe.ile[res[0]][res[1]].getValeur()==4 || equipe.ile[res[0]][res[1]].getValeur()==6 || equipe.ile[res[0]][res[1]].getValeur()==10 || equipe.ile[res[0]][res[1]].getValeur()==11 || equipe.ile[res[0]][res[1]].getValeur()==12 || equipe.ile[res[0]][res[1]].getValeur()==13 || equipe.ile[res[0]][res[1]].getValeur()==14 || equipe.ile[res[0]][res[1]].getValeur()==15) {
    					highlight8(equipe, res[0], res[1]);
    				}
+   				//Pour permettre sortie personnage
+   				int perso=-1 ;
+   				if(equipe.ile[res[0]][res[1]].getValeur()==4 || equipe.ile[res[0]][res[1]].getValeur()==6){
+					perso=menuNavire(equipe, res[0] , res[1]);
+				}
    				boolean clic2 = false;
    				do{
    					evenement =  equipe.plateau.waitEvent();
@@ -72,24 +139,94 @@ public class TreasureHunt {
    					res[3]=equipe.plateau.getY((MouseEvent) evenement) ;
    					if ((res[3] == res[1]+1 && res[2] == res[0]) || (res[3] == res[1]-1 && res[2] == res[0]) || (res[3] == res[1] && res[2] == res[0]+1) || (res[3] == res[1] && res[2] == res[0]-1) || (res[3] == res[1]+1 && res[2] == res[0]+1) || (res[3] == res[1]-1 && res[2] == res[0]+1) || (res[3] == res[1]+1 && res[2] == res[0]-1) || (res[3] == res[1]-1 && res[2] == res[0]-1)) {
    						clic2 = true;
-   						
-   						char ch2 = (char) (res[2]+64);
-   						equipe.plateau.println("; "+res[3]+ ch2);
    						evenement = equipe.plateau.waitEvent(1000);
    					}   					
    				} while (!clic2);
-   				if (equipe.getValeur(res[0], res[1]) == 5 || equipe.getValeur(res[0], res[1]) == 7 || equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11 || equipe.getValeur(res[0], res[1]) == 12 || equipe.getValeur(res[0], res[1]) == 13  || equipe.getValeur(res[0], res[1]) == 14 || equipe.getValeur(res[0], res[1]) == 15) {
+   				if (equipe.ile[res[2]][res[3]].getValeur() == 8 && (equipe.getValeur(res[0], res[1]) == 5 || equipe.getValeur(res[0], res[1]) == 7 || equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11 || equipe.getValeur(res[0], res[1]) == 12 || equipe.getValeur(res[0], res[1]) == 13  || equipe.getValeur(res[0], res[1]) == 14 || equipe.getValeur(res[0], res[1]) == 15)) {
    					
-   					if ((res[3] == res[1]-1 && res[2] == res[0]-1 && (equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]-1 && res[2] == res[0]+1 && (equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]+1 && res[2] == res[0]-1 && (equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11)) || (res[3] == res[1]+1 && res[2] == res[0]+1 && (equipe.getValeur(res[0], res[1]) == 10 || equipe.getValeur(res[0], res[1]) == 11)) || (res[3] == res[1] && res[2] == res[0]-1) || (res[3] == res[1] && res[2] == res[0]+1) || (res[3] == res[1]+1 && res[2] == res[0]) || (res[3] == res[1]-1 && res[2] == res[0])) {
+   					if ((res[3] == res[1]-1 && res[2] == res[0]-1 && (equipe.getValeur(res[0], res[1]) == 10 || 
+   								equipe.getValeur(res[0], res[1]) == 11 || 
+   								equipe.getValeur(res[0], res[1]) == 12 || 
+   								equipe.getValeur(res[0], res[1]) == 13 || 
+   								equipe.getValeur(res[0], res[1]) == 14 || 
+   								equipe.getValeur(res[0], res[1]) == 15)) || 
+   						(res[3] == res[1]-1 && res[2] == res[0]+1 && (equipe.getValeur(res[0], res[1]) == 10 || 
+   								equipe.getValeur(res[0], res[1]) == 11 || 
+   								equipe.getValeur(res[0], res[1]) == 12 || 
+   								equipe.getValeur(res[0], res[1]) == 13 || 
+   								equipe.getValeur(res[0], res[1]) == 14 || 
+   								equipe.getValeur(res[0], res[1]) == 15)) || 
+   						(res[3] == res[1]+1 && res[2] == res[0]-1 && (equipe.getValeur(res[0], res[1]) == 10 || 
+   							equipe.getValeur(res[0], res[1]) == 11 || 
+   							equipe.getValeur(res[0], res[1]) == 12 || 
+   							equipe.getValeur(res[0], res[1]) == 13 || 
+   							equipe.getValeur(res[0], res[1]) == 14 || 
+   							equipe.getValeur(res[0], res[1]) == 15)) || 
+   						(res[3] == res[1]+1 && res[2] == res[0]+1 && (equipe.getValeur(res[0], res[1]) == 10 || 
+	   						equipe.getValeur(res[0], res[1]) == 11 || 
+	   						equipe.getValeur(res[0], res[1]) == 12 || 
+	   						equipe.getValeur(res[0], res[1]) == 13 || 
+	   						equipe.getValeur(res[0], res[1]) == 14 || 
+	   						equipe.getValeur(res[0], res[1]) == 15)) || 
+   						(res[3] == res[1] && res[2] == res[0]-1) || 
+   						(res[3] == res[1] && res[2] == res[0]+1) || 
+   						(res[3] == res[1]+1 && res[2] == res[0]) || 
+   						(res[3] == res[1]-1 && res[2] == res[0])) {
    						deplacement(equipe, res[0], res[1], res[2], res[3]);
    						}
-   					if (evenement instanceof KeyEvent) {
-   						int keyCode = ((KeyEvent) evenement).getKeyCode() ;
-   						if (keyCode == 27) { // equipe escape key
-   							fin = true ;
-   						}
-   					}
    				}
+   				
+   				if (jActif == 0 && equipe.ile[res[0]][res[1]].getValeur() == 10 && (equipe.ile[res[2]][res[3]].getValeur() == 7 || equipe.ile[res[2]][res[3]].getValeur() == 11 || equipe.ile[res[2]][res[3]].getValeur() == 13 || equipe.ile[res[2]][res[3]].getValeur() == 15)) {
+					equipe.ile[res[0]][res[1]].getPerso().vol(equipe.ile[res[2]][res[3]].getPerso());
+					//VOL EQUIPE1
+				}
+   				
+   				if (jActif == 1 && equipe.ile[res[0]][res[1]].getValeur() == 11 && (equipe.ile[res[2]][res[3]].getValeur() == 5 || equipe.ile[res[2]][res[3]].getValeur() == 10 || equipe.ile[res[2]][res[3]].getValeur() == 12 || equipe.ile[res[2]][res[3]].getValeur() == 14)) {
+   					equipe.ile[res[0]][res[1]].getPerso().vol(equipe.ile[res[2]][res[3]].getPerso());
+   					// VOL EQUIPE2
+				}
+   				
+   				if (jActif == 0 && equipe.ile[res[0]][res[1]].getValeur() == 14 && (equipe.ile[res[2]][res[3]].getValeur() == 7 || equipe.ile[res[2]][res[3]].getValeur() == 11 || equipe.ile[res[2]][res[3]].getValeur() == 13 || equipe.ile[res[2]][res[3]].getValeur() == 15)) {
+   					if (equipe.ile[res[0]][res[1]].getPerso().possedeArme == true) {
+   						equipe.ile[res[0]][res[1]].getPerso().frapper(equipe.ile[res[2]][res[3]].getPerso());
+   					} else {
+   						JOptionPane.showMessageDialog(null, "Vous n'avez pas d'arme !");
+   					}
+   					//ATTAQUE GUERRIER EQUIPE1
+   				}
+   				
+   				if (jActif == 1 && equipe.ile[res[0]][res[1]].getValeur() == 15 && (equipe.ile[res[2]][res[3]].getValeur() == 5 || equipe.ile[res[2]][res[3]].getValeur() == 10 || equipe.ile[res[2]][res[3]].getValeur() == 12 || equipe.ile[res[2]][res[3]].getValeur() == 14)) {
+   					if (equipe.ile[res[0]][res[1]].getPerso().possedeArme == true) {
+   						equipe.ile[res[0]][res[1]].getPerso().frapper(equipe.ile[res[2]][res[3]].getPerso());
+   					} else {
+   						JOptionPane.showMessageDialog(null, "Vous n'avez pas d'arme !");
+   					}
+					//ATTAQUE GUERRIER EQUIPE2
+				}
+   				
+   				if (jActif == 0 && equipe.ile[res[0]][res[1]].getValeur() == 12 && equipe.ile[res[0]][res[1]].getValeur() == 8) {
+   					//Pose Piege Equipe1
+   				}
+   				
+   				if (jActif == 1 && equipe.ile[res[0]][res[1]].getValeur() == 13 && equipe.ile[res[0]][res[1]].getValeur() == 8) {
+   					//Pose Piege Equipe2
+   				}
+   				
+   				
+   				
+   				
+   				
+   				if (evenement instanceof KeyEvent) {
+					int keyCode = ((KeyEvent) evenement).getKeyCode() ;
+					if (keyCode == 27) { // equipe escape key
+						fin = true ;
+					}
+				}
+   				
+   				if (equipe.getValeur(res[0], res[1]) == 4 || equipe.getValeur(res[0], res[1]) == 6) {
+   					placementPerso(res,equipe,perso);
+   				}
+   				
    				if (jActif == 0) {
    					jActif = 1;
    				} else {
@@ -113,6 +250,8 @@ public class TreasureHunt {
 	   					}
 	   				}
    				}
+   				
+   				equipe.plateau.masquer();
    				//Ne sera utile qu'après avoir remanié les données
    				/*if (nbPersoJ1 == 0) {
    					fin = true;
@@ -139,7 +278,6 @@ public class TreasureHunt {
 	    if(choisir == 1) { 
 	    	boolean finish = false;
 	    	Island test = new Island();
-	    	int turn = 0;
 			System.out.println(test.toString());
 			test.affichageGraphique();
 			
@@ -161,17 +299,15 @@ public class TreasureHunt {
 					
 				System.out.print("Case : "+res[1]+ ch);
 				int perso=-1 ;
-				if (Island.ile[res[0]][res[1]].getValeur()==5 || Island.ile[res[0]][res[1]].getValeur()==7) {
+				if (test.ile[res[0]][res[1]].getValeur()==5 || test.ile[res[0]][res[1]].getValeur()==7) {
 					highlight4(test, res[0],res[1]);
 				}
-				if (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15) {
+				if (test.ile[res[0]][res[1]].getValeur()==10 || test.ile[res[0]][res[1]].getValeur()==11 || test.ile[res[0]][res[1]].getValeur()==12 || test.ile[res[0]][res[1]].getValeur()==13 || test.ile[res[0]][res[1]].getValeur()==14 || test.ile[res[0]][res[1]].getValeur()==15) {
 
 					highlight8(test, res[0], res[1]);
 				}
-				if(Island.ile[res[0]][res[1]].getValeur()==4 || Island.ile[res[0]][res[1]].getValeur()==6){
+				if(test.ile[res[0]][res[1]].getValeur()==4 || test.ile[res[0]][res[1]].getValeur()==6){
 					perso=menuNavire(test, res[0] , res[1]);
-
-
 				}
 				
 				boolean clic2 = false;
@@ -189,10 +325,10 @@ public class TreasureHunt {
 					
 				} while (!clic2);
 				if(perso==-1 ){
-					if (test.getValeur(res[0], res[1]) == 5 || test.getValeur(res[0], res[1]) == 7 || Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15) {
+					if (test.getValeur(res[0], res[1]) == 5 || test.getValeur(res[0], res[1]) == 7 || test.ile[res[0]][res[1]].getValeur()==10 || test.ile[res[0]][res[1]].getValeur()==11 || test.ile[res[0]][res[1]].getValeur()==12 || test.ile[res[0]][res[1]].getValeur()==13 || test.ile[res[0]][res[1]].getValeur()==14 || test.ile[res[0]][res[1]].getValeur()==15) {
 					
 						if (res[3] == res[1]+1 && res[2] == res[0]) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+							if(test.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
 									for (int j = 0; j < test.getYIle(); j++){
@@ -213,14 +349,12 @@ public class TreasureHunt {
 							}
 							test.plateau.masquer();
 							test.affichageGraphique();
-							turn++;
-							
 							}
 						
 					
 					
 						if (res[3] == res[1]-1 && res[2] == res[0]) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+							if(test.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
 									for (int j = 0; j < test.getYIle(); j++){
@@ -240,11 +374,10 @@ public class TreasureHunt {
 											
 							test.plateau.masquer();
 							test.affichageGraphique();
-							turn++;
 							}
 						}
 						if (res[3] == res[1] && res[2] == res[0]+1) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+							if(test.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
 									for (int j = 0; j < test.getYIle(); j++){
@@ -264,11 +397,10 @@ public class TreasureHunt {
 											
 							test.plateau.masquer();
 							test.affichageGraphique();
-							turn++;
 							}
 						}
 						if (res[3] == res[1] && res[2] == res[0]-1) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+							if(test.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
 									for (int j = 0; j < test.getYIle(); j++){
@@ -288,13 +420,12 @@ public class TreasureHunt {
 											
 							test.plateau.masquer();
 							test.affichageGraphique();
-							turn++;
 							}
 						}
 					
 					
-						if (res[3] == res[1]+1 && res[2] == res[0]+1 && (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15)) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+						if (res[3] == res[1]+1 && res[2] == res[0]+1 && (test.ile[res[0]][res[1]].getValeur()==10 || test.ile[res[0]][res[1]].getValeur()==11 || test.ile[res[0]][res[1]].getValeur()==12 || test.ile[res[0]][res[1]].getValeur()==13 || test.ile[res[0]][res[1]].getValeur()==14 || test.ile[res[0]][res[1]].getValeur()==15)) {
+							if(test.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
 									for (int j = 0; j < test.getYIle(); j++){
@@ -314,11 +445,10 @@ public class TreasureHunt {
 											
 							test.plateau.masquer();
 							test.affichageGraphique();
-							turn++;
 							}
 						}
-						if (res[3] == res[1]+1 && res[2] == res[0]-1 && (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15)) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+						if (res[3] == res[1]+1 && res[2] == res[0]-1 && (test.ile[res[0]][res[1]].getValeur()==10 || test.ile[res[0]][res[1]].getValeur()==11 || test.ile[res[0]][res[1]].getValeur()==12 || test.ile[res[0]][res[1]].getValeur()==13 || test.ile[res[0]][res[1]].getValeur()==14 || test.ile[res[0]][res[1]].getValeur()==15)) {
+							if(test.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
 									for (int j = 0; j < test.getYIle(); j++){
@@ -338,12 +468,11 @@ public class TreasureHunt {
 											
 							test.plateau.masquer();
 							test.affichageGraphique();
-							turn++;
 							}
 						}
 						
-						if (res[3] == res[1]-1 && res[2] == res[0]+1 && (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15)) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+						if (res[3] == res[1]-1 && res[2] == res[0]+1 && (test.ile[res[0]][res[1]].getValeur()==10 || test.ile[res[0]][res[1]].getValeur()==11 || test.ile[res[0]][res[1]].getValeur()==12 || test.ile[res[0]][res[1]].getValeur()==13 || test.ile[res[0]][res[1]].getValeur()==14 || test.ile[res[0]][res[1]].getValeur()==15)) {
+							if(test.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
 									for (int j = 0; j < test.getYIle(); j++){
@@ -363,11 +492,10 @@ public class TreasureHunt {
 											
 							test.plateau.masquer();
 							test.affichageGraphique();
-							turn++;
 							}
 						}
-						if (res[3] == res[1]-1 && res[2] == res[0]-1 && (Island.ile[res[0]][res[1]].getValeur()==10 || Island.ile[res[0]][res[1]].getValeur()==11 || Island.ile[res[0]][res[1]].getValeur()==12 || Island.ile[res[0]][res[1]].getValeur()==13 || Island.ile[res[0]][res[1]].getValeur()==14 || Island.ile[res[0]][res[1]].getValeur()==15)) {
-							if(Island.ile[res[2]][res[3]].getValeur()!=8){
+						if (res[3] == res[1]-1 && res[2] == res[0]-1 && (test.ile[res[0]][res[1]].getValeur()==10 || test.ile[res[0]][res[1]].getValeur()==11 || test.ile[res[0]][res[1]].getValeur()==12 || test.ile[res[0]][res[1]].getValeur()==13 || test.ile[res[0]][res[1]].getValeur()==14 || test.ile[res[0]][res[1]].getValeur()==15)) {
+							if(test.ile[res[2]][res[3]].getValeur()!=8){
 								JOptionPane.showMessageDialog(null, "Impossible !");
 								for (int i = 0; i < test.getXIle(); i++) {
 									for (int j = 0; j < test.getYIle(); j++){
@@ -387,7 +515,6 @@ public class TreasureHunt {
 											
 							test.plateau.masquer();
 							test.affichageGraphique();
-							turn++;
 							}
 						}
 					}
@@ -395,7 +522,6 @@ public class TreasureHunt {
 						placementPerso(res,test,perso);
 						test.plateau.masquer();
 						test.affichageGraphique();
-						turn++;
 				}
 				
 			if (evenement instanceof KeyEvent) {
@@ -491,16 +617,16 @@ public class TreasureHunt {
 	static void highlight4(Island i, int x, int y) {
 
 		
-		if (Island.ile[x+1][y].getValeur()==8) {
+		if (i.ile[x+1][y].getValeur()==8) {
 			i.plateau.setHighlight(x+1, y, Color.blue);
 		}
-		if (Island.ile[x-1][y].getValeur()==8) {
+		if (i.ile[x-1][y].getValeur()==8) {
 			i.plateau.setHighlight(x-1, y, Color.blue);
 		}
-		if (Island.ile[x][y+1].getValeur()==8) {
+		if (i.ile[x][y+1].getValeur()==8) {
 			i.plateau.setHighlight(x, y+1, Color.blue);
 		}
-		if (Island.ile[x][y-1].getValeur()==8) {
+		if (i.ile[x][y-1].getValeur()==8) {
 			i.plateau.setHighlight(x, y-1, Color.blue);
 		}
 	}
@@ -512,22 +638,22 @@ public class TreasureHunt {
 	 */
 	static void highlight8(Island i, int x, int y) {
 		highlight4(i,x,y);
-		if (Island.ile[x-1][y-1].getValeur()==8) {
+		if (i.ile[x-1][y-1].getValeur()==8) {
 			i.plateau.setHighlight(x-1, y-1, Color.blue);
 		}
-		if (Island.ile[x+1][y-1].getValeur()==8) {
+		if (i.ile[x+1][y-1].getValeur()==8) {
 			i.plateau.setHighlight(x+1, y-1, Color.blue);
 		}
-		if (Island.ile[x-1][y+1].getValeur()==8) {
+		if (i.ile[x-1][y+1].getValeur()==8) {
 			i.plateau.setHighlight(x-1, y+1, Color.blue);
 		}
-		if (Island.ile[x+1][y+1].getValeur()==8) {
+		if (i.ile[x+1][y+1].getValeur()==8) {
 			i.plateau.setHighlight(x+1, y+1, Color.blue);
 		}
 	}
 	
 	private static void deplacement (Island joueur, int res0, int res1, int res2, int res3) {
-		if(Island.ile[res2][res3].getValeur()!=8){
+		if(joueur.ile[res2][res3].getValeur()!=8){
 				JOptionPane.showMessageDialog(null, "Impossible !");
 				for (int i = 0; i < joueur.getXIle(); i++) {
 					for (int j = 0; j < joueur.getYIle(); j++){
@@ -557,7 +683,7 @@ public class TreasureHunt {
 				(res[3] == res[1]+1 && res[2] == res[0]-1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15)) ||
 				(res[3] == res[1]-1 && res[2] == res[0]+1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15) ) ||
 				(res[3] == res[1]-1 && res[2] == res[0]-1 && (ile.getValeur(res[0], res[1]) == 10 || ile.getValeur(res[0], res[1]) == 11 || ile.getValeur(res[0], res[1]) == 12 || ile.getValeur(res[0], res[1]) == 13 || ile.getValeur(res[0], res[1]) == 14 || ile.getValeur(res[0], res[1]) == 15) )){
-			if(Island.ile[res[2]][res[3]].getValeur()!=8){
+			if(ile.ile[res[2]][res[3]].getValeur()!=8){
 				JOptionPane.showMessageDialog(null, "Impossible !");
 				for (int i = 0; i < ile.getXIle(); i++) {
 					for (int j = 0; j < ile.getYIle(); j++){
